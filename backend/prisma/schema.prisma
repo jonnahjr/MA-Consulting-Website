@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+}
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model Blog {
+  id        Int      @id @default(autoincrement())
+  title     String
+  slug      String   @unique
+  content   String
+  excerpt   String?
+  tags      String[] @default([])
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Job {
+  id          Int      @id @default(autoincrement())
+  title       String
+  location    String?
+  type        String?
+  description String?
+  requirements String[] @default([])
+  createdAt   DateTime @default(now())
+}
+
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  name      String
+  role      String?
+  company   String?
+  quote     String
+  avatarUrl String?
+  createdAt DateTime @default(now())
+}
+
+model Application {
+  id         Int      @id @default(autoincrement())
+  name       String
+  email      String
+  phone      String?
+  position   String
+  resumePath String?
+  coverLetter String?
+  createdAt  DateTime @default(now())
+}
