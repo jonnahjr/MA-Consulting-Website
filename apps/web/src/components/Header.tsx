@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
+import maLogo from '../assets/images/team/ma.png'
 
 const Header = () => {
   const [open, setOpen] = useState(false)
@@ -17,21 +18,32 @@ const Header = () => {
 
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-200">
-      <nav className="container mx-auto px-4 py-4">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 hover:scale-105 transition-transform duration-300">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
-              <span className="text-lg text-white font-bold">MA</span>
-            </div>
-            <div className="hidden sm:block">
-              <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                MA Consulting
-              </h1>
-            </div>
-          </Link>
+  <nav className="container mx-auto px-4 py-4">
+    <div className="flex justify-between items-center">
+      {/* Logo */}
+      <Link
+        to="/"
+        className="flex items-center space-x-3 hover:scale-105 transition-transform duration-300"
+      >
+        {/* Use image instead of gradient box */}
+        <img
+          src={maLogo}
+          alt="MA Consulting Logo"
+          className="w-12 h-12 object-contain rounded-md shadow-lg"
+          onError={(e) => {
+            // Fallback to text logo if image fails to load
+            const parent = e.currentTarget.parentElement!;
+            parent.innerHTML = '<div class="w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg"><span class="text-lg text-white font-bold">MA</span></div>';
+          }}
+        />
+        <div className="hidden sm:block">
+          <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            MA Consulting
+          </h1>
+        </div>
+      </Link>
 
-          {/* Desktop Navigation */}
+      {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link
