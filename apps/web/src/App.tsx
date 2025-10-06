@@ -2,6 +2,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Hero from './components/Hero'
+import ChatWidget from './components/ChatWidget'
 import { useEffect, useState } from 'react'
 
 interface BlogPost {
@@ -13,9 +14,21 @@ interface BlogPost {
   publishedAt: string
 }
 
+interface Testimonial {
+  id: string
+  name: string
+  company: string
+  position: string
+  content: string
+  rating: number
+  image?: string
+}
+
 export function Home({ initialSection }: { initialSection?: string }) {
   const navigate = useNavigate()
   const [featuredPosts, setFeaturedPosts] = useState<BlogPost[]>([])
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([])
+  const [currentTestimonial, setCurrentTestimonial] = useState(0)
 
   useEffect(() => {
     const id = initialSection || (window.location.hash ? window.location.hash.replace('#', '') : undefined)
@@ -38,6 +51,28 @@ export function Home({ initialSection }: { initialSection?: string }) {
         console.error('Error fetching featured posts:', error)
       })
   }, [])
+
+  useEffect(() => {
+    fetch('/api/testimonials')
+      .then(res => res.json())
+      .then(data => {
+        setTestimonials(data.slice(0, 6)) // Get first 6 testimonials
+      })
+      .catch(error => {
+        console.error('Error fetching testimonials:', error)
+      })
+  }, [])
+
+  // Auto-slide testimonials every 5 seconds
+  useEffect(() => {
+    if (testimonials.length === 0) return
+
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [testimonials.length])
 
   return (
     <>
@@ -687,6 +722,238 @@ export function Home({ initialSection }: { initialSection?: string }) {
         </div>
       </section>
 
+      {/* TESTIMONIALS SECTION - Carousel Design */}
+      <section id="testimonials" className="py-24 bg-gradient-to-br from-green-50 via-emerald-50 to-green-50 relative overflow-hidden">
+        {/* Enhanced Background */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-green-500/5 to-emerald-500/5"></div>
+          {/* Floating elements */}
+          {[...Array(15)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute animate-float opacity-20"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${8 + Math.random() * 4}s`,
+              }}
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-green-200/30 to-emerald-200/30 rounded-full blur-sm"></div>
+            </div>
+          ))}
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-20 animate-fade-in-up">
+            <div className="inline-block mb-6">
+              <span className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-3 rounded-full text-lg font-semibold uppercase tracking-wider shadow-lg">
+                Client Success Stories
+              </span>
+            </div>
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">What Our Clients Say</h2>
+            <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Real results from real businesses. Discover how MA Consulting has transformed
+              operations and driven growth across diverse industries in Ethiopia.
+            </p>
+          </div>
+
+          {testimonials.length === 0 ? (
+            <div className="text-center py-20">
+              <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-4 border-green-600"></div>
+              <p className="mt-6 text-2xl text-gray-600">Loading client testimonials...</p>
+            </div>
+          ) : (
+            <div className="relative max-w-6xl mx-auto">
+              {/* Testimonial Carousel */}
+              <div className="overflow-hidden relative">
+                <div
+                  className="flex transition-transform duration-500 ease-in-out"
+                  style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
+                >
+                  {testimonials.map((testimonial) => (
+                    <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
+                      <div className="bg-white p-12 rounded-3xl shadow-2xl border border-gray-100 text-center animate-fade-in-up">
+                        {/* Large quote icon */}
+                        <div className="text-6xl text-green-500 mb-8 opacity-20">"</div>
+
+                        {/* Testimonial content */}
+                        <blockquote className="text-2xl text-gray-700 leading-relaxed mb-8 italic font-light">
+                          {testimonial.content}
+                        </blockquote>
+
+                        {/* Rating stars */}
+                        <div className="flex items-center justify-center mb-8">
+                          {[...Array(5)].map((_, i) => (
+                            <svg
+                              key={i}
+                              className={`w-6 h-6 ${i < testimonial.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                          ))}
+                        </div>
+
+                        {/* Client info with social links */}
+                        <div className="flex items-center justify-center mb-6">
+                          <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg mr-6">
+                            <span className="text-2xl text-white font-bold">
+                              {testimonial.name.split(' ').map(n => n[0]).join('').toUpperCase()}
+                            </span>
+                          </div>
+                          <div className="text-left">
+                            <h4 className="text-2xl font-bold text-gray-900 mb-1">{testimonial.name}</h4>
+                            <p className="text-green-600 font-semibold text-lg mb-2">{testimonial.company}</p>
+                            <p className="text-gray-600 mb-3">{testimonial.position}</p>
+
+                            {/* Social media links */}
+                            <div className="flex space-x-3">
+                              <a
+                                href={`https://linkedin.com/in/${testimonial.name.toLowerCase().replace(' ', '-')}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"
+                                title={`Connect with ${testimonial.name} on LinkedIn`}
+                              >
+                                <span className="text-white text-xs font-bold">in</span>
+                              </a>
+                              <a
+                                href={`https://twitter.com/${testimonial.name.toLowerCase().replace(' ', '')}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors"
+                                title={`Follow ${testimonial.name} on Twitter`}
+                              >
+                                <span className="text-white text-xs">🐦</span>
+                              </a>
+                              <a
+                                href={`mailto:${testimonial.name.toLowerCase().replace(' ', '.')}@${testimonial.company.toLowerCase().replace(' ', '')}.com`}
+                                className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors"
+                                title={`Email ${testimonial.name}`}
+                              >
+                                <span className="text-white text-xs">✉️</span>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Verification badge */}
+                        <div className="inline-flex items-center bg-green-100 px-4 py-2 rounded-full">
+                          <svg className="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                          </svg>
+                          <span className="text-green-800 font-semibold text-sm">Verified MA Consulting Client</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Carousel Navigation Dots */}
+              <div className="flex justify-center mt-8 space-x-3">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === currentTestimonial ? 'bg-green-600 scale-125' : 'bg-gray-300 hover:bg-gray-400'
+                    }`}
+                    onClick={() => setCurrentTestimonial(index)}
+                  />
+                ))}
+              </div>
+
+              {/* Carousel Navigation Arrows */}
+              <button
+                onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white transition-all duration-300 hover:scale-110"
+              >
+                <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white transition-all duration-300 hover:scale-110"
+              >
+                <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          )}
+
+          {/* Success Statistics */}
+          <div className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 p-12 rounded-3xl shadow-2xl text-white mb-16 animate-fade-in-up">
+            <h3 className="text-4xl font-bold text-center mb-12">Our Impact in Numbers</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="text-center group">
+                <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl backdrop-blur-sm group-hover:scale-110 transition-transform">
+                  😊
+                </div>
+                <div className="text-5xl font-bold mb-2">95%</div>
+                <div className="text-xl font-semibold text-green-200 mb-2">Client Satisfaction</div>
+                <div className="text-green-300">Based on feedback surveys</div>
+              </div>
+
+              <div className="text-center group">
+                <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl backdrop-blur-sm group-hover:scale-110 transition-transform">
+                  🔄
+                </div>
+                <div className="text-5xl font-bold mb-2">98%</div>
+                <div className="text-xl font-semibold text-green-200 mb-2">Client Retention</div>
+                <div className="text-green-300">Long-term partnerships</div>
+              </div>
+
+              <div className="text-center group">
+                <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl backdrop-blur-sm group-hover:scale-110 transition-transform">
+                  📈
+                </div>
+                <div className="text-5xl font-bold mb-2">250%</div>
+                <div className="text-xl font-semibold text-green-200 mb-2">Average ROI</div>
+                <div className="text-green-300">Client investment returns</div>
+              </div>
+
+              <div className="text-center group">
+                <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl backdrop-blur-sm group-hover:scale-110 transition-transform">
+                  🌟
+                </div>
+                <div className="text-5xl font-bold mb-2">500+</div>
+                <div className="text-xl font-semibold text-green-200 mb-2">Success Stories</div>
+                <div className="text-green-300">Transformed businesses</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Enhanced Call to Action */}
+          <div className="text-center animate-fade-in-up">
+            <div className="bg-white p-12 rounded-3xl shadow-2xl border border-gray-100 max-w-4xl mx-auto">
+              <h3 className="text-3xl font-bold mb-6 text-gray-900">Join Our Success Stories</h3>
+              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                Ready to transform your business? Join hundreds of Ethiopian companies that have
+                achieved remarkable growth and success with MA Consulting's expert guidance.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                <button
+                  onClick={() => navigate('/contact')}
+                  className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-green-500/50 transition-all duration-300 transform hover:scale-105 animate-pulse-glow"
+                >
+                  Start Your Success Story
+                </button>
+                <button
+                  onClick={() => navigate('/testimonials')}
+                  className="border-2 border-green-300 text-green-600 px-10 py-5 rounded-2xl font-bold text-xl hover:bg-green-50 transition-all duration-300"
+                >
+                  Read More Testimonials
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* BLOG SECTION - Enhanced Professional Design */}
       <section id="blog" className="py-24 bg-gradient-to-br from-purple-50 via-violet-50 to-purple-50 relative overflow-hidden">
         {/* Enhanced Background */}
@@ -910,8 +1177,11 @@ export function Home({ initialSection }: { initialSection?: string }) {
                   <p className="text-xl font-semibold text-red-600">+251 911 123 456</p>
                   <p className="text-sm text-gray-500">Mon-Fri 9AM-6PM EAT</p>
                 </div>
-                <button className="mt-6 bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300">
-                  Call Now
+                <button
+                  onClick={() => navigate('/contact')}
+                  className="mt-6 bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300"
+                >
+                  Contact Us
                 </button>
               </div>
 
@@ -928,8 +1198,11 @@ export function Home({ initialSection }: { initialSection?: string }) {
                   <p className="text-xl font-semibold text-orange-600">info@maconsulting.com</p>
                   <p className="text-sm text-gray-500">24/7 Email Support</p>
                 </div>
-                <button className="mt-6 bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300">
-                  Send Email
+                <button
+                  onClick={() => navigate('/contact')}
+                  className="mt-6 bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300"
+                >
+                  Contact Us
                 </button>
               </div>
 
@@ -946,84 +1219,15 @@ export function Home({ initialSection }: { initialSection?: string }) {
                   <p className="text-lg font-semibold text-pink-600">Addis Ababa, Ethiopia</p>
                   <p className="text-sm text-gray-500">By appointment only</p>
                 </div>
-                <button className="mt-6 bg-gradient-to-r from-pink-500 to-rose-500 text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300">
-                  Schedule Visit
+                <button
+                  onClick={() => navigate('/contact')}
+                  className="mt-6 bg-gradient-to-r from-pink-500 to-rose-500 text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300"
+                >
+                  Contact Us
                 </button>
               </div>
             </div>
 
-            {/* Quick Contact Form */}
-            <div className="bg-white p-12 rounded-3xl shadow-2xl border border-gray-100 max-w-4xl mx-auto">
-              <div className="text-center mb-8">
-                <h3 className="text-3xl font-bold mb-4 text-gray-900">Send Us a Quick Message</h3>
-                <p className="text-lg text-gray-600">
-                  Tell us about your business challenges and we'll get back to you with expert solutions.
-                </p>
-              </div>
-
-              <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
-                    placeholder="Your full name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                  <input
-                    type="email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
-                    placeholder="your.email@company.com"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Company</label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
-                    placeholder="Your company name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
-                  <input
-                    type="tel"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
-                    placeholder="+251 XXX XXX XXX"
-                  />
-                </div>
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Service Interest</label>
-                  <select className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
-                    <option>Select a service...</option>
-                    <option>Investment Consulting</option>
-                    <option>Business Development</option>
-                    <option>Tax & Customs</option>
-                    <option>Marketing Strategies</option>
-                    <option>Development Works</option>
-                    <option>Dedicated Support</option>
-                  </select>
-                </div>
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Message</label>
-                  <textarea
-                    rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all resize-none"
-                    placeholder="Tell us about your business needs and challenges..."
-                  ></textarea>
-                </div>
-                <div className="md:col-span-2 text-center">
-                  <button
-                    type="submit"
-                    className="bg-gradient-to-r from-red-500 via-pink-500 to-rose-500 text-white px-12 py-4 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-red-500/50 transition-all duration-300 transform hover:scale-105 animate-pulse-glow"
-                  >
-                    Send Message
-                  </button>
-                </div>
-              </form>
-            </div>
 
             {/* Additional Contact Info */}
             <div className="mt-16 text-center">
@@ -1065,6 +1269,7 @@ function App() {
         <Outlet />
       </main>
       <Footer />
+      <ChatWidget />
     </div>
   )
 }

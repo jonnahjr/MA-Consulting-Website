@@ -1,7 +1,22 @@
 import Meta from '../components/Meta'
 import ContactForm from '../components/ContactForm'
+import { useRef } from 'react'
 
 export function Contact() {
+  const contactFormRef = useRef<HTMLDivElement>(null)
+
+  const scrollToContactForm = () => {
+    contactFormRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const handlePhoneCall = (phoneNumber: string) => {
+    window.location.href = `tel:${phoneNumber}`
+  }
+
+  const handleEmail = (email: string) => {
+    window.location.href = `mailto:${email}`
+  }
+
   return (
     <>
       <Meta title="Contact MA Consulting - Get Expert Business Consulting" description="Ready to transform your business? Contact MA Consulting for expert investment consulting, business development, tax services, and strategic guidance. Get in touch today." />
@@ -51,13 +66,19 @@ export function Contact() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <button className="bg-gradient-to-r from-orange-500 to-red-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-orange-500/50 transition-all duration-300 transform hover:scale-105 animate-pulse-glow">
-                Schedule Consultation
-              </button>
-              <button className="border-2 border-white/30 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm">
-                Call Us Now
-              </button>
-            </div>
+               <button
+                 onClick={scrollToContactForm}
+                 className="bg-gradient-to-r from-orange-500 to-red-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-orange-500/50 transition-all duration-300 transform hover:scale-105 animate-pulse-glow"
+               >
+                 Schedule Consultation
+               </button>
+               <button
+                 onClick={() => handlePhoneCall('+251911123456')}
+                 className="border-2 border-white/30 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm"
+               >
+                 Call Us Now
+               </button>
+             </div>
           </div>
         </div>
 
@@ -82,7 +103,7 @@ export function Contact() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {/* Email Contact */}
-            <div className="group">
+            <div className="group cursor-pointer" onClick={() => handleEmail('info@maconsulting.com')}>
               <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 transform hover:scale-105">
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:shadow-blue-500/50 transition-all">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,7 +115,7 @@ export function Contact() {
                   Send us detailed inquiries about your consulting needs. We respond within 2 hours during business hours.
                 </p>
                 <div className="space-y-2">
-                  <p className="text-lg font-semibold text-blue-600">info@maconsulting.com</p>
+                  <p className="text-lg font-semibold text-blue-600 hover:text-blue-700 transition-colors">info@maconsulting.com</p>
                   <p className="text-sm text-gray-500">General inquiries & consultations</p>
                 </div>
                 <div className="mt-4 text-sm text-green-600 font-semibold">
@@ -104,7 +125,7 @@ export function Contact() {
             </div>
 
             {/* Phone Contact */}
-            <div className="group">
+            <div className="group cursor-pointer" onClick={() => handlePhoneCall('+251911123456')}>
               <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 transform hover:scale-105">
                 <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:shadow-green-500/50 transition-all">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -116,7 +137,7 @@ export function Contact() {
                   Speak directly with our consultants for immediate assistance and personalized guidance.
                 </p>
                 <div className="space-y-2">
-                  <p className="text-lg font-semibold text-green-600">+251 911 123 456</p>
+                  <p className="text-lg font-semibold text-green-600 hover:text-green-700 transition-colors">+251 911 123 456</p>
                   <p className="text-sm text-gray-500">Direct line to consulting team</p>
                 </div>
                 <div className="mt-4 text-sm text-green-600 font-semibold">
@@ -149,7 +170,7 @@ export function Contact() {
             </div>
 
             {/* Emergency Contact */}
-            <div className="group">
+            <div className="group cursor-pointer" onClick={() => handlePhoneCall('+251922987654')}>
               <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 transform hover:scale-105">
                 <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:shadow-red-500/50 transition-all">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -161,7 +182,7 @@ export function Contact() {
                   For time-sensitive consulting needs or urgent business matters requiring immediate attention.
                 </p>
                 <div className="space-y-2">
-                  <p className="text-lg font-semibold text-red-600">+251 922 987 654</p>
+                  <p className="text-lg font-semibold text-red-600 hover:text-red-700 transition-colors">+251 922 987 654</p>
                   <p className="text-sm text-gray-500">Emergency consulting line</p>
                 </div>
                 <div className="mt-4 text-sm text-red-600 font-semibold">
@@ -211,7 +232,7 @@ export function Contact() {
           </div>
 
           {/* CONTACT FORM SECTION */}
-          <div className="max-w-4xl mx-auto">
+          <div ref={contactFormRef} className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h3 className="text-4xl font-bold mb-6 text-gray-900">Send Us a Message</h3>
               <p className="text-xl text-gray-600 leading-relaxed">
@@ -220,70 +241,7 @@ export function Contact() {
               </p>
             </div>
 
-            <div className="bg-white p-12 rounded-3xl shadow-2xl border border-gray-100">
-              <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
-                    placeholder="Your full name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                  <input
-                    type="email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
-                    placeholder="your.email@company.com"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Company</label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
-                    placeholder="Your company name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
-                  <input
-                    type="tel"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
-                    placeholder="+251 XXX XXX XXX"
-                  />
-                </div>
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Service Interest</label>
-                  <select className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
-                    <option>Select a service...</option>
-                    <option>Investment Consulting</option>
-                    <option>Business Development</option>
-                    <option>Tax & Customs</option>
-                    <option>Marketing Strategies</option>
-                    <option>Development Works</option>
-                    <option>Dedicated Support</option>
-                  </select>
-                </div>
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Message</label>
-                  <textarea
-                    rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all resize-none"
-                    placeholder="Tell us about your business needs and challenges..."
-                  ></textarea>
-                </div>
-                <div className="md:col-span-2 text-center">
-                  <button
-                    type="submit"
-                    className="bg-gradient-to-r from-red-500 via-pink-500 to-rose-500 text-white px-12 py-4 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-red-500/50 transition-all duration-300 transform hover:scale-105 animate-pulse-glow"
-                  >
-                    Send Message
-                  </button>
-                </div>
-              </form>
-            </div>
+            <ContactForm />
           </div>
         </div>
       </section>
@@ -342,7 +300,7 @@ export function Contact() {
               <h3 className="text-4xl font-bold mb-8">Connect With Us Online</h3>
 
               <div className="grid grid-cols-2 gap-6 mb-8">
-                <a href="#" className="group">
+                <a href="https://linkedin.com/company/ma-consulting-ethiopia" target="_blank" rel="noopener noreferrer" className="group">
                   <div className="bg-gradient-to-br from-blue-600 to-blue-700 p-6 rounded-2xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                     <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4">
                       <span className="text-white text-xl">in</span>
@@ -352,7 +310,7 @@ export function Contact() {
                   </div>
                 </a>
 
-                <a href="#" className="group">
+                <a href="https://twitter.com/MAConsultingET" target="_blank" rel="noopener noreferrer" className="group">
                   <div className="bg-gradient-to-br from-blue-400 to-blue-500 p-6 rounded-2xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                     <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4">
                       <span className="text-white text-xl">🐦</span>
@@ -362,7 +320,7 @@ export function Contact() {
                   </div>
                 </a>
 
-                <a href="#" className="group">
+                <a href="https://facebook.com/MAConsultingEthiopia" target="_blank" rel="noopener noreferrer" className="group">
                   <div className="bg-gradient-to-br from-purple-600 to-purple-700 p-6 rounded-2xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                     <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4">
                       <span className="text-white text-xl">📘</span>
@@ -372,7 +330,7 @@ export function Contact() {
                   </div>
                 </a>
 
-                <a href="#" className="group">
+                <a href="https://instagram.com/ma_consulting_et" target="_blank" rel="noopener noreferrer" className="group">
                   <div className="bg-gradient-to-br from-pink-600 to-pink-700 p-6 rounded-2xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                     <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4">
                       <span className="text-white text-xl">📷</span>
@@ -418,10 +376,16 @@ export function Contact() {
             can help you achieve your goals and drive sustainable growth.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button className="bg-white text-gray-900 px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+            <button
+              onClick={scrollToContactForm}
+              className="bg-white text-gray-900 px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+            >
               Schedule Free Consultation
             </button>
-            <button className="border-2 border-white/50 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white transition-all duration-300">
+            <button
+              onClick={() => handlePhoneCall('+251911123456')}
+              className="border-2 border-white/50 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white transition-all duration-300"
+            >
               Call +251 911 123 456
             </button>
           </div>

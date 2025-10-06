@@ -1,10 +1,11 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import maLogo from '../assets/images/team/ma.png'
 
 const Header = () => {
   const [open, setOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
 
   const navItems = [
     { path: '/', label: 'Home', description: 'Welcome & Overview' },
@@ -15,6 +16,20 @@ const Header = () => {
     { path: '/careers', label: 'Careers', description: 'Join Our Team' },
     { path: '/contact', label: 'Contact', description: 'Get In Touch' },
   ]
+
+  const handleGetConsultation = () => {
+    if (location.pathname === '/') {
+      // If on home page, scroll to contact section
+      const contactSection = document.getElementById('contact')
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' })
+      }
+    } else {
+      // If on other pages, navigate to home with contact section
+      navigate('/#contact')
+    }
+    setOpen(false) // Close mobile menu if open
+  }
 
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-200">
@@ -61,12 +76,12 @@ const Header = () => {
           </div>
 
           {/* CTA Button */}
-          <Link
-            to="/contact"
+          <button
+            onClick={handleGetConsultation}
             className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105"
           >
             Get Consultation
-          </Link>
+          </button>
 
           {/* Mobile Menu Button */}
           <button
@@ -99,13 +114,12 @@ const Header = () => {
                 </Link>
               ))}
               <div className="pt-4 border-t border-gray-200">
-                <Link
-                  to="/contact"
-                  onClick={() => setOpen(false)}
+                <button
+                  onClick={handleGetConsultation}
                   className="block w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 px-4 rounded-lg font-semibold text-center hover:shadow-lg transition-all duration-300"
                 >
                   Get Consultation
-                </Link>
+                </button>
               </div>
             </div>
           </div>

@@ -1,21 +1,28 @@
 # MA Consulting Website
 
-A modern, premium full-stack consulting website built with React 19, Vite, Express, and PostgreSQL. This project clones and enhances the content from [maservicessolution.com](https://maservicessolution.com/) with a dynamic backend and professional UI.
+A modern, professional consulting website built with React, Vite, Express, and PostgreSQL. This project showcases MA Consulting's services with a clean, responsive design and interactive AI chat assistant.
+
+## ✨ Live Demo
+
+🚀 **[View Live Demo](https://your-demo-url.vercel.app)** (replace with your deployed URL)
+
+This is a fully functional demo website featuring:
+- Professional consulting website design
+- Interactive AI chat assistant
+- Responsive mobile-first design
+- Modern React + TypeScript architecture
+- Clean, maintainable code structure
 
 ## 🚀 Features
 
-- **Modern Frontend**: React 19 + Vite + TypeScript + Tailwind CSS
-- **Animations**: Framer Motion + React Spring with 3D hover physics
-- **UI Components**: ShadCN UI with glassmorphism design
-- **Forms**: React Hook Form + Zod validation
-- **State Management**: Zustand
-- **SEO**: React Helmet Async + prerendering
-- **Backend**: Node.js + Express REST API
-- **Database**: PostgreSQL with Prisma ORM
-- **Auth**: Role-based with Supabase (magic link + OAuth)
-- **CMS**: Supabase Studio for content management
-- **Testing**: Vitest + React Testing Library + Playwright
-- **Deployment**: Vercel (frontend) + Supabase/Render (backend & DB)
+- **Modern Frontend**: React + Vite + TypeScript + Tailwind CSS
+- **Responsive Design**: Mobile-first approach with professional styling
+- **Interactive AI Chat**: Built-in chat bot with consulting expertise
+- **Dynamic Content**: REST API backend with database integration
+- **SEO Optimized**: React Helmet Async for meta management
+- **Professional UI**: Clean, modern design with smooth animations
+- **Contact Forms**: Validated forms with email integration
+- **Multi-page Layout**: Home, About, Services, Team, Blog, Contact, Careers, Testimonials
 
 ## 🏗️ Project Structure
 
@@ -32,29 +39,27 @@ A modern, premium full-stack consulting website built with React 19, Vite, Expre
 ## 🛠️ Tech Stack
 
 ### Frontend
-- React 19
+- React 18
 - Vite
 - TypeScript
 - Tailwind CSS
-- ShadCN UI
-- Framer Motion
-- React Spring
 - React Router DOM
-- React Hook Form
-- Zod
-- Zustand
-- React Helmet Async
+- React Hook Form + Zod validation
+- Zustand (state management)
+- Framer Motion (animations)
+- React Helmet Async (SEO)
+- TanStack Query (data fetching)
 
 ### Backend
 - Node.js
 - Express
 - TypeScript
-- Prisma
-- Supabase
+- Prisma ORM
 - CORS
 - Helmet
-- Multer
-- Nodemailer
+- Multer (file uploads)
+- Nodemailer (email)
+- Cheerio (web scraping)
 
 ### Database
 - PostgreSQL
@@ -63,40 +68,49 @@ A modern, premium full-stack consulting website built with React 19, Vite, Expre
 ## 📋 Prerequisites
 
 - Node.js 18+
-- PostgreSQL
-- Supabase account (optional, for auth & CMS)
+- PostgreSQL (optional - demo can run without database)
 
 ## 🚀 Getting Started
 
 1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd ma-consulting-website
-   ```
+    ```bash
+    git clone <repository-url>
+    cd ma-consulting-website
+    ```
 
 2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm install
+    ```
 
-3. **Set up environment variables**
-   ```bash
-   cp env.example .env
-   # Edit .env with your configuration
-   ```
+3. **Start the development server**
+    ```bash
+    npm run dev
+    ```
 
-4. **Set up the database**
-   ```bash
-   npm run db:push
-   npm run db:seed
-   ```
+    The website will be available at http://localhost:5173
 
-5. **Start development servers**
-   ```bash
-   npm run dev
-   ```
+### Optional: Full Backend Setup
 
-   This will start both the frontend (http://localhost:3000) and backend (http://localhost:5000) servers.
+If you want to run the full backend with database:
+
+1. **Set up PostgreSQL database**
+2. **Configure environment variables**
+    ```bash
+    cp env.example .env
+    # Edit .env with your database URL
+    ```
+3. **Set up the database**
+    ```bash
+    npm run db:push
+    npm run db:seed
+    ```
+4. **Start both frontend and backend**
+    ```bash
+    npm run dev
+    ```
+
+    Frontend: http://localhost:5173, Backend: http://localhost:5000
 
 ## 📜 Available Scripts
 
@@ -162,16 +176,27 @@ Role-based authentication using Supabase:
 - Editor: Content management
 - User: Basic access
 
+## 🎯 Demo Features
+
+This website showcases:
+
+- **Professional Design**: Clean, modern consulting website design
+- **Responsive Layout**: Works perfectly on desktop, tablet, and mobile
+- **Interactive AI Chat**: Click the chat bubble in the bottom-right to talk to MA's AI assistant
+- **Multi-page Navigation**: Explore different sections of the consulting firm
+- **Contact Integration**: Working contact forms and information
+- **SEO Optimized**: Proper meta tags and page structure
+
 ## 📱 Pages
 
-- **Home**: Hero section with tagline, services overview
-- **About**: Company story, mission, vision
-- **Services**: Detailed service pages with case studies
-- **Team**: Team member profiles with social links
-- **Blog**: CMS-driven blog with search and categories
-- **Testimonials**: Client feedback carousel
-- **Careers**: Job listings with application forms
-- **Contact**: Contact form with validation
+- **Home**: Hero section with services overview and company highlights
+- **About**: Company story, achievements, and team culture
+- **Services**: Investment consulting, business development, tax & customs
+- **Team**: Leadership team profiles with expertise areas
+- **Blog**: Business insights and industry articles
+- **Testimonials**: Client success stories and feedback
+- **Careers**: Career opportunities (coming soon)
+- **Contact**: Contact forms and company information
 
 ## 🧪 Testing
 
@@ -186,20 +211,17 @@ npx playwright test
 
 ## 🚀 Deployment
 
-### Frontend (Vercel)
-1. Connect GitHub repo to Vercel
-2. Set build command: `npm run build --workspace=apps/web`
-3. Set output directory: `apps/web/dist`
+### Quick Demo Deployment (Vercel)
+1. Fork this repository on GitHub
+2. Connect to Vercel: https://vercel.com
+3. Import your forked repo
+4. Vercel will auto-detect the Vite project and deploy
+5. Your demo site will be live in minutes!
 
-### Backend (Supabase/Render)
-1. Deploy to Supabase Functions or Render
-2. Set environment variables
-3. Run database migrations
-
-### Database (Supabase)
-1. Create Supabase project
-2. Run Prisma migrations
-3. Set up RLS policies
+### Full Stack Deployment
+- **Frontend**: Deploy `apps/web` to Vercel/Netlify
+- **Backend**: Deploy `apps/api` to Render/Railway
+- **Database**: Use Supabase or PlanetScale for PostgreSQL
 
 ## 🤝 Contributing
 
