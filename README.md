@@ -2,9 +2,11 @@
 
 A modern, professional consulting website built with React, Vite, Express, and PostgreSQL. This project showcases MA Consulting's services with a clean, responsive design and interactive AI chat assistant.
 
-## ✨ Live Demo
+## ✨ Live Demo & Repository
 
-🚀 **[View Live Demo](https://your-demo-url.vercel.app)** (replace with your deployed URL)
+🚀 **[View Repository on GitHub](https://github.com/jonnahjr/MA-Consulting-Website)**
+
+🌐 **[View Live Demo](https://ma-consulting-website.vercel.app)** (deployed on Vercel)
 
 This is a fully functional demo website featuring:
 - Professional consulting website design
