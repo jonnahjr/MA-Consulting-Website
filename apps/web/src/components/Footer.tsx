@@ -1,3 +1,5 @@
+import maLogo from '../assets/images/team/ma.png'
+
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-br from-slate-900 via-gray-900 to-slate-900 text-white relative overflow-hidden">
@@ -30,8 +32,17 @@ const Footer = () => {
           {/* Company Branding & Description */}
           <div className="lg:col-span-4 animate-fade-in-up">
             <div className="flex items-center space-x-4 mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl">
-                <span className="text-2xl text-white font-bold">MA</span>
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl overflow-hidden">
+                <img
+                  src={maLogo}
+                  alt="MA Consulting Logo"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    // Fallback to text logo if image fails to load
+                    const parent = e.currentTarget.parentElement!;
+                    parent.innerHTML = '<span class="text-2xl text-white font-bold">MA</span>';
+                  }}
+                />
               </div>
               <div>
                 <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
