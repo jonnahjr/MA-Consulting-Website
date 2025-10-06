@@ -1,4 +1,4 @@
-import maLogo from '../assets/images/team/ma.png'
+import maLogo from '../assets/images/team/ma.png?url'
 
 const Footer = () => {
   return (
