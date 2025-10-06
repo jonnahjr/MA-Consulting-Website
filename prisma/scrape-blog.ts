@@ -53,6 +53,7 @@ async function scrapeBlogPosts(): Promise<BlogPost[]> {
 }
 
 async function saveBlogPosts(posts: BlogPost[]) {
+  let savedCount = 0
   for (const post of posts) {
     try {
       await prisma.blogPost.upsert({
@@ -60,11 +61,18 @@ async function saveBlogPosts(posts: BlogPost[]) {
         update: post,
         create: post
       })
+      savedCount++
       console.log(`Saved blog post: ${post.title}`)
-    } catch (error) {
+    } catch (error: any) {
+      // If Prisma couldn't initialize (missing DATABASE_URL), surface the error
+      const msg = error && (error.message || error.toString())
+      if (msg && msg.includes('Environment variable not found')) {
+        throw error
+      }
       console.error(`Error saving post ${post.title}:`, error)
     }
   }
+  return savedCount
 }
 
 async function main() {
@@ -78,16 +86,22 @@ async function main() {
       console.log(`${index + 1}. ${post.title}`)
     })
 
-    // Try to save if DB is available
-    try {
-      await saveBlogPosts(posts)
-      console.log('Blog posts saved to database!')
-    } catch (error) {
-      console.log('Database not configured. Scraped posts are ready to be saved once DATABASE_URL is set.')
-      // Optionally save to JSON file
+    // If DATABASE_URL not set, skip DB write and save to JSON
+    if (!process.env.DATABASE_URL) {
+      console.log('DATABASE_URL not set. Saving scraped posts to JSON instead.')
       const fs = require('fs')
       fs.writeFileSync('scraped-blog-posts.json', JSON.stringify(posts, null, 2))
       console.log('Scraped posts saved to scraped-blog-posts.json')
+    } else {
+      try {
+        const saved = await saveBlogPosts(posts)
+        console.log(`Saved ${saved} posts to database.`)
+      } catch (error) {
+        console.log('Error writing to database. Falling back to JSON file.')
+        const fs = require('fs')
+        fs.writeFileSync('scraped-blog-posts.json', JSON.stringify(posts, null, 2))
+        console.log('Scraped posts saved to scraped-blog-posts.json')
+      }
     }
   } else {
     console.log('No blog posts found. You may need to adjust the scraping selectors.')

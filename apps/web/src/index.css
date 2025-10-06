@@ -1,3 +1,579 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom animations and effects */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(146, 65, 14, 0.144);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(146, 65, 14, 0.123);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Utility classes */
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.6s ease-out forwards;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.6s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* 3D Card effects */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: all 0.3s ease;
+}
+
+.card-3d:hover {
+  transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced gradients - Brown and white theme */
+.gradient-primary {
+  background: linear-gradient(135deg, #0b096865 0%, #04205c85 100%);
+}
+
+.gradient-secondary {
+  background: linear-gradient(135deg, #f5f5f42d 0%, #e7e5e433 100%);
+}
+
+.gradient-accent {
+  background: linear-gradient(135deg, #a1610733 0%, #0a0908 100%);
+}
+
+.gradient-dark {
+  background: linear-gradient(135deg, #fef7ed 0%, rgba(254, 215, 170, 0.5) 100%);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f12d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #000000e1, #000000a9);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #000000, #000000ec);
+}
+
+/* Loading spinner */
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #ffffff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Text effects */
+.text-gradient {
+  background: linear-gradient(135deg, #241c18 0%, #201f1d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-shadow-glow {
+  text-shadow: 0 0 20px rgba(146, 65, 14, 0.103);
+}
+
+/* Button enhancements */
+.btn-3d {
+  transform: translateY(0);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-3d:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.btn-3d:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Staggered animation delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* Parallax effect */
+.parallax {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus states for accessibility */
+.focus-ring:focus {
+  outline: 2px solid #0a0807;
+  outline-offset: 2px;
+}
+
+/* Utility classes for inline styles */
+.animation-delay-100 { animation-delay: 0.1s; }
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-500 { animation-delay: 0.5s; }
+.animation-delay-600 { animation-delay: 0.6s; }
+.animation-delay-1s { animation-delay: 1s; }
+.animation-delay-2s { animation-delay: 2s; }
+
+.transform-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.transform-translate-z {
+  transform: translateZ(0);
+}
+
+/* Random positioning utilities */
+.random-position-1 {
+  left: 10%;
+  top: 20%;
+}
+
+.random-position-2 {
+  left: 80%;
+  top: 60%;
+}
+
+.random-position-3 {
+  left: 60%;
+  top: 80%;
+}
+
+.random-position-4 {
+  left: 30%;
+  top: 40%;
+}
+
+.random-position-5 {
+  left: 90%;
+  top: 10%;
+}
+
+/* Particle animation variants */
+.particle-1 {
+  left: 15%;
+  top: 25%;
+  animation-delay: 0s;
+}
+
+.particle-2 {
+  left: 75%;
+  top: 45%;
+  animation-delay: 1s;
+}
+
+.particle-3 {
+  left: 45%;
+  top: 75%;
+  animation-delay: 2s;
+}
+
+.particle-4 {
+  left: 85%;
+  top: 15%;
+  animation-delay: 0.5s;
+}
+
+.particle-5 {
+  left: 25%;
+  top: 85%;
+  animation-delay: 1.5s;
+}
+
+/* Dynamic animation delays for staggered effects */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+
+/* Enhanced card effects */
+.card-enhanced {
+  transform: translateY(0);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-enhanced:hover {
+  transform: translateY(-8px) rotateX(5deg) rotateY(5deg);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+/* Glass effect variants */
+.glass-light {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Floating elements */
+.float-element-1 {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 5rem;
+  height: 5rem;
+  background: rgba(251, 191, 36, 0.3);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.float-element-2 {
+  position: absolute;
+  bottom: 20%;
+  left: 20%;
+  width: 4rem;
+  height: 4rem;
+  background: rgba(249, 116, 22, 0.096);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.float-element-3 {
+  position: absolute;
+  top: 50%;
+  right: 25%;
+  width: 3rem;
+  height: 3rem;
+  background: rgba(239, 68, 68, 0.2);
+  border-radius: 50%;
+  animation: float 7s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+/* Hero particles */
+.hero-particle {
+  position: absolute;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  animation: float 4s ease-in-out infinite;
+}
+
+.hero-particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+.hero-particle:nth-child(2) { left: 80%; top: 60%; animation-delay: 1s; }
+.hero-particle:nth-child(3) { left: 60%; top: 80%; animation-delay: 2s; }
+.hero-particle:nth-child(4) { left: 30%; top: 40%; animation-delay: 0.5s; }
+.hero-particle:nth-child(5) { left: 90%; top: 10%; animation-delay: 1.5s; }
+
+/* Team particles */
+.team-particle {
+  position: absolute;
+  width: 0.25rem;
+  height: 0.25rem;
+  background: rgba(251, 191, 36, 0.4);
+  border-radius: 50%;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* Blog decorative elements */
+.blog-decoration-1 {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.blog-decoration-2 {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+/* Chat widget typing dots */
+.typing-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: rgb(156, 163, 175);
+  border-radius: 50%;
+  animation: bounce 1.4s ease-in-out infinite both;
+}
+
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+.typing-dot:nth-child(3) { animation-delay: 0s; }
+
+/* Enhanced button styles */
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  border: 2px solid white;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Card/Box Styles */
+.card-service {
+  @apply card-3d bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 animate-fade-in-up;
+}
+
+.card-glass {
+  @apply bg-white/10 backdrop-blur-lg p-8 rounded-2xl border border-white/20;
+}
+
+.card-glass-dark {
+  @apply bg-white/10 backdrop-blur-lg p-8 rounded-2xl border border-white/20;
+}
+
+.card-content {
+  @apply bg-white p-8 rounded-2xl shadow-xl border border-amber-200;
+}
+
+.card-content-dark {
+  @apply bg-gray-800/80 backdrop-blur-sm p-6 rounded-xl border border-amber-500/30;
+}
+
+.card-small {
+  @apply bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-gray-200 hover:border-blue-300 transition-all duration-300;
+}
+
+.card-blog {
+  @apply card-3d bg-white/10 backdrop-blur-lg rounded-2xl overflow-hidden hover:bg-white/15 transition-all duration-500 animate-fade-in-up border border-white/20;
+}
+
+.card-team {
+  @apply card-3d bg-gray-800/80 backdrop-blur-sm p-6 rounded-xl border border-orange-500/30 text-center animate-fade-in-up delay-200 hover:bg-gray-700/80 transition-all duration-500;
+}
+
+.card-establishment {
+  @apply relative bg-gradient-to-br from-amber-500 via-orange-500 to-red-500 p-8 rounded-2xl shadow-2xl card-3d animate-float;
+}
+
+.card-form {
+  @apply max-w-md mx-auto bg-white/10 backdrop-blur-lg p-8 rounded-2xl border border-white/20 shadow-2xl;
+}
+
+.card-message {
+  @apply bg-white p-3 rounded-2xl shadow-md;
+}
+
+/* Icon Styles */
+.icon-service {
+  @apply w-16 h-16 bg-gradient-to-br rounded-2xl flex items-center justify-center mb-6 animate-pulse-glow;
+}
+
+.icon-service-blue {
+  @apply icon-service from-blue-500 to-blue-600;
+}
+
+.icon-service-green {
+  @apply icon-service from-green-500 to-green-600;
+}
+
+.icon-service-purple {
+  @apply icon-service from-purple-500 to-purple-600;
+}
+
+.icon-service-orange {
+  @apply icon-service from-orange-500 to-red-500;
+}
+
+.icon-service-teal {
+  @apply icon-service from-teal-500 to-blue-500;
+}
+
+.icon-service-pink {
+  @apply icon-service from-pink-500 to-purple-500;
+}
+
+.icon-value {
+  @apply w-20 h-20 bg-gradient-to-br rounded-full flex items-center justify-center mx-auto mb-4;
+}
+
+.icon-value-integrity {
+  @apply icon-value from-amber-500 to-orange-500;
+}
+
+.icon-value-innovation {
+  @apply icon-value from-orange-500 to-red-500;
+}
+
+.icon-value-excellence {
+  @apply icon-value from-red-500 to-pink-500;
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .float-element-1,
+  .float-element-2,
+  .float-element-3 {
+    display: none;
+  }
+
+  .hero-particle {
+    width: 0.25rem;
+    height: 0.25rem;
+  }
+
+  .card-service,
+  .card-glass,
+  .card-content {
+    @apply p-6;
+  }
+
+  .icon-service {
+    @apply w-12 h-12 mb-4;
+  }
+}

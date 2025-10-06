@@ -1,22 +1,104 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { useState } from 'react'
 
 const Header = () => {
+  const [open, setOpen] = useState(false)
+  const location = useLocation()
+
+  const navItems = [
+    { path: '/', label: 'Home', description: 'Welcome & Overview' },
+    { path: '/about', label: 'About', description: 'Our Story & Mission' },
+    { path: '/services', label: 'Services', description: 'Expert Consulting' },
+    { path: '/team', label: 'Team', description: 'Leadership & Experts' },
+    { path: '/blog', label: 'Blog', description: 'Insights & News' },
+    { path: '/careers', label: 'Careers', description: 'Join Our Team' },
+    { path: '/contact', label: 'Contact', description: 'Get In Touch' },
+  ]
+
   return (
-    <header className="bg-white shadow sticky top-0 z-50">
-      <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link to="/" className="text-xl font-bold text-gray-800">MA Consulting</Link>
-        <ul className="hidden md:flex space-x-6">
-          <li><Link to="/" className="text-gray-700 hover:text-blue-600 transition">Home</Link></li>
-          <li><Link to="/#about" className="text-gray-700 hover:text-blue-600 transition">About</Link></li>
-          <li><Link to="/#services" className="text-gray-700 hover:text-blue-600 transition">Services</Link></li>
-          <li><Link to="/#team" className="text-gray-700 hover:text-blue-600 transition">Team</Link></li>
-          <li><Link to="/#blog" className="text-gray-700 hover:text-blue-600 transition">Blog</Link></li>
-          <li><Link to="/#careers" className="text-gray-700 hover:text-blue-600 transition">Careers</Link></li>
-          <li><Link to="/#contact" className="text-gray-700 hover:text-blue-600 transition">Contact</Link></li>
-        </ul>
-        {/* Mobile menu button */}
-        <button className="md:hidden">Menu</button>
+    <header className="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-200">
+      <nav className="container mx-auto px-4 py-4">
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-3 hover:scale-105 transition-transform duration-300">
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
+              <span className="text-lg text-white font-bold">MA</span>
+            </div>
+            <div className="hidden sm:block">
+              <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                MA Consulting
+              </h1>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`font-medium transition-colors duration-300 hover:text-blue-600 ${
+                  location.pathname === item.path
+                    ? 'text-blue-600'
+                    : 'text-gray-700'
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* CTA Button */}
+          <Link
+            to="/contact"
+            className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+          >
+            Get Consultation
+          </Link>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center"
+            aria-label="Toggle menu"
+            onClick={() => setOpen(v => !v)}
+          >
+            <span className="text-lg font-semibold text-gray-700">{open ? '✕' : '☰'}</span>
+          </button>
+        </div>
       </nav>
+
+      {/* Mobile Menu */}
+      {open && (
+        <div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
+          <div className="container mx-auto px-4 py-4">
+            <div className="space-y-4">
+              {navItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setOpen(false)}
+                  className={`block py-3 px-4 rounded-lg transition-colors duration-300 ${
+                    location.pathname === item.path
+                      ? 'bg-blue-50 text-blue-600 font-semibold'
+                      : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <div className="pt-4 border-t border-gray-200">
+                <Link
+                  to="/contact"
+                  onClick={() => setOpen(false)}
+                  className="block w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 px-4 rounded-lg font-semibold text-center hover:shadow-lg transition-all duration-300"
+                >
+                  Get Consultation
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   )
 }

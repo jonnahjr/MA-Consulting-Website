@@ -1,5 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App, { Home } from './App'
+import { About } from './pages/About'
+import { Services } from './pages/Services'
+import { Team } from './pages/Team'
+import { Blog } from './pages/Blog'
+import { Testimonials } from './pages/Testimonials'
+import { Careers } from './pages/Careers'
+import { Contact } from './pages/Contact'
 
 const future: any = {
   v7_startTransition: true,
@@ -13,12 +20,13 @@ export const router = createBrowserRouter(
       element: <App />,
       children: [
         { index: true, element: <Home /> },
-        { path: 'about', element: <Home initialSection="about" /> },
-        { path: 'services', element: <Home initialSection="services" /> },
-        { path: 'team', element: <Home initialSection="team" /> },
-        { path: 'blog', element: <Home initialSection="blog" /> },
-        { path: 'careers', element: <Home initialSection="careers" /> },
-        { path: 'contact', element: <Home initialSection="contact" /> },
+        { path: 'about', element: <About /> },
+        { path: 'services', element: <Services /> },
+        { path: 'team', element: <Team /> },
+        { path: 'blog', element: <Blog /> },
+        { path: 'testimonials', element: <Testimonials /> },
+        { path: 'careers', element: <Careers /> },
+        { path: 'contact', element: <Contact /> },
       ],
     },
   ],
