@@ -20,12 +20,10 @@ const ContactForm = () => {
   const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null)
   const [focusedField, setFocusedField] = useState<string | null>(null)
 
-  const { register, handleSubmit, formState: { errors, isValid }, reset, watch } = useForm<FormData>({
+  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<FormData>({
     resolver: zodResolver(schema),
     mode: 'onChange',
   })
-
-  const watchedService = watch('service')
 
   const services = [
     'Investment Consulting',
