@@ -6,7 +6,7 @@ A modern, professional consulting website built with React, Vite, Express, and P
 
 🚀 **[View Repository on GitHub](https://github.com/jonnahjr/MA-Consulting-Website)**
 
-🌐 **[View Live Demo](https://ma-consulting-website.vercel.app)** (deployed on Vercel)
+🌐 **[View Live Demo](https://ma-consulting-website-jr.vercel.app)** (deployed on Vercel)
 
 This is a fully functional demo website featuring:
 - Professional consulting website design
