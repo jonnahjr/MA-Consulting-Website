@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
+import maLogo from '../assets/images/team/ma.png'
 
 const Header = () => {
   const [open, setOpen] = useState(false)
@@ -21,8 +22,17 @@ const Header = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 hover:scale-105 transition-transform duration-300">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
-              <span className="text-lg text-white font-bold">MA</span>
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
+              <img
+                src={maLogo}
+                alt="MA Consulting Logo"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  // Fallback to text logo if image fails to load
+                  const parent = e.currentTarget.parentElement!;
+                  parent.innerHTML = '<span class="text-lg text-white font-bold">MA</span>';
+                }}
+              />
             </div>
             <div className="hidden sm:block">
               <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
