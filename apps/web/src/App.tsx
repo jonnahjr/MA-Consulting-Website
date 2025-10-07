@@ -10,7 +10,7 @@ interface BlogPost {
   title: string
   slug: string
   content: string
-  tags: string[]
+  tags: string
   publishedAt: string
 }
 
@@ -1051,7 +1051,7 @@ export function Home({ initialSection }: { initialSection?: string }) {
                       </div>
                       {post.tags && post.tags.length > 0 && (
                         <span className="bg-gradient-to-r from-purple-500 to-violet-500 text-white px-4 py-2 rounded-full text-xs font-semibold shadow-lg">
-                          {post.tags[0]}
+                          {post.tags.split(',')[0]}
                         </span>
                       )}
                     </div>
