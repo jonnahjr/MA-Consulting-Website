@@ -4,7 +4,7 @@ import maLogo from '../assets/images/team/ma.png'
 const Footer = () => {
   const [logoError, setLogoError] = useState(false)
   return (
-    <footer className="bg-gradient-to-r from-slate-800 via-slate-900 to-slate-800 text-white py-8 border-t-4 border-orange-500">
+    <footer className="bg-black/90 backdrop-blur-md text-white py-8 border-t-4 border-orange-500 relative z-10">
       <div className="w-full px-6">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 lg:grid-cols-10 gap-8 mb-8">
