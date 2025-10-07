@@ -44,11 +44,11 @@ const Header = () => {
         <img
           src={maLogo}
           alt="Ma Services Solution Logo"
-          className="w-12 h-12 object-contain rounded-md shadow-lg"
+          className="w-16 h-16 object-contain rounded-md shadow-lg"
           onError={(e) => {
             // Fallback to text logo if image fails to load
             const parent = e.currentTarget.parentElement!;
-            parent.innerHTML = '<div class="w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg"><span class="text-lg text-white font-bold">MA</span></div>';
+            parent.innerHTML = '<div class="w-16 h-16 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg"><span class="text-xl text-white font-bold">MS</span></div>';
           }}
         />
         <div className="hidden sm:block">

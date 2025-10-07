@@ -11,9 +11,9 @@ const Footer = () => {
           {/* Company Branding & Description */}
           <div className="lg:col-span-4">
             <div className="flex items-center space-x-4 mb-6">
-              <div className="w-16 h-16 bg-slate-600 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden">
+              <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center shadow-lg overflow-hidden">
                 {logoError ? (
-                  <span className="text-2xl text-white font-bold">MA</span>
+                  <span className="text-3xl text-gray-800 font-bold">MS</span>
                 ) : (
                   <img
                     src={maLogo}
