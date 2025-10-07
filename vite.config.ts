@@ -6,6 +6,12 @@ export default defineConfig({
   root: path.resolve(__dirname, 'apps/web'),
   plugins: [react()],
   base: './',
+  resolve: {
+    alias: {
+      react: path.resolve(__dirname, 'apps/web/node_modules/react'),
+      'react-dom': path.resolve(__dirname, 'apps/web/node_modules/react-dom')
+    }
+  },
   build: {
     outDir: path.resolve(__dirname, 'apps/web/dist'),
     emptyOutDir: true,
