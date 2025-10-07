@@ -7,10 +7,10 @@
     "node": ">=18"
   },
   "scripts": {
-  "dev": "concurrently \"npm run dev --workspace=apps/web\" \"npm run dev --workspace=apps/api\"",
-  "build": "npm --workspace=web run build",
-  "build:web": "npm --workspace=web run build",
-  "start": "npm --workspace=api run start",
+    "dev": "concurrently \"npm run dev --workspace=apps/web\" \"npm run dev --workspace=apps/api\"",
+    "build": "npm run build --workspace=apps/web",
+    "build:web": "npm run build --workspace=apps/web",
+    "start": "npm run start --workspace=apps/api",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts"
