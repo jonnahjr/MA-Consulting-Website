@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "workspaces": ["apps/*"],
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "dev": "concurrently \"npm run dev --workspace=apps/web\" \"npm run dev --workspace=apps/api\"",
     "build": "npm run build --workspace=apps/web && npm run build --workspace=apps/api",
