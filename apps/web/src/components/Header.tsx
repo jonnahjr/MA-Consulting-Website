@@ -43,7 +43,7 @@ const Header = () => {
         {/* Use image instead of gradient box */}
         <img
           src={maLogo}
-          alt="MA Consulting Logo"
+          alt="Ma Services Solution Logo"
           className="w-12 h-12 object-contain rounded-md shadow-lg"
           onError={(e) => {
             // Fallback to text logo if image fails to load
@@ -53,7 +53,7 @@ const Header = () => {
         />
         <div className="hidden sm:block">
           <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-            MA Consulting
+            Ma Services Solution
           </h1>
         </div>
       </Link>

@@ -9,7 +9,7 @@ interface MetaProps {
 }
 
 const Meta = ({ title, description, keywords, image, url }: MetaProps) => {
-  const siteName = 'MA Consulting'
+  const siteName = 'Ma Services Solution'
   const defaultImage = '/og-image.jpg' // TODO: Add default OG image
   const defaultUrl = window.location.href
 

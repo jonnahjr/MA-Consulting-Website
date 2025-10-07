@@ -1,5 +1,5 @@
 {
-  "name": "ma-consulting-website",
+  "name": "ma-services-solution-website",
   "version": "1.0.0",
   "private": true,
   "workspaces": ["apps/*"],

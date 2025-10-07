@@ -1,6 +1,6 @@
-# MA Consulting Website
+# Ma Services Solution Website
 
-A modern, professional consulting website built with React, Vite, Express, and PostgreSQL. This project showcases MA Consulting's services with a clean, responsive design and interactive AI chat assistant.
+A modern, professional consulting website built with React, Vite, Express, and PostgreSQL. This project showcases Ma Services Solution's services with a clean, responsive design and interactive AI chat assistant.
 
 ## ✨ Live Demo & Repository
 

@@ -74,7 +74,7 @@ const ChatWidget = () => {
 
     // General responses
     if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
-      return "Hello! Welcome to MA Consulting. I'm here to help you learn about our professional services. What would you like to know about investment consulting, business development, tax services, or our other offerings?"
+      return "Hello! Welcome to Ma Services Solution. I'm here to help you learn about our professional services. What would you like to know about investment consulting, business development, tax services, or our other offerings?"
     }
 
     if (message.includes('thank') || message.includes('thanks')) {

@@ -17,7 +17,7 @@ const Footer = () => {
                 ) : (
                   <img
                     src={maLogo}
-                    alt="MA Consulting Logo"
+                    alt="Ma Services Solution Logo"
                     className="w-full h-full object-cover"
                     onError={() => setLogoError(true)}
                   />
@@ -25,7 +25,7 @@ const Footer = () => {
               </div>
               <div>
                 <h3 className="text-3xl font-bold text-white">
-                  MA Consulting
+                  Ma Services Solution
                 </h3>
                 <p className="text-sm text-gray-200 font-medium">Professional Business Solutions</p>
               </div>
@@ -230,7 +230,7 @@ const Footer = () => {
         <div className="border-t border-gray-700/50 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm">
-              &copy; 2024 MA Consulting PLC. All rights reserved.
+              &copy; 2024 Ma Services Solution PLC. All rights reserved.
             </p>
             <div className="flex flex-wrap gap-6">
               <a href="#" className="text-gray-200 transition-colors duration-300 text-sm hover:underline">

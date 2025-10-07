@@ -1,6 +1,6 @@
-# MA Consulting Website Assets
+# Ma Services Solution Website Assets
 
-This folder contains all static assets for the MA Consulting website.
+This folder contains all static assets for the Ma Services Solution website.
 
 ## 📁 Folder Structure
 

@@ -3,7 +3,7 @@ import Meta from '../components/Meta'
 export function About() {
   return (
     <>
-      <Meta title="About MA Consulting - Ethiopia's Premier Business Consulting Firm" description="Learn about MA Consulting's 13+ years of excellence in investment consulting, business development, tax services, and strategic transformation. Meet our expert team and discover our mission." />
+      <Meta title="About Ma Services Solution - Ethiopia's Premier Business Consulting Firm" description="Learn about Ma Services Solution's 13+ years of excellence in investment consulting, business development, tax services, and strategic transformation. Meet our expert team and discover our mission." />
 
       {/* HERO SECTION - Large and Professional */}
       <section className="relative min-h-screen flex items-center bg-gradient-to-br from-slate-900 via-amber-900 to-orange-900 overflow-hidden">

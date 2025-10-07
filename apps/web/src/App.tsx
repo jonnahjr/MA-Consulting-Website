@@ -126,7 +126,7 @@ export function Home({ initialSection }: { initialSection?: string }) {
             <div className="text-center mb-20 animate-fade-in-up">
               <div className="inline-block mb-6">
                 <span className="bg-gradient-to-r from-amber-400 to-orange-500 text-white px-6 py-3 rounded-full text-lg font-semibold uppercase tracking-wider shadow-lg">
-                  About MA Consulting
+                  About Ma Services Solution
                 </span>
               </div>
               <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">Ethiopia's Premier Consulting Firm</h2>
@@ -144,7 +144,7 @@ export function Home({ initialSection }: { initialSection?: string }) {
                     <h3 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900">Our Founding Story</h3>
                     <p className="text-xl text-gray-700 leading-relaxed mb-6">
                       Founded in 2010 by industry veterans Alebachew Sitotaw Yimer and Melsew Hailemariam Yassin,
-                      MA Consulting emerged from a bold vision to bridge the gap between traditional Ethiopian business
+                      Ma Services Solution emerged from a bold vision to bridge the gap between traditional Ethiopian business
                       practices and cutting-edge global consulting methodologies.
                     </p>
                     <p className="text-xl text-gray-700 leading-relaxed mb-6">
