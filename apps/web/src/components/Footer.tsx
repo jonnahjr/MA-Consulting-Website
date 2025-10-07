@@ -27,11 +27,11 @@ const Footer = () => {
                 <h3 className="text-3xl font-bold text-white">
                   MA Consulting
                 </h3>
-                <p className="text-sm text-gray-400 font-medium">Professional Business Solutions</p>
+                <p className="text-sm text-gray-200 font-medium">Professional Business Solutions</p>
               </div>
             </div>
 
-            <p className="text-gray-300 leading-relaxed mb-6 text-base">
+            <p className="text-gray-200 leading-relaxed mb-6 text-base">
               Ethiopia's premier consulting firm delivering expertise in investment, business development, tax services, and strategic planning since 2010.
             </p>
 
@@ -102,37 +102,37 @@ const Footer = () => {
             <h4 className="text-xl font-bold mb-6 text-white">Our Services</h4>
             <ul className="space-y-4">
               <li>
-                <a href="/services" className="group flex items-center text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">
+                <a href="/services" className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-blue-500 rounded-full mr-3 group-hover:bg-blue-400 transition-colors"></span>
                   <span className="text-lg">Investment Consulting</span>
                 </a>
               </li>
               <li>
-                <a href="/services" className="group flex items-center text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">
+                <a href="/services" className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-green-500 rounded-full mr-3 group-hover:bg-green-400 transition-colors"></span>
                   <span className="text-lg">Business Development</span>
                 </a>
               </li>
               <li>
-                <a href="/services" className="group flex items-center text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">
+                <a href="/services" className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 group-hover:bg-purple-400 transition-colors"></span>
                   <span className="text-lg">Marketing Strategies</span>
                 </a>
               </li>
               <li>
-                <a href="/services" className="group flex items-center text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">
+                <a href="/services" className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-orange-500 rounded-full mr-3 group-hover:bg-orange-400 transition-colors"></span>
                   <span className="text-lg">Tax & Customs</span>
                 </a>
               </li>
               <li>
-                <a href="/services" className="group flex items-center text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">
+                <a href="/services" className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-teal-500 rounded-full mr-3 group-hover:bg-teal-400 transition-colors"></span>
                   <span className="text-lg">Development Works</span>
                 </a>
               </li>
               <li>
-                <a href="/services" className="group flex items-center text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">
+                <a href="/services" className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-pink-500 rounded-full mr-3 group-hover:bg-pink-400 transition-colors"></span>
                   <span className="text-lg">Dedicated Support</span>
                 </a>
@@ -145,37 +145,37 @@ const Footer = () => {
             <h4 className="text-xl font-bold mb-6 text-white">Quick Links</h4>
             <ul className="space-y-4">
               <li>
-                <a href="/" className="group flex items-center text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">
+                <a href="/" className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mr-3"></span>
                   <span className="text-lg">Home</span>
                 </a>
               </li>
               <li>
-                <a href="/about" className="group flex items-center text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">
+                <a href="/about" className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mr-3"></span>
                   <span className="text-lg">About Us</span>
                 </a>
               </li>
               <li>
-                <a href="/team" className="group flex items-center text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">
+                <a href="/team" className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mr-3"></span>
                   <span className="text-lg">Our Team</span>
                 </a>
               </li>
               <li>
-                <a href="/blog" className="group flex items-center text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">
+                <a href="/blog" className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mr-3"></span>
                   <span className="text-lg">Blog & Insights</span>
                 </a>
               </li>
               <li>
-                <a href="/careers" className="group flex items-center text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">
+                <a href="/careers" className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full mr-3"></span>
                   <span className="text-lg">Careers</span>
                 </a>
               </li>
               <li>
-                <a href="/contact" className="group flex items-center text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">
+                <a href="/contact" className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full mr-3"></span>
                   <span className="text-lg">Contact Us</span>
                 </a>
@@ -193,8 +193,8 @@ const Footer = () => {
                 </div>
                 <div>
                   <h5 className="text-lg font-semibold text-white mb-1">Phone</h5>
-                  <p className="text-gray-300">+251 911 123 456</p>
-                  <p className="text-sm text-gray-400">Mon-Fri 9AM-6PM EAT</p>
+                  <p className="text-gray-200">+251 911 123 456</p>
+                  <p className="text-sm text-gray-300">Mon-Fri 9AM-6PM EAT</p>
                 </div>
               </div>
 
@@ -204,8 +204,8 @@ const Footer = () => {
                 </div>
                 <div>
                   <h5 className="text-lg font-semibold text-white mb-1">Email</h5>
-                  <p className="text-gray-300">info@maconsulting.com</p>
-                  <p className="text-sm text-gray-400">Response within 2 hours</p>
+                  <p className="text-gray-200">info@maconsulting.com</p>
+                  <p className="text-sm text-gray-300">Response within 2 hours</p>
                 </div>
               </div>
 
@@ -215,8 +215,8 @@ const Footer = () => {
                 </div>
                 <div>
                   <h5 className="text-lg font-semibold text-white mb-1">Office</h5>
-                  <p className="text-gray-300">Bole Medhanealem<br />Addis Ababa, Ethiopia</p>
-                  <p className="text-sm text-gray-400">By appointment</p>
+                  <p className="text-gray-200">Bole Medhanealem<br />Addis Ababa, Ethiopia</p>
+                  <p className="text-sm text-gray-300">By appointment</p>
                 </div>
               </div>
             </div>
@@ -233,16 +233,16 @@ const Footer = () => {
               &copy; 2024 MA Consulting PLC. All rights reserved.
             </p>
             <div className="flex flex-wrap gap-6">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300 text-sm hover:underline">
+              <a href="#" className="text-gray-200 transition-colors duration-300 text-sm hover:underline">
                 Privacy Policy
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300 text-sm hover:underline">
+              <a href="#" className="text-gray-200 transition-colors duration-300 text-sm hover:underline">
                 Terms of Service
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300 text-sm hover:underline">
+              <a href="#" className="text-gray-200 transition-colors duration-300 text-sm hover:underline">
                 Cookie Policy
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300 text-sm hover:underline">
+              <a href="#" className="text-gray-200 transition-colors duration-300 text-sm hover:underline">
                 Accessibility
               </a>
             </div>

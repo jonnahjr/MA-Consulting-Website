@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import maLogo from '../assets/images/team/ma.png?url'
+import maLogo from '../assets/images/team/ma.png'
 
 const Header = () => {
   const [open, setOpen] = useState(false)

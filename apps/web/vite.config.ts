@@ -3,14 +3,15 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    port: 3000,
-  },
+  base: './', // important for Vercel
+  server: { port: 3000 },
   build: {
+    chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
-        manualChunks: () => 'vendor',
-      },
-    },
-  },
+        // everything goes into one vendor chunk to avoid React internal errors
+        manualChunks: () => 'vendor'
+      }
+    }
+  }
 })
