@@ -98,4 +98,6 @@ jspm_packages/
 
 # Temporary folders
 tmp/
+# Database
+prisma/dev.db
 temp/
