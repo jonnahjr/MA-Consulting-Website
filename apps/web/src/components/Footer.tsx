@@ -1,6 +1,8 @@
-import maLogo from '../assets/images/team/ma.png?url'
+import { useState } from 'react'
+import maLogo from '../assets/images/team/ma.png'
 
 const Footer = () => {
+  const [logoError, setLogoError] = useState(false)
   return (
     <footer className="bg-slate-900 text-white py-8">
       <div className="w-full px-6">
@@ -10,16 +12,16 @@ const Footer = () => {
           <div className="lg:col-span-4">
             <div className="flex items-center space-x-4 mb-6">
               <div className="w-16 h-16 bg-slate-600 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden">
-                <img
-                  src={maLogo}
-                  alt="MA Consulting Logo"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    // Fallback to text logo if image fails to load
-                    const parent = e.currentTarget.parentElement!;
-                    parent.innerHTML = '<span class="text-2xl text-white font-bold">MA</span>';
-                  }}
-                />
+                {logoError ? (
+                  <span className="text-2xl text-white font-bold">MA</span>
+                ) : (
+                  <img
+                    src={maLogo}
+                    alt="MA Consulting Logo"
+                    className="w-full h-full object-cover"
+                    onError={() => setLogoError(true)}
+                  />
+                )}
               </div>
               <div>
                 <h3 className="text-3xl font-bold text-white">
