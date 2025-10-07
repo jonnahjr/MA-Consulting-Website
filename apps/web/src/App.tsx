@@ -155,7 +155,7 @@ export function Home({ initialSection }: { initialSection?: string }) {
                     </p>
                     <p className="text-xl text-gray-700 leading-relaxed">
                       We've successfully navigated our clients through economic challenges, regulatory changes, and
-                      market transformations, emerging stronger and more capable with each milestone. Today, MA Consulting
+                      market transformations, emerging stronger and more capable with each milestone. Today, Ma Services Solution
                       stands as a beacon of professional excellence in Ethiopian business consulting.
                     </p>
 
@@ -272,9 +272,9 @@ export function Home({ initialSection }: { initialSection?: string }) {
                 </div>
               </div>
 
-              {/* Why Choose MA Consulting */}
+              {/* Why Choose Ma Services Solution */}
               <div className="mt-16 bg-white p-12 rounded-3xl shadow-2xl border border-gray-100 animate-fade-in-up">
-                <h3 className="text-4xl font-bold text-center mb-12 text-gray-900">Why Choose MA Consulting?</h3>
+                <h3 className="text-4xl font-bold text-center mb-12 text-gray-900">Why Choose Ma Services Solution?</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   <div className="text-center group">
                     <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-3xl flex items-center justify-center mx-auto mb-6 text-4xl shadow-2xl group-hover:scale-110 transition-transform">
@@ -753,7 +753,7 @@ export function Home({ initialSection }: { initialSection?: string }) {
             </div>
             <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">What Our Clients Say</h2>
             <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Real results from real businesses. Discover how MA Consulting has transformed
+              Real results from real businesses. Discover how Ma Services Solution has transformed
               operations and driven growth across diverse industries in Ethiopia.
             </p>
           </div>
@@ -844,7 +844,7 @@ export function Home({ initialSection }: { initialSection?: string }) {
                           <svg className="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
-                          <span className="text-green-800 font-semibold text-sm">Verified MA Consulting Client</span>
+                          <span className="text-green-800 font-semibold text-sm">Verified Ma Services Solution Client</span>
                         </div>
                       </div>
                     </div>
@@ -933,7 +933,7 @@ export function Home({ initialSection }: { initialSection?: string }) {
               <h3 className="text-3xl font-bold mb-6 text-gray-900">Join Our Success Stories</h3>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                 Ready to transform your business? Join hundreds of Ethiopian companies that have
-                achieved remarkable growth and success with MA Consulting's expert guidance.
+                achieved remarkable growth and success with Ma Services Solution's expert guidance.
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <button
@@ -1232,7 +1232,7 @@ export function Home({ initialSection }: { initialSection?: string }) {
             {/* Additional Contact Info */}
             <div className="mt-16 text-center">
               <div className="bg-gradient-to-r from-gray-100 to-gray-200 p-8 rounded-3xl">
-                <h4 className="text-2xl font-bold mb-4 text-gray-900">Why Choose MA Consulting?</h4>
+                <h4 className="text-2xl font-bold mb-4 text-gray-900">Why Choose Ma Services Solution?</h4>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
                   <div>
                     <div className="text-3xl font-bold text-red-600 mb-2">2hrs</div>

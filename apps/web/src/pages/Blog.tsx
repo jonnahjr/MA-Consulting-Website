@@ -44,7 +44,7 @@ export function Blog() {
 
   return (
     <>
-      <Meta title="Business Insights & Consulting Blog - MA Consulting" description="Stay informed with expert insights on investment consulting, business development, tax strategies, and industry trends from MA Consulting's thought leaders." />
+      <Meta title="Business Insights & Consulting Blog - Ma Services Solution" description="Stay informed with expert insights on investment consulting, business development, tax strategies, and industry trends from Ma Services Solution's thought leaders." />
 
       {/* HERO SECTION - Large and Professional */}
       <section className="relative min-h-screen flex items-center bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 overflow-hidden">
@@ -85,7 +85,7 @@ export function Blog() {
             </h1>
 
             <p className="text-2xl md:text-3xl text-gray-300 mb-12 leading-relaxed max-w-4xl mx-auto">
-              Discover actionable insights from MA Consulting's thought leaders. Our blog covers the latest
+              Discover actionable insights from Ma Services Solution's thought leaders. Our blog covers the latest
               trends in investment consulting, business development strategies, tax optimization, and industry
               best practices that drive business success.
             </p>
@@ -289,7 +289,7 @@ export function Blog() {
       <section className="py-24 bg-gradient-to-br from-slate-900 via-gray-900 to-slate-900 text-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-bold mb-6">Why Read MA Consulting Insights?</h2>
+            <h2 className="text-5xl md:text-6xl font-bold mb-6">Why Read Ma Services Solution Insights?</h2>
             <p className="text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Our blog combines deep industry expertise with practical business advice,
               helping you make informed decisions that drive success.
@@ -338,7 +338,7 @@ export function Blog() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-5xl md:text-6xl font-bold mb-6">Ready to Transform Your Business?</h2>
           <p className="text-2xl mb-12 max-w-3xl mx-auto leading-relaxed">
-            Put our expert insights into action. Contact MA Consulting today for personalized
+            Put our expert insights into action. Contact Ma Services Solution today for personalized
             consulting services that drive measurable business results.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">

@@ -3,7 +3,7 @@ import Meta from '../components/Meta'
 export function Team() {
   return (
     <>
-      <Meta title="Our Expert Team - MA Consulting" description="Meet the leadership team at MA Consulting - experienced professionals dedicated to delivering exceptional business consulting solutions." />
+      <Meta title="Our Expert Team - Ma Services Solution" description="Meet the leadership team at Ma Services Solution - experienced professionals dedicated to delivering exceptional business consulting solutions." />
 
       {/* HERO SECTION - Large and Professional */}
       <section className="relative min-h-screen flex items-center bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 overflow-hidden">
@@ -74,7 +74,7 @@ export function Team() {
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">Leadership & Expertise</h2>
             <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Get to know the professionals who drive MA Consulting's success and client satisfaction.
+              Get to know the professionals who drive Ma Services Solution's success and client satisfaction.
             </p>
           </div>
 
@@ -88,7 +88,7 @@ export function Team() {
                 <h3 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Alebachew Sitotaw Yimer</h3>
                 <h4 className="text-2xl text-amber-600 font-bold mb-6">CEO & Founder</h4>
                 <p className="text-xl text-gray-700 leading-relaxed mb-8">
-                  As the visionary founder of MA Consulting, Alebachew brings over 15 years of strategic consulting experience
+                  As the visionary founder of Ma Services Solution, Alebachew brings over 15 years of strategic consulting experience
                   to every client engagement. His expertise spans investment consulting, business development, and organizational
                   transformation across multiple industries.
                 </p>
@@ -117,7 +117,7 @@ export function Team() {
                   <ul className="space-y-3 text-lg text-gray-700">
                     <li className="flex items-start">
                       <span className="text-amber-500 mr-3 text-xl">✓</span>
-                      <span>Founded MA Consulting in 2010, growing it to Ethiopia's premier consulting firm</span>
+                      <span>Founded Ma Services Solution in 2010, growing it to Ethiopia's premier consulting firm</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-amber-500 mr-3 text-xl">✓</span>
@@ -166,7 +166,7 @@ export function Team() {
                 <h3 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Melsew Hailemariam Yassin</h3>
                 <h4 className="text-2xl text-orange-600 font-bold mb-6">Deputy CEO & Founder</h4>
                 <p className="text-xl text-gray-700 leading-relaxed mb-8">
-                  Melsew serves as the operational backbone of MA Consulting, ensuring that our strategic vision
+                  Melsew serves as the operational backbone of Ma Services Solution, ensuring that our strategic vision
                   translates into seamless client experiences. With extensive experience in business operations,
                   project management, and client relationship management, she drives organizational excellence.
                 </p>
@@ -245,7 +245,7 @@ export function Team() {
                 <p className="text-xl text-gray-700 leading-relaxed mb-8">
                   Tiruwork leads our business development initiatives, focusing on strategic partnerships,
                   market expansion, and long-term client relationships. His expertise in identifying growth
-                  opportunities and building strategic alliances has been instrumental in MA Consulting's expansion.
+                  opportunities and building strategic alliances has been instrumental in Ma Services Solution's expansion.
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -272,7 +272,7 @@ export function Team() {
                   <ul className="space-y-3 text-lg text-gray-700">
                     <li className="flex items-start">
                       <span className="text-red-500 mr-3 text-xl">✓</span>
-                      <span>Expanded MA Consulting's client base by 300% through strategic partnerships</span>
+                      <span>Expanded Ma Services Solution's client base by 300% through strategic partnerships</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-red-500 mr-3 text-xl">✓</span>

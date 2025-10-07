@@ -3,7 +3,7 @@ import Meta from '../components/Meta'
 export function Services() {
   return (
     <>
-      <Meta title="Professional Consulting Services - MA Consulting" description="Comprehensive business consulting services including investment consulting, business development, tax & customs, marketing strategies, development works, and dedicated support." />
+      <Meta title="Professional Consulting Services - Ma Services Solution" description="Comprehensive business consulting services including investment consulting, business development, tax & customs, marketing strategies, development works, and dedicated support." />
 
       {/* HERO SECTION - Large and Impactful */}
       <section className="relative min-h-screen flex items-center bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 overflow-hidden">
@@ -456,7 +456,7 @@ export function Services() {
           <h2 className="text-5xl md:text-6xl font-bold mb-6">Ready to Transform Your Business?</h2>
           <p className="text-2xl mb-12 max-w-3xl mx-auto leading-relaxed">
             Let's discuss how our consulting services can help you achieve your goals.
-            Contact us today for a free consultation and discover the MA Consulting difference.
+            Contact us today for a free consultation and discover the Ma Services Solution difference.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button className="bg-white text-gray-900 px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">

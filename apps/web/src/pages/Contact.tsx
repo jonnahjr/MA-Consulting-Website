@@ -19,7 +19,7 @@ export function Contact() {
 
   return (
     <>
-      <Meta title="Contact MA Consulting - Get Expert Business Consulting" description="Ready to transform your business? Contact MA Consulting for expert investment consulting, business development, tax services, and strategic guidance. Get in touch today." />
+      <Meta title="Contact Ma Services Solution - Get Expert Business Consulting" description="Ready to transform your business? Contact Ma Services Solution for expert investment consulting, business development, tax services, and strategic guidance. Get in touch today." />
 
       {/* HERO SECTION - Large and Professional */}
       <section className="relative min-h-screen flex items-center bg-gradient-to-br from-slate-900 via-red-900 to-pink-900 overflow-hidden">
@@ -194,7 +194,7 @@ export function Contact() {
 
           {/* WHY CONTACT US SECTION */}
           <div className="bg-gradient-to-r from-orange-100 to-red-100 p-12 rounded-3xl mb-16">
-            <h3 className="text-4xl font-bold text-center mb-12 text-gray-900">Why Choose MA Consulting?</h3>
+            <h3 className="text-4xl font-bold text-center mb-12 text-gray-900">Why Choose Ma Services Solution?</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-3xl flex items-center justify-center mx-auto mb-6 text-3xl shadow-lg">
@@ -346,7 +346,7 @@ export function Contact() {
                 <div className="space-y-4 text-lg">
                   <div>
                     <span className="font-semibold text-orange-300">Business Registration:</span>
-                    <span className="ml-2">MA Consulting PLC - Addis Ababa, Ethiopia</span>
+                    <span className="ml-2">Ma Services Solution PLC - Addis Ababa, Ethiopia</span>
                   </div>
                   <div>
                     <span className="font-semibold text-orange-300">Tax ID:</span>
@@ -372,7 +372,7 @@ export function Contact() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-5xl md:text-6xl font-bold mb-6">Ready to Get Started?</h2>
           <p className="text-2xl mb-12 max-w-3xl mx-auto leading-relaxed">
-            Don't wait to transform your business. Contact us today and let's discuss how MA Consulting
+            Don't wait to transform your business. Contact us today and let's discuss how Ma Services Solution
             can help you achieve your goals and drive sustainable growth.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">

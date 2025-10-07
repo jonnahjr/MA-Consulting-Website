@@ -31,7 +31,7 @@ export function About() {
           <div className="text-center max-w-6xl mx-auto">
             <div className="inline-block mb-8">
               <span className="bg-gradient-to-r from-amber-400 to-orange-500 text-white px-6 py-3 rounded-full text-lg font-semibold uppercase tracking-wider shadow-lg">
-                About MA Consulting
+                About Ma Services Solution
               </span>
             </div>
 
@@ -44,7 +44,7 @@ export function About() {
             </h1>
 
             <p className="text-2xl md:text-3xl text-gray-300 mb-12 leading-relaxed max-w-4xl mx-auto">
-              Since 2010, MA Consulting has been Ethiopia's trusted partner for business transformation.
+              Since 2010, Ma Services Solution has been Ethiopia's trusted partner for business transformation.
               We combine deep local expertise with global best practices to deliver exceptional results
               that drive sustainable growth and competitive advantage.
             </p>
@@ -83,7 +83,7 @@ export function About() {
               <div>
                 <h3 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900">Founded with a Vision</h3>
                 <p className="text-xl text-gray-700 leading-relaxed mb-6">
-                  MA Consulting was founded in 2010 by industry veterans Alebachew Sitotaw Yimer and Melsew Hailemariam Yassin,
+                  Ma Services Solution was founded in 2010 by industry veterans Alebachew Sitotaw Yimer and Melsew Hailemariam Yassin,
                   who recognized a critical gap in Ethiopia's business consulting landscape. With extensive experience in
                   international consulting firms, they saw an opportunity to bring world-class expertise to Ethiopian businesses.
                 </p>
@@ -149,7 +149,7 @@ export function About() {
                   </div>
                   <h4 className="text-xl font-bold mb-3 text-gray-900">Foundation</h4>
                   <p className="text-gray-600 leading-relaxed">
-                    MA Consulting established with a vision to transform Ethiopian businesses through expert consulting services.
+                    Ma Services Solution established with a vision to transform Ethiopian businesses through expert consulting services.
                   </p>
                 </div>
 
@@ -244,7 +244,7 @@ export function About() {
                   </p>
                   <div className="bg-white/80 p-6 rounded-2xl border border-slate-200">
                     <p className="text-lg text-gray-700 leading-relaxed">
-                      By 2025, MA Consulting aims to expand its impact across East Africa, establishing itself as the
+                      By 2025, Ma Services Solution aims to expand its impact across East Africa, establishing itself as the
                       regional leader in comprehensive business consulting while maintaining our core values of integrity,
                       innovation, and client-centric service delivery. We are committed to developing the next generation
                       of business leaders through mentorship, knowledge sharing, and industry collaboration.
@@ -382,7 +382,7 @@ export function About() {
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">Meet Our Leadership Team</h2>
             <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Get to know the experienced professionals who drive MA Consulting's success and client satisfaction
+              Get to know the experienced professionals who drive Ma Services Solution's success and client satisfaction
             </p>
           </div>
 
@@ -459,7 +459,7 @@ export function About() {
           <h2 className="text-5xl md:text-6xl font-bold mb-6">Ready to Partner with Ethiopia's Premier Consulting Firm?</h2>
           <p className="text-2xl mb-12 max-w-3xl mx-auto leading-relaxed">
             Join the hundreds of Ethiopian businesses that have transformed their operations and achieved
-            sustainable growth with MA Consulting's expert guidance.
+            sustainable growth with Ma Services Solution's expert guidance.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button className="bg-white text-gray-900 px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">

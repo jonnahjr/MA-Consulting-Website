@@ -46,7 +46,7 @@ export function Testimonials() {
 
   return (
     <>
-      <Meta title="Client Testimonials - MA Consulting Success Stories" description="Read what our clients say about MA Consulting's investment consulting, business development, and tax services. Real success stories from satisfied Ethiopian businesses." />
+      <Meta title="Client Testimonials - Ma Services Solution Success Stories" description="Read what our clients say about Ma Services Solution's investment consulting, business development, and tax services. Real success stories from satisfied Ethiopian businesses." />
 
       {/* HERO SECTION - Large and Professional */}
       <section className="relative min-h-screen flex items-center bg-gradient-to-br from-slate-900 via-green-900 to-emerald-900 overflow-hidden">
@@ -87,7 +87,7 @@ export function Testimonials() {
             </h1>
 
             <p className="text-2xl md:text-3xl text-gray-300 mb-12 leading-relaxed max-w-4xl mx-auto">
-              Don't just take our word for it. Discover how MA Consulting has transformed businesses
+              Don't just take our word for it. Discover how Ma Services Solution has transformed businesses
               across Ethiopia through our expert consulting services. These are real stories from
               real clients who achieved extraordinary results.
             </p>
@@ -117,7 +117,7 @@ export function Testimonials() {
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">Our Track Record Speaks</h2>
             <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Numbers don't lie. Here's what our clients have achieved working with MA Consulting.
+              Numbers don't lie. Here's what our clients have achieved working with Ma Services Solution.
             </p>
           </div>
 
@@ -270,7 +270,7 @@ export function Testimonials() {
 
                   <div className="space-y-4 text-lg">
                     <p>
-                      "MA Consulting transformed our business from a struggling manufacturer to Ethiopia's leading
+                      "Ma Services Solution transformed our business from a struggling manufacturer to Ethiopia's leading
                       producer in our industry. Their strategic guidance helped us optimize operations, expand our
                       market reach, and achieve sustainable growth."
                     </p>
@@ -325,7 +325,7 @@ export function Testimonials() {
                       </div>
                     </div>
                     <p className="text-green-100 italic">
-                      "MA Consulting didn't just consult—they became our partners in success.
+                      "Ma Services Solution didn't just consult—they became our partners in success.
                       Their expertise and dedication turned our challenges into opportunities."
                     </p>
                   </div>
@@ -340,7 +340,7 @@ export function Testimonials() {
       <section className="py-24 bg-gradient-to-br from-slate-900 via-gray-900 to-slate-900 text-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-bold mb-6">Why Clients Choose MA Consulting</h2>
+            <h2 className="text-5xl md:text-6xl font-bold mb-6">Why Clients Choose Ma Services Solution</h2>
             <p className="text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Our commitment to excellence and proven track record set us apart from other consulting firms.
             </p>
@@ -388,7 +388,7 @@ export function Testimonials() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-5xl md:text-6xl font-bold mb-6">Ready to Join Our Success Stories?</h2>
           <p className="text-2xl mb-12 max-w-3xl mx-auto leading-relaxed">
-            Don't let your business potential go untapped. Contact MA Consulting today and discover
+            Don't let your business potential go untapped. Contact Ma Services Solution today and discover
             how we can help you achieve extraordinary results like our satisfied clients.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">

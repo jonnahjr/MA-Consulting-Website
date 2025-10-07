@@ -3,7 +3,7 @@ import Meta from '../components/Meta'
 export function Careers() {
   return (
     <>
-      <Meta title="Careers at MA Consulting - Join Our Professional Team" description="Discover exciting career opportunities at MA Consulting. Join Ethiopia's premier consulting firm and work on transformative projects with industry experts." />
+      <Meta title="Careers at Ma Services Solution - Join Our Professional Team" description="Discover exciting career opportunities at Ma Services Solution. Join Ethiopia's premier consulting firm and work on transformative projects with industry experts." />
 
       {/* HERO SECTION - Large and Professional */}
       <section className="relative min-h-screen flex items-center bg-gradient-to-br from-slate-900 via-amber-900 to-orange-900 overflow-hidden">
@@ -44,7 +44,7 @@ export function Careers() {
             </h1>
 
             <p className="text-2xl md:text-3xl text-gray-300 mb-12 leading-relaxed max-w-4xl mx-auto">
-              Join MA Consulting and become part of Ethiopia's most respected consulting firm.
+              Join Ma Services Solution and become part of Ethiopia's most respected consulting firm.
               Work on transformative projects, develop your expertise, and make a real impact
               on businesses across diverse industries.
             </p>
@@ -68,14 +68,14 @@ export function Careers() {
         </div>
       </section>
 
-      {/* WHY WORK AT MA CONSULTING */}
+      {/* WHY WORK AT Ma Services Solution */}
       <section className="py-24 bg-gradient-to-br from-gray-50 to-amber-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">Why Choose MA Consulting?</h2>
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">Why Choose Ma Services Solution?</h2>
             <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Join a firm that values excellence, innovation, and professional growth.
-              Here's what makes MA Consulting the perfect place to advance your career.
+              Here's what makes Ma Services Solution the perfect place to advance your career.
             </p>
           </div>
 
@@ -167,7 +167,7 @@ export function Careers() {
 
           {/* Career Statistics */}
           <div className="bg-gradient-to-r from-amber-100 to-orange-100 p-12 rounded-3xl">
-            <h3 className="text-4xl font-bold text-center mb-12 text-gray-900">Career Success at MA Consulting</h3>
+            <h3 className="text-4xl font-bold text-center mb-12 text-gray-900">Career Success at Ma Services Solution</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center">
                 <div className="text-5xl font-bold text-amber-600 mb-2">95%</div>
@@ -297,7 +297,7 @@ export function Careers() {
 
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
                 Drive business growth initiatives and develop strategic partnerships. Identify new market opportunities,
-                build client relationships, and lead business development projects that expand MA Consulting's market presence.
+                build client relationships, and lead business development projects that expand Ma Services Solution's market presence.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -604,7 +604,7 @@ export function Careers() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-5xl md:text-6xl font-bold mb-6">Ready to Join Our Team?</h2>
           <p className="text-2xl mb-12 max-w-3xl mx-auto leading-relaxed">
-            Take the next step in your career with MA Consulting. We're looking for talented,
+            Take the next step in your career with Ma Services Solution. We're looking for talented,
             passionate professionals ready to make a difference. Apply today and be part of
             Ethiopia's leading consulting firm.
           </p>
