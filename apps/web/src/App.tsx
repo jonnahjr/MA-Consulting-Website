@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Hero from './components/Hero'
@@ -1257,18 +1257,24 @@ export function Home({ initialSection }: { initialSection?: string }) {
         </div>
       </section>
       </div>
+
+      {/* Put Footer for Home page explicitly so it matches other pages */}
+      <Footer />
     </>
   )
 }
 
 function App() {
+  const location = useLocation()
+  const isHome = location.pathname === '/' || location.pathname === ''
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-grow">
         <Outlet />
       </main>
-      <Footer />
+      {!isHome && <Footer />}
       <ChatWidget />
     </div>
   )
