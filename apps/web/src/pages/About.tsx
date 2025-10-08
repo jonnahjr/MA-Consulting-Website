@@ -1,4 +1,7 @@
 import Meta from '../components/Meta'
+import aleImage from '../assets/images/team/Ale-360x280-modified.png'
+import melsewImage from '../assets/images/team/Mele1-360x280-photoaidcom-cropped.jpg'
+import tiruImage from '../assets/images/team/Tiru-360x280-photoaidcom-cropped.jpg'
 
 export function About() {
   return (
@@ -390,8 +393,12 @@ export function About() {
             {/* CEO */}
             <div className="group bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 transform hover:scale-105">
               <div className="text-center mb-6">
-                <div className="w-24 h-24 bg-gradient-to-br from-amber-500 to-orange-500 rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-2xl">
-                  <span className="text-4xl text-white">👨‍💼</span>
+                <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 shadow-2xl bg-gradient-to-br from-amber-400 to-orange-500 p-1">
+                  <img
+                    src={aleImage}
+                    alt="Alebachew Sitotaw Yimer - CEO & Founder"
+                    className="w-full h-full object-cover rounded-full"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900">Alebachew Sitotaw Yimer</h3>
                 <p className="text-amber-600 font-semibold">CEO & Founder</p>
@@ -409,8 +416,12 @@ export function About() {
             {/* Deputy CEO */}
             <div className="group bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 transform hover:scale-105">
               <div className="text-center mb-6">
-                <div className="w-24 h-24 bg-gradient-to-br from-orange-500 to-red-500 rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-2xl">
-                  <span className="text-4xl text-white">👩‍💼</span>
+                <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 shadow-2xl bg-gradient-to-br from-orange-400 to-red-500 p-1">
+                  <img
+                    src={melsewImage}
+                    alt="Melsew Hailemariam Yassin - Deputy CEO & Founder"
+                    className="w-full h-full object-cover rounded-full"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900">Melsew Hailemariam Yassin</h3>
                 <p className="text-orange-600 font-semibold">Deputy CEO & Founder</p>
@@ -428,8 +439,12 @@ export function About() {
             {/* Head of Business Development */}
             <div className="group bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 transform hover:scale-105">
               <div className="text-center mb-6">
-                <div className="w-24 h-24 bg-gradient-to-br from-red-500 to-pink-500 rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-2xl">
-                  <span className="text-4xl text-white">👨‍💼</span>
+                <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 shadow-2xl bg-gradient-to-br from-red-400 to-pink-500 p-1">
+                  <img
+                    src={tiruImage}
+                    alt="Tiruwork Tizazu Liyew - Head of Business Development"
+                    className="w-full h-full object-cover rounded-full"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900">Tiruwork Tizazu Liyew</h3>
                 <p className="text-red-600 font-semibold">Head of Business Development</p>

@@ -32,7 +32,7 @@ const Footer = () => {
             </div>
 
             <p className="text-gray-200 leading-relaxed mb-6 text-base">
-              Ethiopia's premier consulting firm delivering expertise in investment, business development, tax services, and strategic planning since 2010.
+              Maservicessolution your reliable service solution provider in Ethiopia. We are a team of skilled expediters dedicated to assisting businesses with their expediting needs. Whether you require document processing, transportation arrangements, or any other expediting activities, we have the expertise to streamline your operations and save you time and resources.
             </p>
 
             {/* Social Media Links */}
@@ -86,7 +86,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="mailto:info@maconsulting.com"
+                href="mailto:info@maservicessolution.com"
                 className="w-10 h-10 bg-gray-600 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors"
                 aria-label="Email"
               >
@@ -193,8 +193,8 @@ const Footer = () => {
                 </div>
                 <div>
                   <h5 className="text-lg font-semibold text-white mb-1">Phone</h5>
-                  <p className="text-gray-200">+251 911 123 456</p>
-                  <p className="text-sm text-gray-300">Mon-Fri 9AM-6PM EAT</p>
+                  <p className="text-gray-200">+251 912 058 982</p>
+                  <p className="text-sm text-gray-300">+251 988 980 798</p>
                 </div>
               </div>
 
@@ -204,7 +204,7 @@ const Footer = () => {
                 </div>
                 <div>
                   <h5 className="text-lg font-semibold text-white mb-1">Email</h5>
-                  <p className="text-gray-200">info@maconsulting.com</p>
+                  <p className="text-gray-200">info@maservicessolution.com</p>
                   <p className="text-sm text-gray-300">Response within 2 hours</p>
                 </div>
               </div>

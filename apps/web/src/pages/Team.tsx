@@ -1,4 +1,7 @@
 import Meta from '../components/Meta'
+import aleImage from '../assets/images/team/Ale-360x280-modified.png'
+import melsewImage from '../assets/images/team/Mele1-360x280-photoaidcom-cropped.jpg'
+import tiruImage from '../assets/images/team/Tiru-360x280-photoaidcom-cropped.jpg'
 
 export function Team() {
   return (
@@ -82,8 +85,12 @@ export function Team() {
           <div className="mb-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div>
-                <div className="w-32 h-32 bg-gradient-to-br from-amber-400 to-orange-500 rounded-3xl flex items-center justify-center mb-8 shadow-2xl">
-                  <span className="text-6xl text-white">👨‍💼</span>
+                <div className="w-32 h-32 rounded-full overflow-hidden mb-8 shadow-2xl bg-gradient-to-br from-amber-400 to-orange-500 p-1">
+                  <img
+                    src={aleImage}
+                    alt="Alebachew Sitotaw Yimer - CEO & Founder"
+                    className="w-full h-full object-cover rounded-full"
+                  />
                 </div>
                 <h3 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Alebachew Sitotaw Yimer</h3>
                 <h4 className="text-2xl text-amber-600 font-bold mb-6">CEO & Founder</h4>
@@ -160,8 +167,12 @@ export function Team() {
           <div className="mb-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div className="order-2 lg:order-1">
-                <div className="w-32 h-32 bg-gradient-to-br from-orange-400 to-red-500 rounded-3xl flex items-center justify-center mb-8 shadow-2xl">
-                  <span className="text-6xl text-white">👩‍💼</span>
+                <div className="w-32 h-32 rounded-full overflow-hidden mb-8 shadow-2xl bg-gradient-to-br from-orange-400 to-red-500 p-1">
+                  <img
+                    src={melsewImage}
+                    alt="Melsew Hailemariam Yassin - Deputy CEO & Founder"
+                    className="w-full h-full object-cover rounded-full"
+                  />
                 </div>
                 <h3 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Melsew Hailemariam Yassin</h3>
                 <h4 className="text-2xl text-orange-600 font-bold mb-6">Deputy CEO & Founder</h4>
@@ -237,8 +248,12 @@ export function Team() {
           <div className="mb-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div>
-                <div className="w-32 h-32 bg-gradient-to-br from-red-400 to-pink-500 rounded-3xl flex items-center justify-center mb-8 shadow-2xl">
-                  <span className="text-6xl text-white">👨‍💼</span>
+                <div className="w-32 h-32 rounded-full overflow-hidden mb-8 shadow-2xl bg-gradient-to-br from-red-400 to-pink-500 p-1">
+                  <img
+                    src={tiruImage}
+                    alt="Tiruwork Tizazu Liyew - Head of Business Development"
+                    className="w-full h-full object-cover rounded-full"
+                  />
                 </div>
                 <h3 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Tiruwork Tizazu Liyew</h3>
                 <h4 className="text-2xl text-red-600 font-bold mb-6">Head of Business Development</h4>

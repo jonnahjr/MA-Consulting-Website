@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model User {
@@ -21,7 +21,7 @@ model Service {
   title       String
   description String
   icon        String?
-  metrics     Json?
+  metrics     String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -32,7 +32,7 @@ model TeamMember {
   role        String
   bio         String?
   image       String?
-  socials     Json?
+  socials     String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -51,7 +51,7 @@ model BlogPost {
   title       String
   slug        String   @unique
   content     String
-  tags        String[]
+  tags        String
   publishedAt DateTime?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

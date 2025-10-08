@@ -5,9 +5,22 @@ const prisma = new PrismaClient()
 async function main() {
   console.log('Seeding database...')
 
+  // Clear existing data
+  await prisma.blogPost.deleteMany()
+  await prisma.testimonial.deleteMany()
+  await prisma.teamMember.deleteMany()
+  await prisma.service.deleteMany()
+  await prisma.lead.deleteMany()
+  await prisma.application.deleteMany()
+
   // Seed admin user
-  await prisma.user.create({
-    data: {
+  await prisma.user.upsert({
+    where: { email: 'admin@maservicessolution.com' },
+    update: {
+      name: 'Administrator',
+      role: 'admin',
+    },
+    create: {
       name: 'Administrator',
       email: 'admin@maservicessolution.com',
       role: 'admin',
@@ -21,37 +34,37 @@ async function main() {
         title: 'Investment Consulting',
         description: 'Professional investment advice and portfolio management services tailored to your financial goals.',
         icon: 'investment',
-        metrics: { projects: 150, satisfaction: '98%' },
+        metrics: JSON.stringify({ projects: 150, satisfaction: '98%' }),
       },
       {
         title: 'Business Development',
         description: 'Strategic business growth and development solutions to expand your market presence.',
         icon: 'business',
-        metrics: { clients: 200, growth: '45%' },
+        metrics: JSON.stringify({ clients: 200, growth: '45%' }),
       },
       {
         title: 'Marketing Strategies',
         description: 'Effective marketing campaigns and brand development to increase your visibility and engagement.',
         icon: 'marketing',
-        metrics: { campaigns: 300, roi: '250%' },
+        metrics: JSON.stringify({ campaigns: 300, roi: '250%' }),
       },
       {
         title: 'Tax & Customs',
         description: 'Comprehensive tax planning, compliance, and customs regulations expertise.',
         icon: 'tax',
-        metrics: { savings: '$2M', compliance: '100%' },
+        metrics: JSON.stringify({ savings: '$2M', compliance: '100%' }),
       },
       {
         title: 'Development Works',
         description: 'Project development and implementation services for sustainable growth.',
         icon: 'development',
-        metrics: { projects: 80, success: '95%' },
+        metrics: JSON.stringify({ projects: 80, success: '95%' }),
       },
       {
         title: 'Dedicated Support',
         description: 'Ongoing support and maintenance services to ensure your operations run smoothly.',
         icon: 'support',
-        metrics: { uptime: '99.9%', response: '<2hrs' },
+        metrics: JSON.stringify({ uptime: '99.9%', response: '<2hrs' }),
       },
     ],
   })
@@ -63,22 +76,22 @@ async function main() {
         name: 'Alebachew Sitotaw Yimer',
         role: 'CEO',
         bio: 'Experienced CEO with over 15 years in consulting, leading Ma Services Solution to deliver exceptional value to clients worldwide.',
-        image: '/team/alebachew.jpg',
-        socials: { linkedin: 'https://linkedin.com/in/alebachew', twitter: '@alebachew' },
+        image: '/src/assets/images/team/Ale-360x280-modified.png',
+        socials: JSON.stringify({ linkedin: 'https://linkedin.com/in/alebachew', twitter: '@alebachew' }),
       },
       {
         name: 'Melsew Hailemariam Yassin',
         role: 'Deputy CEO',
         bio: 'Deputy CEO focused on operational excellence and strategic partnerships, ensuring seamless client experiences.',
-        image: '/team/melsew.jpg',
-        socials: { linkedin: 'https://linkedin.com/in/melsew' },
+        image: '/src/assets/images/team/Mele1-360x280-photoaidcom-cropped.jpg',
+        socials: JSON.stringify({ linkedin: 'https://linkedin.com/in/melsew' }),
       },
       {
         name: 'Tiruwork Tizazu Liyew',
         role: 'Head of Business Development',
         bio: 'Leading business development initiatives and fostering long-term client relationships through innovative solutions.',
-        image: '/team/tiruwork.jpg',
-        socials: { linkedin: 'https://linkedin.com/in/tiruwork' },
+        image: '/src/assets/images/team/Tiru-360x280-photoaidcom-cropped.jpg',
+        socials: JSON.stringify({ linkedin: 'https://linkedin.com/in/tiruwork' }),
       },
     ],
   })
@@ -104,50 +117,71 @@ async function main() {
     ],
   })
 
-  // Seed blog posts
+  // Seed blog posts (scraped from original website)
   await prisma.blogPost.createMany({
     data: [
       {
-        title: 'The Future of Investment Consulting in 2024',
-        slug: 'future-investment-consulting-2024',
-        content: 'As we navigate through 2024, the investment consulting landscape is undergoing significant transformation driven by technological advancements, regulatory changes, and evolving market dynamics. At Ma Services Solution, we\'ve observed several key trends that are reshaping how investment professionals approach client relationships and portfolio management.\n\nDigital transformation continues to be a dominant force, with AI and machine learning algorithms becoming integral to investment analysis and risk assessment. Our team has successfully integrated these technologies to provide more accurate market predictions and personalized investment strategies.\n\nRegulatory compliance remains paramount, with increasing focus on ESG (Environmental, Social, and Governance) factors. We help our clients navigate these complex requirements while maximizing their investment potential.\n\nThe rise of sustainable investing represents another major shift. Investors are increasingly seeking opportunities that align with their values while delivering competitive returns. Our sustainable investment consulting services have helped numerous clients achieve both financial and impact goals.',
-        tags: ['investment', 'consulting', 'trends', 'technology'],
+        title: 'Alebachew Sitotaw Yimer',
+        slug: 'alebachew-sitotaw-yimer',
+        content: 'CEO/Founder\nMa Services Solution PLC',
+        tags: 'team,leadership,ceo',
         publishedAt: new Date('2024-01-15'),
       },
       {
-        title: 'Tax Optimization Strategies for Businesses',
-        slug: 'tax-optimization-strategies-businesses',
-        content: 'In today\'s complex business environment, effective tax planning is not just about compliance—it\'s about strategic optimization that enhances your bottom line. Our tax consulting experts at Ma Services Solution have developed comprehensive strategies that help businesses minimize tax liabilities while maintaining full regulatory compliance.\n\nOne of our most successful approaches involves the strategic use of tax-advantaged investment vehicles and retirement planning. By carefully structuring investments and retirement contributions, businesses can significantly reduce their taxable income while building long-term wealth.\n\nInternational tax planning has become increasingly important for businesses with global operations. We specialize in navigating complex cross-border tax regulations, transfer pricing, and international tax treaties to ensure optimal tax efficiency.\n\nOur proactive tax planning approach includes regular reviews of tax laws and regulations, ensuring our clients always benefit from the latest tax-saving opportunities. This forward-thinking strategy has helped our clients save millions in tax liabilities over the years.',
-        tags: ['tax', 'business', 'optimization', 'planning'],
+        title: 'Melsew Hailemariam Yassin',
+        slug: 'melsew-hailemariam-yassin',
+        content: 'D/CEO and Founder\nMa Services Solution PLC',
+        tags: 'team,leadership,deputy-ceo',
+        publishedAt: new Date('2024-01-20'),
+      },
+      {
+        title: 'Tiruwork Tizazu Liyew',
+        slug: 'tiruwork-tizazu-liyew',
+        content: 'Head, Business Development\nMa Services Solution PLC',
+        tags: 'team,business-development,leadership',
+        publishedAt: new Date('2024-01-25'),
+      },
+      {
+        title: 'Dedicated Support',
+        slug: 'dedicated-support',
+        content: 'Our team is dedicated to providing you with the best possible experience. We offer a wide range of services, including software development, web design, and digital marketing. We work closely with our clients to understand their needs and provide them with tailored solutions that meet their unique requirements.',
+        tags: 'services,support,client-service',
         publishedAt: new Date('2024-02-01'),
       },
       {
-        title: 'Building Sustainable Business Development Plans',
-        slug: 'sustainable-business-development-plans',
-        content: 'Sustainable business development is no longer optional—it\'s essential for long-term success in today\'s market. At Ma Services Solution, we help businesses create comprehensive development plans that balance growth objectives with environmental and social responsibility.\n\nOur approach begins with a thorough assessment of your current business model, market position, and growth potential. We then develop customized strategies that incorporate sustainable practices across all business functions.\n\nKey components of our sustainable business development plans include:\n\n1. Market expansion strategies that consider environmental impact\n2. Supply chain optimization for sustainability\n3. Employee development programs that promote long-term growth\n4. Technology integration for operational efficiency\n5. Stakeholder engagement and community relations\n\nWe\'ve helped numerous clients achieve remarkable growth while maintaining strong ESG credentials. Our sustainable development approach has resulted in improved brand reputation, increased investor interest, and enhanced operational efficiency.',
-        tags: ['business', 'development', 'sustainability', 'growth'],
+        title: 'Development Works and Other services',
+        slug: 'development-works-and-other-services',
+        content: 'Are you looking for a reliable partner to help you with your development works and other services? Look no further than our company! We are a team of experts who are passionate about delivering high-quality services to our clients. Our development works include software development, web development, mobile app development, and more.',
+        tags: 'services,development,software',
+        publishedAt: new Date('2024-02-05'),
+      },
+      {
+        title: 'Tax and Customs Consultancy',
+        slug: 'tax-and-customs-consultancy',
+        content: 'The Ethiopian tax and finance system may be described as frequently changing, updating and a loose agglomeration of proclamations, regulations, directives and rules. Ministry of Revenue (MoR) proclamations, regulations, directives and rules are sensitive and bounded by penalties. Our tax and customs consultancy services help businesses navigate these complex regulations and ensure compliance.',
+        tags: 'services,tax,customs,compliance',
+        publishedAt: new Date('2024-02-10'),
+      },
+      {
+        title: 'Marketing Consultancy',
+        slug: 'marketing-consultancy',
+        content: 'Marketing isn\'t simply an important part of business success – it is the business. Everything else in the business depends upon marketing. To create an effective business strategy and ensure you\'re not wasting time or money and maximizing your sales, you need professional marketing consultancy services.',
+        tags: 'services,marketing,strategy',
         publishedAt: new Date('2024-02-15'),
       },
       {
-        title: 'Digital Marketing Strategies for Professional Services',
-        slug: 'digital-marketing-professional-services',
-        content: 'In the professional services industry, effective digital marketing can be the difference between attracting high-quality clients and struggling to maintain visibility. Ma Services Solution\'s digital marketing experts have developed proven strategies that help professional service firms establish thought leadership and generate qualified leads.\n\nContent marketing plays a crucial role in our approach. By creating valuable, educational content that addresses client pain points, we help our clients position themselves as industry experts. This includes whitepapers, case studies, blog posts, and educational webinars.\n\nSocial media engagement is another key component. We develop targeted social media strategies that build community, share insights, and drive engagement with potential clients. Our approach focuses on platforms where decision-makers are most active.\n\nSearch engine optimization (SEO) ensures that when potential clients search for professional services, our clients appear at the top of search results. Our technical SEO expertise combined with content optimization has dramatically improved search visibility for our clients.',
-        tags: ['marketing', 'digital', 'professional-services', 'strategy'],
-        publishedAt: new Date('2024-03-01'),
+        title: 'Business Consultancy',
+        slug: 'business-consultancy',
+        content: 'We offer strategic business consulting services to help businesses optimize operations, improve performance, and maximize profitability. Are you on the way to own a successful and profitable business and feeling it is not clear how to get there? Ma will guide you through every step of the process.',
+        tags: 'services,business,consulting,strategy',
+        publishedAt: new Date('2024-02-20'),
       },
       {
-        title: 'Navigating Customs Regulations in International Trade',
-        slug: 'customs-regulations-international-trade',
-        content: 'International trade presents tremendous opportunities for businesses, but navigating complex customs regulations can be challenging. Ma Services Solution\'s customs and trade experts provide comprehensive support to ensure smooth international operations.\n\nOur customs consulting services cover the entire spectrum of international trade compliance, from classification and valuation to documentation and duty optimization. We help businesses understand and comply with regulations from major trading partners including the US, EU, China, and emerging markets.\n\nOne of our key services is customs duty optimization. By properly classifying goods and utilizing available trade agreements, we help clients significantly reduce their customs costs. Our expertise in free trade agreements has saved clients substantial amounts in import duties.\n\nWe also provide ongoing compliance monitoring and training to ensure businesses stay current with changing regulations. Our proactive approach helps prevent costly penalties and delays at customs checkpoints.\n\nRisk management is another critical area we address. We help businesses identify and mitigate customs-related risks, ensuring uninterrupted supply chains and compliance with all relevant regulations.',
-        tags: ['customs', 'trade', 'international', 'compliance'],
-        publishedAt: new Date('2024-03-15'),
-      },
-      {
-        title: 'Technology Integration for Business Growth',
-        slug: 'technology-integration-business-growth',
-        content: 'Technology integration has become a critical driver of business growth and competitive advantage. Ma Services Solution helps businesses leverage technology to streamline operations, enhance customer experiences, and drive innovation.\n\nOur technology integration approach begins with a comprehensive assessment of your current technology landscape and business objectives. We then develop customized integration strategies that align technology with your growth goals.\n\nKey areas we focus on include:\n\n1. Digital transformation initiatives\n2. Cloud migration and optimization\n3. Data analytics and business intelligence\n4. Automation and workflow optimization\n5. Cybersecurity and data protection\n6. Customer relationship management systems\n\nWe\'ve successfully helped clients integrate cutting-edge technologies that have resulted in improved operational efficiency, enhanced decision-making, and accelerated growth. Our technology experts work closely with your team to ensure smooth implementation and adoption.\n\nChange management is a critical component of our technology integration services. We provide comprehensive training and support to ensure your team can effectively leverage new technologies.',
-        tags: ['technology', 'integration', 'growth', 'digital-transformation'],
-        publishedAt: new Date('2024-04-01'),
+        title: 'Investment Consultancy',
+        slug: 'investment-consultancy',
+        content: 'Are you looking to invest your hard-earned money but don\'t know where to start? Look no further than Ma Services Solutions. Our investment consultancy team of experts has years of experience in the industry and can help you make informed investment decisions that align with your financial goals.',
+        tags: 'services,investment,finance',
+        publishedAt: new Date('2024-02-25'),
       },
     ],
   })

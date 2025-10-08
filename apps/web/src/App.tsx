@@ -4,6 +4,9 @@ import Footer from './components/Footer'
 import Hero from './components/Hero'
 import ChatWidget from './components/ChatWidget'
 import { useEffect, useState } from 'react'
+import aleImage from './assets/images/team/Ale-360x280-modified.png'
+import melsewImage from './assets/images/team/Mele1-360x280-photoaidcom-cropped.jpg'
+import tiruImage from './assets/images/team/Tiru-360x280-photoaidcom-cropped.jpg'
 
 interface BlogPost {
   id: string
@@ -564,8 +567,12 @@ export function Home({ initialSection }: { initialSection?: string }) {
             {/* CEO & Founder */}
             <div className="group bg-white/10 backdrop-blur-xl p-8 rounded-3xl border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:scale-105">
               <div className="text-center mb-6">
-                <div className="w-32 h-32 bg-gradient-to-br from-amber-400 to-orange-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl group-hover:shadow-amber-500/50 transition-all">
-                  <span className="text-5xl text-white">👨‍💼</span>
+                <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6 shadow-2xl bg-gradient-to-br from-amber-400 to-orange-500 p-1 group-hover:shadow-amber-500/50 transition-all">
+                  <img
+                    src={aleImage}
+                    alt="Alebachew Sitotaw Yimer - CEO & Founder"
+                    className="w-full h-full object-cover rounded-full"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold mb-3 text-white">Alebachew Sitotaw Yimer</h3>
                 <h4 className="text-lg text-amber-300 font-semibold mb-4">CEO & Founder</h4>
@@ -598,8 +605,12 @@ export function Home({ initialSection }: { initialSection?: string }) {
             {/* Deputy CEO & Founder */}
             <div className="group bg-white/10 backdrop-blur-xl p-8 rounded-3xl border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:scale-105">
               <div className="text-center mb-6">
-                <div className="w-32 h-32 bg-gradient-to-br from-orange-400 to-red-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl group-hover:shadow-orange-500/50 transition-all">
-                  <span className="text-5xl text-white">👩‍💼</span>
+                <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6 shadow-2xl bg-gradient-to-br from-orange-400 to-red-500 p-1 group-hover:shadow-orange-500/50 transition-all">
+                  <img
+                    src={melsewImage}
+                    alt="Melsew Hailemariam Yassin - Deputy CEO & Founder"
+                    className="w-full h-full object-cover rounded-full"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold mb-3 text-white">Melsew Hailemariam Yassin</h3>
                 <h4 className="text-lg text-orange-300 font-semibold mb-4">Deputy CEO & Founder</h4>
@@ -631,8 +642,12 @@ export function Home({ initialSection }: { initialSection?: string }) {
             {/* Head of Business Development */}
             <div className="group bg-white/10 backdrop-blur-xl p-8 rounded-3xl border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:scale-105">
               <div className="text-center mb-6">
-                <div className="w-32 h-32 bg-gradient-to-br from-red-400 to-pink-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl group-hover:shadow-red-500/50 transition-all">
-                  <span className="text-5xl text-white">👨‍💼</span>
+                <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6 shadow-2xl bg-gradient-to-br from-red-400 to-pink-500 p-1 group-hover:shadow-red-500/50 transition-all">
+                  <img
+                    src={tiruImage}
+                    alt="Tiruwork Tizazu Liyew - Head of Business Development"
+                    className="w-full h-full object-cover rounded-full"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold mb-3 text-white">Tiruwork Tizazu Liyew</h3>
                 <h4 className="text-lg text-red-300 font-semibold mb-4">Head of Business Development</h4>
