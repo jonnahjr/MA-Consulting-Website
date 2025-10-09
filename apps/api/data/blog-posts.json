@@ -1,0 +1,92 @@
+[
+  {
+    "id": "blog-1",
+    "title": "Alebachew Sitotaw Yimer",
+    "slug": "alebachew-sitotaw-yimer",
+    "content": "CEO/Founder\nMa Services Solution PLC",
+    "tags": "team,leadership,ceo",
+    "publishedAt": "2024-01-15T00:00:00.000Z",
+    "createdAt": "2024-01-15T00:00:00.000Z",
+    "updatedAt": "2024-01-15T00:00:00.000Z"
+  },
+  {
+    "id": "blog-2",
+    "title": "Melsew Hailemariam Yassin",
+    "slug": "melsew-hailemariam-yassin",
+    "content": "D/CEO and Founder\nMa Services Solution PLC",
+    "tags": "team,leadership,deputy-ceo",
+    "publishedAt": "2024-01-20T00:00:00.000Z",
+    "createdAt": "2024-01-20T00:00:00.000Z",
+    "updatedAt": "2024-01-20T00:00:00.000Z"
+  },
+  {
+    "id": "blog-3",
+    "title": "Tiruwork Tizazu Liyew",
+    "slug": "tiruwork-tizazu-liyew",
+    "content": "Head, Business Development\nMa Services Solution PLC",
+    "tags": "team,business-development,leadership",
+    "publishedAt": "2024-01-25T00:00:00.000Z",
+    "createdAt": "2024-01-25T00:00:00.000Z",
+    "updatedAt": "2024-01-25T00:00:00.000Z"
+  },
+  {
+    "id": "blog-4",
+    "title": "Dedicated Support",
+    "slug": "dedicated-support",
+    "content": "Our team is dedicated to providing you with the best possible experience. We offer a wide range of services, including software development, web design, and digital marketing. We work closely with our clients to understand their needs and provide them with tailored solutions that meet their unique requirements.",
+    "tags": "services,support,client-service",
+    "publishedAt": "2024-02-01T00:00:00.000Z",
+    "createdAt": "2024-02-01T00:00:00.000Z",
+    "updatedAt": "2024-02-01T00:00:00.000Z"
+  },
+  {
+    "id": "blog-5",
+    "title": "Development Works and Other services",
+    "slug": "development-works-and-other-services",
+    "content": "Are you looking for a reliable partner to help you with your development works and other services? Look no further than our company! We are a team of experts who are passionate about delivering high-quality services to our clients. Our development works include software development, web development, mobile app development, and more.",
+    "tags": "services,development,software",
+    "publishedAt": "2024-02-05T00:00:00.000Z",
+    "createdAt": "2024-02-05T00:00:00.000Z",
+    "updatedAt": "2024-02-05T00:00:00.000Z"
+  },
+  {
+    "id": "blog-6",
+    "title": "Tax and Customs Consultancy",
+    "slug": "tax-and-customs-consultancy",
+    "content": "The Ethiopian tax and finance system may be described as frequently changing, updating and a loose agglomeration of proclamations, regulations, directives and rules. Ministry of Revenue (MoR) proclamations, regulations, directives and rules are sensitive and bounded by penalties. Our tax and customs consultancy services help businesses navigate these complex regulations and ensure compliance.",
+    "tags": "services,tax,customs,compliance",
+    "publishedAt": "2024-02-10T00:00:00.000Z",
+    "createdAt": "2024-02-10T00:00:00.000Z",
+    "updatedAt": "2024-02-10T00:00:00.000Z"
+  },
+  {
+    "id": "blog-7",
+    "title": "Marketing Consultancy",
+    "slug": "marketing-consultancy",
+    "content": "Marketing isn't simply an important part of business success – it is the business. Everything else in the business depends upon marketing. To create an effective business strategy and ensure you're not wasting time or money and maximizing your sales, you need professional marketing consultancy services.",
+    "tags": "services,marketing,strategy",
+    "publishedAt": "2024-02-15T00:00:00.000Z",
+    "createdAt": "2024-02-15T00:00:00.000Z",
+    "updatedAt": "2024-02-15T00:00:00.000Z"
+  },
+  {
+    "id": "blog-8",
+    "title": "Business Consultancy",
+    "slug": "business-consultancy",
+    "content": "We offer strategic business consulting services to help businesses optimize operations, improve performance, and maximize profitability. Are you on the way to own a successful and profitable business and feeling it is not clear how to get there? Ma will guide you through every step of the process.",
+    "tags": "services,business,consulting,strategy",
+    "publishedAt": "2024-02-20T00:00:00.000Z",
+    "createdAt": "2024-02-20T00:00:00.000Z",
+    "updatedAt": "2024-02-20T00:00:00.000Z"
+  },
+  {
+    "id": "blog-9",
+    "title": "Investment Consultancy",
+    "slug": "investment-consultancy",
+    "content": "Are you looking to invest your hard-earned money but don't know where to start? Look no further than Ma Services Solutions. Our investment consultancy team of experts has years of experience in the industry and can help you make informed investment decisions that align with your financial goals.",
+    "tags": "services,investment,finance",
+    "publishedAt": "2024-02-25T00:00:00.000Z",
+    "createdAt": "2024-02-25T00:00:00.000Z",
+    "updatedAt": "2024-02-25T00:00:00.000Z"
+  }
+]

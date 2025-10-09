@@ -6,7 +6,7 @@ interface BlogPost {
   title: string
   slug: string
   content: string
-  tags: string[]
+  tags: string
   publishedAt: string
 }
 
@@ -40,7 +40,10 @@ export function Blog() {
 
   const filteredPosts = selectedCategory === 'All'
     ? posts
-    : posts.filter(post => post.tags.some(tag => tag.toLowerCase().includes(selectedCategory.toLowerCase())))
+    : posts.filter(post => {
+        const tagsArray = post.tags ? post.tags.split(',').map(tag => tag.trim()) : []
+        return tagsArray.some(tag => tag.toLowerCase().includes(selectedCategory.toLowerCase()))
+      })
 
   return (
     <>
@@ -147,7 +150,7 @@ export function Blog() {
                       }
                     </p>
                     <div className="flex flex-wrap gap-3 mb-8">
-                      {filteredPosts[0].tags.map((tag, index) => (
+                      {(filteredPosts[0].tags ? filteredPosts[0].tags.split(',').map(tag => tag.trim()) : []).map((tag, index) => (
                         <span key={index} className="bg-white/20 px-4 py-2 rounded-full text-sm font-semibold">
                           {tag}
                         </span>
@@ -203,7 +206,7 @@ export function Blog() {
                   <div className="p-8">
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {post.tags.slice(0, 2).map((tag, tagIndex) => (
+                      {(post.tags ? post.tags.split(',').map(tag => tag.trim()).slice(0, 2) : []).map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
                           className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold"

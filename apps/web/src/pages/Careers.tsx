@@ -1,6 +1,20 @@
+import { useState } from 'react'
 import Meta from '../components/Meta'
+import JobApplicationForm from '../components/JobApplicationForm'
 
 export function Careers() {
+  const [showApplicationForm, setShowApplicationForm] = useState(false)
+  const [selectedJob, setSelectedJob] = useState<{title: string, department: string} | null>(null)
+
+  const handleApplyClick = (jobTitle: string, department: string) => {
+    setSelectedJob({ title: jobTitle, department })
+    setShowApplicationForm(true)
+  }
+
+  const handleCloseForm = () => {
+    setShowApplicationForm(false)
+    setSelectedJob(null)
+  }
   return (
     <>
       <Meta title="Careers at Ma Services Solution - Join Our Professional Team" description="Discover exciting career opportunities at Ma Services Solution. Join Ethiopia's premier consulting firm and work on transformative projects with industry experts." />
@@ -262,7 +276,10 @@ export function Careers() {
                 </div>
               </div>
 
-              <button className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+              <button
+                onClick={() => handleApplyClick('Senior Investment Consultant', 'Investment Consulting Department')}
+                className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+              >
                 Apply for This Position
               </button>
             </div>
@@ -321,7 +338,10 @@ export function Careers() {
                 </div>
               </div>
 
-              <button className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+              <button
+                onClick={() => handleApplyClick('Business Development Manager', 'Business Development Department')}
+                className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+              >
                 Apply for This Position
               </button>
             </div>
@@ -381,7 +401,10 @@ export function Careers() {
                 </div>
               </div>
 
-              <button className="bg-gradient-to-r from-orange-500 to-red-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+              <button
+                onClick={() => handleApplyClick('Tax Consultant', 'Tax & Customs Department')}
+                className="bg-gradient-to-r from-orange-500 to-red-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+              >
                 Apply for This Position
               </button>
             </div>
@@ -626,6 +649,15 @@ export function Careers() {
           </div>
         </div>
       </section>
+
+      {/* Job Application Modal */}
+      {showApplicationForm && selectedJob && (
+        <JobApplicationForm
+          jobTitle={selectedJob.title}
+          jobDepartment={selectedJob.department}
+          onClose={handleCloseForm}
+        />
+      )}
     </>
   )
 }

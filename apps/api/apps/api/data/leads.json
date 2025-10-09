@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1759922245688,
+    "name": "Test User",
+    "email": "test@example.com",
+    "subject": "Test",
+    "message": "Hello from the working API!",
+    "createdAt": "2025-10-08T11:17:25.688Z"
+  }
+]

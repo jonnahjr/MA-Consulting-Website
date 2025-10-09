@@ -2,7 +2,9 @@
   "name": "ma-services-solution-website",
   "version": "1.0.0",
   "private": true,
-  "workspaces": ["apps/*"],
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
     "dev": "concurrently \"npm run dev --workspace=apps/web\" \"npm run dev --workspace=apps/api\"",
     "build": "npm run build --workspace=apps/web",
@@ -10,12 +12,17 @@
     "start": "npm run start --workspace=apps/api",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
-    "db:seed": "tsx prisma/seed.ts"
+    "db:seed": "tsx prisma/seed.ts",
+    "supabase:setup": "echo 'Run: npm run db:push && npm run db:seed'",
+    "supabase:reset": "npm run db:push && npm run db:seed"
   },
   "devDependencies": {
+    "@types/node": "^20.0.0",
     "concurrently": "^8.2.0",
     "prisma": "^5.0.0",
-    "@types/node": "^20.0.0",
     "tsx": "^4.0.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.74.0"
   }
 }

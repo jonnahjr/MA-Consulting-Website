@@ -7,6 +7,7 @@ import { Blog } from './pages/Blog'
 import { Testimonials } from './pages/Testimonials'
 import { Careers } from './pages/Careers'
 import { Contact } from './pages/Contact'
+import Admin from './pages/Admin'
 
 const future: any = {
   v7_startTransition: true,
@@ -28,6 +29,10 @@ export const router = createBrowserRouter(
         { path: 'careers', element: <Careers /> },
         { path: 'contact', element: <Contact /> },
       ],
+    },
+    {
+      path: '/admin',
+      element: <Admin />,
     },
   ],
   {

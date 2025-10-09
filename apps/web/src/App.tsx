@@ -815,38 +815,38 @@ export function Home({ initialSection }: { initialSection?: string }) {
                         <div className="flex items-center justify-center mb-6">
                           <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg mr-6">
                             <span className="text-2xl text-white font-bold">
-                              {testimonial.name.split(' ').map(n => n[0]).join('').toUpperCase()}
+                              {testimonial.name ? testimonial.name.split(' ').map(n => n[0]).join('').toUpperCase() : 'U'}
                             </span>
                           </div>
                           <div className="text-left">
-                            <h4 className="text-2xl font-bold text-gray-900 mb-1">{testimonial.name}</h4>
-                            <p className="text-green-600 font-semibold text-lg mb-2">{testimonial.company}</p>
-                            <p className="text-gray-600 mb-3">{testimonial.position}</p>
+                            <h4 className="text-2xl font-bold text-gray-900 mb-1">{testimonial.name || 'Anonymous Client'}</h4>
+                            <p className="text-green-600 font-semibold text-lg mb-2">{testimonial.company || 'Company'}</p>
+                            <p className="text-gray-600 mb-3">{testimonial.position || 'Position'}</p>
 
                             {/* Social media links */}
                             <div className="flex space-x-3">
                               <a
-                                href={`https://linkedin.com/in/${testimonial.name.toLowerCase().replace(' ', '-')}`}
+                                href={`https://linkedin.com/in/${testimonial.name ? testimonial.name.toLowerCase().replace(' ', '-') : 'client'}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"
-                                title={`Connect with ${testimonial.name} on LinkedIn`}
+                                title={`Connect with ${testimonial.name || 'Client'} on LinkedIn`}
                               >
                                 <span className="text-white text-xs font-bold">in</span>
                               </a>
                               <a
-                                href={`https://twitter.com/${testimonial.name.toLowerCase().replace(' ', '')}`}
+                                href={`https://twitter.com/${testimonial.name ? testimonial.name.toLowerCase().replace(' ', '') : 'client'}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors"
-                                title={`Follow ${testimonial.name} on Twitter`}
+                                title={`Follow ${testimonial.name || 'Client'} on Twitter`}
                               >
                                 <span className="text-white text-xs">🐦</span>
                               </a>
                               <a
-                                href={`mailto:${testimonial.name.toLowerCase().replace(' ', '.')}@${testimonial.company.toLowerCase().replace(' ', '')}.com`}
+                                href={`mailto:${testimonial.name ? testimonial.name.toLowerCase().replace(' ', '.') : 'client'}@${testimonial.company ? testimonial.company.toLowerCase().replace(' ', '') : 'company'}.com`}
                                 className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors"
-                                title={`Email ${testimonial.name}`}
+                                title={`Email ${testimonial.name || 'Client'}`}
                               >
                                 <span className="text-white text-xs">✉️</span>
                               </a>

@@ -2,14 +2,17 @@ import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
 import dotenv from 'dotenv'
+import path from 'path'
 import { contactRouter } from './routes/contact.js'
 import { careersRouter } from './routes/careers.js'
 import { servicesRouter } from './routes/services.js'
 import { teamRouter } from './routes/team.js'
 import { testimonialsRouter } from './routes/testimonials.js'
 import { blogRouter } from './routes/blog.js'
+import { contactInfoRouter } from './routes/contact-info.js'
 
-dotenv.config()
+// Load .env from project root
+dotenv.config({ path: path.resolve(process.cwd(), '../../.env') })
 
 const app = express()
 const PORT = process.env.PORT || 5000
@@ -27,6 +30,10 @@ app.use('/api/services', servicesRouter)
 app.use('/api/team', teamRouter)
 app.use('/api/testimonials', testimonialsRouter)
 app.use('/api/blog', blogRouter)
+app.use('/api/contact-info', contactInfoRouter)
+
+// Serve uploaded files
+app.use('/uploads', express.static(path.resolve(process.cwd(), 'uploads')))
 
 // Health check
 app.get('/health', (req, res) => {
