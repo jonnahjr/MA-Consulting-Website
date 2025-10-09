@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Meta from '../components/Meta'
 import ContentManager from '../components/admin/ContentManager'
+import BlogModal from '../components/admin/BlogModal'
 
 interface DashboardStats {
   services: number
@@ -153,35 +154,27 @@ const Admin = () => {
     }
   }
 
-  const handleSaveBlogPost = async () => {
-    if (!editingBlog) return
-
+  const handleSaveBlogPost = async (blogPost: { title: string; slug: string; content: string; tags: string; publishedAt: string }) => {
     try {
       const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000'
-      const method = editingBlog.id ? 'PUT' : 'POST'
-      const url = editingBlog.id ? `${apiUrl}/api/blog/${editingBlog.id}` : `${apiUrl}/api/blog`
+      const method = editingBlog?.id ? 'PUT' : 'POST'
+      const url = editingBlog?.id ? `${apiUrl}/api/blog/${editingBlog.id}` : `${apiUrl}/api/blog`
 
       const response = await fetch(url, {
         method,
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          title: editingBlog.title,
-          slug: editingBlog.slug,
-          content: editingBlog.content,
-          tags: editingBlog.tags,
-          publishedAt: editingBlog.publishedAt
-        })
+        body: JSON.stringify(blogPost)
       })
 
       if (response.ok) {
         await loadBlogPosts()
         setShowBlogModal(false)
         setEditingBlog(null)
-        alert(`Blog post ${editingBlog.id ? 'updated' : 'created'} successfully!`)
+        alert(`Blog post ${editingBlog?.id ? 'updated' : 'created'} successfully!`)
       } else {
-        alert(`Failed to ${editingBlog.id ? 'update' : 'create'} blog post`)
+        alert(`Failed to ${editingBlog?.id ? 'update' : 'create'} blog post`)
       }
     } catch (error) {
       console.error('Failed to save blog post:', error)
@@ -642,22 +635,16 @@ const Admin = () => {
                   </table>
                 </div>
 
-                {/* Rich Text Editor Placeholder */}
-                <div className="mt-8 p-6 bg-gray-50 rounded-xl border-2 border-dashed border-gray-300">
-                  <div className="text-center">
-                    <div className="text-4xl mb-4">📝</div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Rich Text Editor</h3>
-                    <p className="text-gray-600 mb-4">
-                      Advanced blog editor with formatting, images, and SEO optimization would be implemented here.
-                    </p>
-                    <div className="flex justify-center space-x-4 text-sm text-gray-500">
-                      <span>✅ WYSIWYG Editor</span>
-                      <span>✅ Image Upload</span>
-                      <span>✅ SEO Tools</span>
-                      <span>✅ Draft Auto-save</span>
-                    </div>
-                  </div>
-                </div>
+                {/* Blog Modal */}
+                <BlogModal
+                  isOpen={showBlogModal}
+                  onClose={() => {
+                    setShowBlogModal(false)
+                    setEditingBlog(null)
+                  }}
+                  onSave={handleSaveBlogPost}
+                  editingPost={editingBlog}
+                />
               </div>
             </div>
           )}
@@ -1282,393 +1269,6 @@ const Admin = () => {
           )}
         </div>
       </div>
-    </>
-  )
-}
-
-      {/* Blog Post Modal */}
-      {showBlogModal && editingBlog && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-200">
-              <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-gray-900">
-                  {editingBlog.id ? 'Edit Blog Post' : 'Create New Blog Post'}
-                </h2>
-                <button
-                  onClick={() => {
-                    setShowBlogModal(false)
-                    setEditingBlog(null)
-                  }}
-                  className="text-gray-400 hover:text-gray-600 text-2xl"
-                >
-                  ×
-                </button>
-              </div>
-            </div>
-
-            <div className="p-6 space-y-6">
-              {/* Title */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
-                <input
-                  type="text"
-                  value={editingBlog.title}
-                  onChange={(e) => {
-                    const title = e.target.value
-                    setEditingBlog({
-                      ...editingBlog,
-                      title,
-                      slug: editingBlog.id ? editingBlog.slug : generateSlug(title)
-                    })
-                  }}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Enter blog post title"
-                />
-              </div>
-
-              {/* Slug */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">URL Slug</label>
-                <input
-                  type="text"
-                  value={editingBlog.slug}
-                  onChange={(e) => setEditingBlog({ ...editingBlog, slug: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="url-friendly-slug"
-                />
-              </div>
-
-              {/* Tags */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Tags (comma-separated)</label>
-                <input
-                  type="text"
-                  value={editingBlog.tags}
-                  onChange={(e) => setEditingBlog({ ...editingBlog, tags: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="tag1, tag2, tag3"
-                />
-              </div>
-
-              {/* Publish Date */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Publish Date</label>
-                <input
-                  type="date"
-                  value={editingBlog.publishedAt ? editingBlog.publishedAt.split('T')[0] : ''}
-                  onChange={(e) => setEditingBlog({
-                    ...editingBlog,
-                    publishedAt: e.target.value ? new Date(e.target.value).toISOString() : ''
-                  })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-
-              {/* Content */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Content</label>
-                <div className="border border-gray-300 rounded-lg overflow-hidden">
-                  <div className="bg-gray-50 px-4 py-2 border-b border-gray-300 flex items-center space-x-2">
-                    <span className="text-sm text-gray-600">Rich Text Editor</span>
-                    <div className="flex space-x-1">
-                      <button className="p-1 hover:bg-gray-200 rounded text-gray-600" title="Bold">B</button>
-                      <button className="p-1 hover:bg-gray-200 rounded text-gray-600" title="Italic">I</button>
-                      <button className="p-1 hover:bg-gray-200 rounded text-gray-600" title="Link">🔗</button>
-                      <button className="p-1 hover:bg-gray-200 rounded text-gray-600" title="Image">🖼️</button>
-                    </div>
-                  </div>
-                  <textarea
-                    value={editingBlog.content}
-                    onChange={(e) => setEditingBlog({ ...editingBlog, content: e.target.value })}
-                    className="w-full px-4 py-3 min-h-[300px] focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
-                    placeholder="Write your blog post content here..."
-                  />
-                </div>
-                <p className="text-sm text-gray-500 mt-2">
-                  💡 Tip: Use Markdown syntax for formatting. Rich text editor features coming soon!
-                </p>
-              </div>
-            </div>
-
-            <div className="p-6 border-t border-gray-200 flex justify-end space-x-4">
-              <button
-                onClick={() => {
-                  setShowBlogModal(false)
-                  setEditingBlog(null)
-                }}
-                className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleSaveBlogPost}
-                className="px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-              >
-                {editingBlog.id ? 'Update Post' : 'Create Post'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  )
-}
-
-      {/* Blog Post Modal */}
-      {showBlogModal && editingBlog && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-200">
-              <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-gray-900">
-                  {editingBlog.id ? 'Edit Blog Post' : 'Create New Blog Post'}
-                </h2>
-                <button
-                  onClick={() => {
-                    setShowBlogModal(false)
-                    setEditingBlog(null)
-                  }}
-                  className="text-gray-400 hover:text-gray-600 text-2xl"
-                >
-                  ×
-                </button>
-              </div>
-            </div>
-
-            <div className="p-6 space-y-6">
-              {/* Title */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
-                <input
-                  type="text"
-                  value={editingBlog.title}
-                  onChange={(e) => {
-                    const title = e.target.value
-                    setEditingBlog({
-                      ...editingBlog,
-                      title,
-                      slug: editingBlog.id ? editingBlog.slug : generateSlug(title)
-                    })
-                  }}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Enter blog post title"
-                />
-              </div>
-
-              {/* Slug */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">URL Slug</label>
-                <input
-                  type="text"
-                  value={editingBlog.slug}
-                  onChange={(e) => setEditingBlog({ ...editingBlog, slug: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="url-friendly-slug"
-                />
-              </div>
-
-              {/* Tags */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Tags (comma-separated)</label>
-                <input
-                  type="text"
-                  value={editingBlog.tags}
-                  onChange={(e) => setEditingBlog({ ...editingBlog, tags: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="tag1, tag2, tag3"
-                />
-              </div>
-
-              {/* Publish Date */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Publish Date</label>
-                <input
-                  type="date"
-                  value={editingBlog.publishedAt ? editingBlog.publishedAt.split('T')[0] : ''}
-                  onChange={(e) => setEditingBlog({
-                    ...editingBlog,
-                    publishedAt: e.target.value ? new Date(e.target.value).toISOString() : ''
-                  })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-
-              {/* Content */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Content</label>
-                <div className="border border-gray-300 rounded-lg overflow-hidden">
-                  <div className="bg-gray-50 px-4 py-2 border-b border-gray-300 flex items-center space-x-2">
-                    <span className="text-sm text-gray-600">Rich Text Editor</span>
-                    <div className="flex space-x-1">
-                      <button className="p-1 hover:bg-gray-200 rounded text-gray-600" title="Bold">B</button>
-                      <button className="p-1 hover:bg-gray-200 rounded text-gray-600" title="Italic">I</button>
-                      <button className="p-1 hover:bg-gray-200 rounded text-gray-600" title="Link">🔗</button>
-                      <button className="p-1 hover:bg-gray-200 rounded text-gray-600" title="Image">🖼️</button>
-                    </div>
-                  </div>
-                  <textarea
-                    value={editingBlog.content}
-                    onChange={(e) => setEditingBlog({ ...editingBlog, content: e.target.value })}
-                    className="w-full px-4 py-3 min-h-[300px] focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
-                    placeholder="Write your blog post content here..."
-                  />
-                </div>
-                <p className="text-sm text-gray-500 mt-2">
-                  💡 Tip: Use Markdown syntax for formatting. Rich text editor features coming soon!
-                </p>
-              </div>
-            </div>
-
-            <div className="p-6 border-t border-gray-200 flex justify-end space-x-4">
-              <button
-                onClick={() => {
-                  setShowBlogModal(false)
-                  setEditingBlog(null)
-                }}
-                className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleSaveBlogPost}
-                className="px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-              >
-                {editingBlog.id ? 'Update Post' : 'Create Post'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  )
-}
-
-      {/* Blog Post Modal */}
-      {showBlogModal && editingBlog && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-200">
-              <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-gray-900">
-                  {editingBlog.id ? 'Edit Blog Post' : 'Create New Blog Post'}
-                </h2>
-                <button
-                  onClick={() => {
-                    setShowBlogModal(false)
-                    setEditingBlog(null)
-                  }}
-                  className="text-gray-400 hover:text-gray-600 text-2xl"
-                >
-                  ×
-                </button>
-              </div>
-            </div>
-
-            <div className="p-6 space-y-6">
-              {/* Title */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
-                <input
-                  type="text"
-                  value={editingBlog.title}
-                  onChange={(e) => {
-                    const title = e.target.value
-                    setEditingBlog({
-                      ...editingBlog,
-                      title,
-                      slug: editingBlog.id ? editingBlog.slug : generateSlug(title)
-                    })
-                  }}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Enter blog post title"
-                />
-              </div>
-
-              {/* Slug */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">URL Slug</label>
-                <input
-                  type="text"
-                  value={editingBlog.slug}
-                  onChange={(e) => setEditingBlog({ ...editingBlog, slug: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="url-friendly-slug"
-                />
-              </div>
-
-              {/* Tags */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Tags (comma-separated)</label>
-                <input
-                  type="text"
-                  value={editingBlog.tags}
-                  onChange={(e) => setEditingBlog({ ...editingBlog, tags: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="tag1, tag2, tag3"
-                />
-              </div>
-
-              {/* Publish Date */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Publish Date</label>
-                <input
-                  type="date"
-                  value={editingBlog.publishedAt ? editingBlog.publishedAt.split('T')[0] : ''}
-                  onChange={(e) => setEditingBlog({
-                    ...editingBlog,
-                    publishedAt: e.target.value ? new Date(e.target.value).toISOString() : ''
-                  })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-
-              {/* Content */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Content</label>
-                <div className="border border-gray-300 rounded-lg overflow-hidden">
-                  <div className="bg-gray-50 px-4 py-2 border-b border-gray-300 flex items-center space-x-2">
-                    <span className="text-sm text-gray-600">Rich Text Editor</span>
-                    <div className="flex space-x-1">
-                      <button className="p-1 hover:bg-gray-200 rounded text-gray-600" title="Bold">B</button>
-                      <button className="p-1 hover:bg-gray-200 rounded text-gray-600" title="Italic">I</button>
-                      <button className="p-1 hover:bg-gray-200 rounded text-gray-600" title="Link">🔗</button>
-                      <button className="p-1 hover:bg-gray-200 rounded text-gray-600" title="Image">🖼️</button>
-                    </div>
-                  </div>
-                  <textarea
-                    value={editingBlog.content}
-                    onChange={(e) => setEditingBlog({ ...editingBlog, content: e.target.value })}
-                    className="w-full px-4 py-3 min-h-[300px] focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
-                    placeholder="Write your blog post content here..."
-                  />
-                </div>
-                <p className="text-sm text-gray-500 mt-2">
-                  💡 Tip: Use Markdown syntax for formatting. Rich text editor features coming soon!
-                </p>
-              </div>
-            </div>
-
-            <div className="p-6 border-t border-gray-200 flex justify-end space-x-4">
-              <button
-                onClick={() => {
-                  setShowBlogModal(false)
-                  setEditingBlog(null)
-                }}
-                className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleSaveBlogPost}
-                className="px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-              >
-                {editingBlog.id ? 'Update Post' : 'Create Post'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   )
 }

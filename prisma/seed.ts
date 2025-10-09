@@ -283,6 +283,26 @@ async function main() {
             isActive: true,
             sortOrder: 4
           },
+          {
+            id: 'social-tiktok',
+            type: 'social',
+            label: 'TikTok',
+            value: 'https://tiktok.com/@ma_consulting_et',
+            platform: 'tiktok',
+            icon: 'tiktok',
+            isActive: true,
+            sortOrder: 5
+          },
+          {
+            id: 'social-telegram',
+            type: 'social',
+            label: 'Telegram',
+            value: 'https://t.me/ma_consulting_et',
+            platform: 'telegram',
+            icon: 'telegram',
+            isActive: true,
+            sortOrder: 6
+          },
           // Website
           {
             id: 'website-main',
