@@ -1,6 +1,23 @@
+import { Link, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import Meta from '../components/Meta'
 
 export function Services() {
+  const location = useLocation()
+
+  useEffect(() => {
+    // Handle hash navigation after component mounts
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1))
+      if (element) {
+        // Small delay to ensure content is rendered
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }, 100)
+      }
+    }
+  }, [location])
+
   return (
     <>
       <Meta title="Professional Consulting Services - Ma Services Solution" description="Comprehensive business consulting services including investment consulting, business development, tax & customs, marketing strategies, development works, and dedicated support." />
@@ -49,10 +66,15 @@ export function Services() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 transform hover:scale-105 animate-pulse-glow">
-                Get Started Today
-              </button>
-              <button className="border-2 border-white/30 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm">
+              <Link to="/contact">
+                <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 transform hover:scale-105 animate-pulse-glow">
+                  Get Started Today
+                </button>
+              </Link>
+              <button
+                onClick={() => document.getElementById('services-overview')?.scrollIntoView({ behavior: 'smooth' })}
+                className="border-2 border-white/30 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm"
+              >
                 Learn More
               </button>
             </div>
@@ -68,7 +90,7 @@ export function Services() {
       </section>
 
       {/* SERVICES OVERVIEW SECTION */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+      <section id="services-overview" className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">Our Core Services</h2>
@@ -79,7 +101,7 @@ export function Services() {
           </div>
 
           {/* Service 1: Investment Consulting */}
-          <div className="mb-24">
+          <div id="investment-consulting" className="mb-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div className="order-2 lg:order-1">
                 <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl flex items-center justify-center mb-8 shadow-2xl">
@@ -164,7 +186,7 @@ export function Services() {
           </div>
 
           {/* Service 2: Business Development */}
-          <div className="mb-24">
+          <div id="business-development" className="mb-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div>
                 <div className="w-24 h-24 bg-gradient-to-br from-green-500 to-green-600 rounded-3xl flex items-center justify-center mb-8 shadow-2xl">
@@ -248,7 +270,7 @@ export function Services() {
           </div>
 
           {/* Service 3: Tax & Customs */}
-          <div className="mb-24">
+          <div id="tax-customs" className="mb-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div className="order-2 lg:order-1">
                 <div className="w-24 h-24 bg-gradient-to-br from-orange-500 to-red-500 rounded-3xl flex items-center justify-center mb-8 shadow-2xl">
@@ -336,7 +358,7 @@ export function Services() {
           <div className="bg-gradient-to-r from-gray-100 to-blue-100 p-12 rounded-3xl">
             <h3 className="text-4xl font-bold text-center mb-12 text-gray-900">Additional Specialized Services</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-200">
+              <div id="marketing-strategies" className="bg-white p-8 rounded-3xl shadow-lg border border-gray-200">
                 <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6">
                   <span className="text-3xl text-white">🎨</span>
                 </div>
@@ -353,7 +375,7 @@ export function Services() {
                 </ul>
               </div>
 
-              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-200">
+              <div id="development-works" className="bg-white p-8 rounded-3xl shadow-lg border border-gray-200">
                 <div className="w-16 h-16 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-6">
                   <span className="text-3xl text-white">🏗️</span>
                 </div>
@@ -370,7 +392,7 @@ export function Services() {
                 </ul>
               </div>
 
-              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-200">
+              <div id="dedicated-support" className="bg-white p-8 rounded-3xl shadow-lg border border-gray-200">
                 <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center mb-6">
                   <span className="text-3xl text-white">🛠️</span>
                 </div>
@@ -459,12 +481,16 @@ export function Services() {
             Contact us today for a free consultation and discover the Ma Services Solution difference.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button className="bg-white text-gray-900 px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-              Schedule Free Consultation
-            </button>
-            <button className="border-2 border-white/50 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white transition-all duration-300">
-              Download Service Brochure
-            </button>
+            <Link to="/contact">
+              <button className="bg-white text-gray-900 px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                Schedule Free Consultation
+              </button>
+            </Link>
+            <Link to="/contact">
+              <button className="border-2 border-white/50 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white transition-all duration-300">
+                Download Service Brochure
+              </button>
+            </Link>
           </div>
         </div>
       </section>

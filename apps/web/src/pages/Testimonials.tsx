@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import Meta from '../components/Meta'
 
 interface Testimonial {
@@ -13,6 +14,8 @@ interface Testimonial {
 }
 
 export function Testimonials() {
+  const navigate = useNavigate()
+  const location = useLocation()
   const [testimonials, setTestimonials] = useState<Testimonial[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedService, setSelectedService] = useState('All')
@@ -29,6 +32,53 @@ export function Testimonials() {
         setLoading(false)
       })
   }, [])
+
+  const handleReadSuccessStories = () => {
+    // Scroll to testimonials section
+    const testimonialsSection = document.querySelector('section:nth-of-type(3)') // The testimonials grid section
+    if (testimonialsSection) {
+      testimonialsSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  const handleBecomeNextSuccess = () => {
+    if (location.pathname === '/') {
+      // If on home page, scroll to contact section
+      const contactSection = document.getElementById('contact')
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' })
+      }
+    } else {
+      // If on other pages, navigate to home with contact section
+      navigate('/#contact')
+    }
+  }
+
+  const handleStartSuccessStory = () => {
+    if (location.pathname === '/') {
+      // If on home page, scroll to contact section
+      const contactSection = document.getElementById('contact')
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' })
+      }
+    } else {
+      // If on other pages, navigate to home with contact section
+      navigate('/#contact')
+    }
+  }
+
+  const handleScheduleConsultation = () => {
+    if (location.pathname === '/') {
+      // If on home page, scroll to contact section
+      const contactSection = document.getElementById('contact')
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' })
+      }
+    } else {
+      // If on other pages, navigate to home with contact section
+      navigate('/#contact')
+    }
+  }
 
   const services = ['All', 'Investment Consulting', 'Business Development', 'Tax & Customs', 'Marketing Strategies', 'Development Works', 'Dedicated Support']
 
@@ -93,10 +143,16 @@ export function Testimonials() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <button className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-green-500/50 transition-all duration-300 transform hover:scale-105 animate-pulse-glow">
+              <button
+                onClick={handleReadSuccessStories}
+                className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-green-500/50 transition-all duration-300 transform hover:scale-105 animate-pulse-glow"
+              >
                 Read Success Stories
               </button>
-              <button className="border-2 border-white/30 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm">
+              <button
+                onClick={handleBecomeNextSuccess}
+                className="border-2 border-white/30 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm"
+              >
                 Become Our Next Success
               </button>
             </div>
@@ -221,13 +277,13 @@ export function Testimonials() {
                   <div className="flex items-center">
                     <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mr-4 shadow-lg">
                       <span className="text-2xl text-white font-bold">
-                        {testimonial.name.charAt(0)}
+                        {testimonial.name ? testimonial.name.charAt(0) : 'U'}
                       </span>
                     </div>
                     <div>
-                      <h4 className="text-xl font-bold text-gray-900">{testimonial.name}</h4>
-                      <p className="text-green-600 font-semibold">{testimonial.position}</p>
-                      <p className="text-gray-600">{testimonial.company}</p>
+                      <h4 className="text-xl font-bold text-gray-900">{testimonial.name || 'Anonymous Client'}</h4>
+                      <p className="text-green-600 font-semibold">{testimonial.position || 'Client'}</p>
+                      <p className="text-gray-600">{testimonial.company || 'Company'}</p>
                     </div>
                   </div>
 
@@ -242,94 +298,254 @@ export function Testimonials() {
         </div>
       </section>
 
-      {/* FEATURED SUCCESS STORY */}
+      {/* FEATURED SUCCESS STORIES */}
       <section className="py-24 bg-gradient-to-br from-green-600 to-emerald-600 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-5xl md:text-6xl font-bold mb-6">Featured Success Story</h2>
+              <h2 className="text-5xl md:text-6xl font-bold mb-6">Featured Success Stories</h2>
               <p className="text-2xl text-green-100 max-w-3xl mx-auto leading-relaxed">
-                One of our most remarkable transformations that showcases the power of strategic consulting.
+                Remarkable transformations that showcase the power of strategic consulting across Ethiopian businesses.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <div className="bg-white/10 backdrop-blur-sm p-8 rounded-3xl border border-white/20">
-                  <div className="flex items-center mb-6">
-                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mr-4">
-                      <span className="text-3xl">🏢</span>
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold">Ethio Manufacturing PLC</h3>
-                      <p className="text-green-200">Manufacturing Company</p>
-                    </div>
+            {/* Featured Stories Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+              {/* Ethio Manufacturing PLC */}
+              <div className="bg-white/10 backdrop-blur-sm p-8 rounded-3xl border border-white/20 hover:bg-white/15 transition-all duration-300">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mr-4">
+                    <span className="text-3xl">🏢</span>
                   </div>
-
-                  <h4 className="text-3xl font-bold mb-6">From Struggle to Market Leader</h4>
-
-                  <div className="space-y-4 text-lg">
-                    <p>
-                      "Ma Services Solution transformed our business from a struggling manufacturer to Ethiopia's leading
-                      producer in our industry. Their strategic guidance helped us optimize operations, expand our
-                      market reach, and achieve sustainable growth."
-                    </p>
-                    <p>
-                      "Within 18 months of working with them, we increased our revenue by 300%, expanded to 5 new
-                      regional markets, and became the preferred supplier for major retailers across Ethiopia."
-                    </p>
+                  <div>
+                    <h3 className="text-2xl font-bold">Ethio Manufacturing PLC</h3>
+                    <p className="text-green-200">Manufacturing Company</p>
                   </div>
+                </div>
 
-                  <div className="mt-8 p-6 bg-white/10 rounded-2xl">
-                    <h5 className="text-xl font-bold mb-4">Key Achievements:</h5>
-                    <ul className="space-y-2 text-green-100">
-                      <li>• 300% revenue increase in 18 months</li>
-                      <li>• Expanded to 5 regional markets</li>
-                      <li>• Became preferred supplier for major retailers</li>
-                      <li>• Improved operational efficiency by 40%</li>
-                      <li>• Enhanced product quality and customer satisfaction</li>
-                    </ul>
+                <h4 className="text-3xl font-bold mb-6">From Struggle to Market Leader</h4>
+
+                <div className="space-y-4 text-lg">
+                  <p>
+                    "Ma Services Solution transformed our business from a struggling manufacturer to Ethiopia's leading
+                    producer in our industry. Their strategic guidance helped us optimize operations, expand our
+                    market reach, and achieve sustainable growth."
+                  </p>
+                  <p>
+                    "Within 18 months of working with them, we increased our revenue by 300%, expanded to 5 new
+                    regional markets, and became the preferred supplier for major retailers across Ethiopia."
+                  </p>
+                </div>
+
+                <div className="mt-8 p-6 bg-white/10 rounded-2xl">
+                  <h5 className="text-xl font-bold mb-4">Key Achievements:</h5>
+                  <ul className="space-y-2 text-green-100">
+                    <li>• 300% revenue increase in 18 months</li>
+                    <li>• Expanded to 5 regional markets</li>
+                    <li>• Became preferred supplier for major retailers</li>
+                    <li>• Improved operational efficiency by 40%</li>
+                    <li>• Enhanced product quality and customer satisfaction</li>
+                  </ul>
+                </div>
+
+                <div className="mt-6 text-center">
+                  <div className="inline-block bg-white/10 backdrop-blur-sm p-4 rounded-2xl">
+                    <div className="flex items-center justify-center mb-2">
+                      <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mr-2">
+                        <span className="text-xl">👨‍💼</span>
+                      </div>
+                      <div className="text-left">
+                        <div className="font-bold text-white text-sm">Abebe Tadesse</div>
+                        <div className="text-green-200 text-xs">CEO, Ethio Manufacturing PLC</div>
+                      </div>
+                    </div>
+                    <p className="text-green-100 italic text-sm">
+                      "Ma Services Solution didn't just consult—they became our partners in success."
+                    </p>
                   </div>
                 </div>
               </div>
 
-              <div>
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl text-center">
-                    <div className="text-4xl font-bold text-yellow-300 mb-2">300%</div>
-                    <div className="text-green-200 font-semibold">Revenue Growth</div>
+              {/* Addis Ababa Bank */}
+              <div className="bg-white/10 backdrop-blur-sm p-8 rounded-3xl border border-white/20 hover:bg-white/15 transition-all duration-300">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mr-4">
+                    <span className="text-3xl">🏦</span>
                   </div>
-                  <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl text-center">
-                    <div className="text-4xl font-bold text-blue-300 mb-2">5</div>
-                    <div className="text-green-200 font-semibold">New Markets</div>
-                  </div>
-                  <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl text-center">
-                    <div className="text-4xl font-bold text-purple-300 mb-2">40%</div>
-                    <div className="text-green-200 font-semibold">Efficiency Gain</div>
-                  </div>
-                  <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl text-center">
-                    <div className="text-4xl font-bold text-pink-300 mb-2">98%</div>
-                    <div className="text-green-200 font-semibold">Client Satisfaction</div>
+                  <div>
+                    <h3 className="text-2xl font-bold">Addis Ababa Bank</h3>
+                    <p className="text-green-200">Financial Services</p>
                   </div>
                 </div>
 
-                <div className="mt-8 text-center">
-                  <div className="inline-block bg-white/10 backdrop-blur-sm p-6 rounded-2xl">
-                    <div className="flex items-center justify-center mb-4">
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mr-3">
-                        <span className="text-2xl">👨‍💼</span>
+                <h4 className="text-3xl font-bold mb-6">Digital Transformation Success</h4>
+
+                <div className="space-y-4 text-lg">
+                  <p>
+                    "Ma Services Solution revolutionized our digital banking infrastructure and investment portfolio management.
+                    Their expertise in fintech and regulatory compliance helped us modernize our operations while maintaining
+                    the highest standards of security and customer service."
+                  </p>
+                  <p>
+                    "Their investment consulting services helped us achieve a 250% return on our diversified portfolio
+                    within 24 months, setting new industry benchmarks for Ethiopian financial institutions."
+                  </p>
+                </div>
+
+                <div className="mt-8 p-6 bg-white/10 rounded-2xl">
+                  <h5 className="text-xl font-bold mb-4">Key Achievements:</h5>
+                  <ul className="space-y-2 text-green-100">
+                    <li>• 250% portfolio return in 24 months</li>
+                    <li>• Complete digital banking transformation</li>
+                    <li>• Enhanced cybersecurity and compliance</li>
+                    <li>• 40% increase in customer satisfaction</li>
+                    <li>• Industry-leading fintech innovation</li>
+                  </ul>
+                </div>
+
+                <div className="mt-6 text-center">
+                  <div className="inline-block bg-white/10 backdrop-blur-sm p-4 rounded-2xl">
+                    <div className="flex items-center justify-center mb-2">
+                      <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mr-2">
+                        <span className="text-xl">👩‍💼</span>
                       </div>
                       <div className="text-left">
-                        <div className="font-bold text-white">Abebe Tadesse</div>
-                        <div className="text-green-200">CEO, Ethio Manufacturing PLC</div>
+                        <div className="font-bold text-white text-sm">Sarah Mengistu</div>
+                        <div className="text-green-200 text-xs">CTO, Addis Ababa Bank</div>
                       </div>
                     </div>
-                    <p className="text-green-100 italic">
-                      "Ma Services Solution didn't just consult—they became our partners in success.
-                      Their expertise and dedication turned our challenges into opportunities."
+                    <p className="text-green-100 italic text-sm">
+                      "Their fintech expertise positioned us as Ethiopia's most innovative bank."
                     </p>
                   </div>
                 </div>
+              </div>
+
+              {/* Green Valley Agriculture */}
+              <div className="bg-white/10 backdrop-blur-sm p-8 rounded-3xl border border-white/20 hover:bg-white/15 transition-all duration-300">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mr-4">
+                    <span className="text-3xl">🌾</span>
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold">Green Valley Agriculture</h3>
+                    <p className="text-green-200">Agricultural Company</p>
+                  </div>
+                </div>
+
+                <h4 className="text-3xl font-bold mb-6">Sustainable Growth Revolution</h4>
+
+                <div className="space-y-4 text-lg">
+                  <p>
+                    "Ma Services Solution helped us transition from traditional farming to a modern, sustainable agricultural
+                    enterprise. Their business development strategies and tax optimization services enabled us to scale
+                    operations while maintaining environmental responsibility."
+                  </p>
+                  <p>
+                    "Through their guidance, we secured international export contracts and implemented cutting-edge
+                    farming technologies, resulting in a 180% increase in productivity and market value."
+                  </p>
+                </div>
+
+                <div className="mt-8 p-6 bg-white/10 rounded-2xl">
+                  <h5 className="text-xl font-bold mb-4">Key Achievements:</h5>
+                  <ul className="space-y-2 text-green-100">
+                    <li>• 180% productivity increase</li>
+                    <li>• International export market entry</li>
+                    <li>• Sustainable farming certification</li>
+                    <li>• $2M in tax savings and incentives</li>
+                    <li>• Carbon-neutral operations achieved</li>
+                  </ul>
+                </div>
+
+                <div className="mt-6 text-center">
+                  <div className="inline-block bg-white/10 backdrop-blur-sm p-4 rounded-2xl">
+                    <div className="flex items-center justify-center mb-2">
+                      <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mr-2">
+                        <span className="text-xl">👨‍🌾</span>
+                      </div>
+                      <div className="text-left">
+                        <div className="font-bold text-white text-sm">Dawit Kebede</div>
+                        <div className="text-green-200 text-xs">Founder, Green Valley Agriculture</div>
+                      </div>
+                    </div>
+                    <p className="text-green-100 italic text-sm">
+                      "They transformed our farm into a sustainable, profitable enterprise."
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* TechHub Ethiopia */}
+              <div className="bg-white/10 backdrop-blur-sm p-8 rounded-3xl border border-white/20 hover:bg-white/15 transition-all duration-300">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mr-4">
+                    <span className="text-3xl">💻</span>
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold">TechHub Ethiopia</h3>
+                    <p className="text-green-200">Technology Company</p>
+                  </div>
+                </div>
+
+                <h4 className="text-3xl font-bold mb-6">From Startup to Industry Leader</h4>
+
+                <div className="space-y-4 text-lg">
+                  <p>
+                    "Ma Services Solution was instrumental in our journey from a small tech startup to Ethiopia's leading
+                    software development company. Their marketing consultancy and business development strategies helped
+                    us secure major government contracts and expand our service offerings."
+                  </p>
+                  <p>
+                    "Their dedicated support services ensured seamless project delivery and client satisfaction,
+                    enabling us to grow from 5 employees to over 150 in just 3 years."
+                  </p>
+                </div>
+
+                <div className="mt-8 p-6 bg-white/10 rounded-2xl">
+                  <h5 className="text-xl font-bold mb-4">Key Achievements:</h5>
+                  <ul className="space-y-2 text-green-100">
+                    <li>• 30x employee growth in 3 years</li>
+                    <li>• Major government contract wins</li>
+                    <li>• 95% project success rate</li>
+                    <li>• International client acquisition</li>
+                    <li>• Industry recognition and awards</li>
+                  </ul>
+                </div>
+
+                <div className="mt-6 text-center">
+                  <div className="inline-block bg-white/10 backdrop-blur-sm p-4 rounded-2xl">
+                    <div className="flex items-center justify-center mb-2">
+                      <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mr-2">
+                        <span className="text-xl">👨‍💻</span>
+                      </div>
+                      <div className="text-left">
+                        <div className="font-bold text-white text-sm">Helen Tesfaye</div>
+                        <div className="text-green-200 text-xs">CEO, TechHub Ethiopia</div>
+                      </div>
+                    </div>
+                    <p className="text-green-100 italic text-sm">
+                      "Ma Services Solution scaled our vision into a thriving technology enterprise."
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Call to Action */}
+            <div className="text-center">
+              <div className="inline-block bg-white/10 backdrop-blur-sm p-8 rounded-3xl border border-white/20">
+                <h3 className="text-3xl font-bold mb-4">Your Success Story Awaits</h3>
+                <p className="text-xl text-green-100 mb-6 max-w-2xl">
+                  Join these remarkable Ethiopian businesses that have achieved extraordinary results with Ma Services Solution.
+                  Your transformation could be the next featured success story.
+                </p>
+                <button
+                  onClick={handleBecomeNextSuccess}
+                  className="bg-white text-gray-900 px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                >
+                  Become Our Next Success Story
+                </button>
               </div>
             </div>
           </div>
@@ -392,10 +608,16 @@ export function Testimonials() {
             how we can help you achieve extraordinary results like our satisfied clients.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button className="bg-white text-gray-900 px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+            <button
+              onClick={handleStartSuccessStory}
+              className="bg-white text-gray-900 px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+            >
               Start Your Success Story
             </button>
-            <button className="border-2 border-white/50 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white transition-all duration-300">
+            <button
+              onClick={handleScheduleConsultation}
+              className="border-2 border-white/50 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white transition-all duration-300"
+            >
               Schedule Free Consultation
             </button>
           </div>

@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { useLocation } from 'react-router-dom'
 import maLogo from '../assets/images/team/ma.png'
 
 interface ContactInfo {
@@ -13,6 +15,7 @@ interface ContactInfo {
 }
 
 const Footer = () => {
+  const location = useLocation()
   const [logoError, setLogoError] = useState(false)
   const [contactInfo, setContactInfo] = useState<{
     social: ContactInfo[]
@@ -52,20 +55,68 @@ const Footer = () => {
             addresses: grouped.address || [],
             websites: grouped.website || []
           })
+        } else {
+          // Use fallback data if API fails
+          setContactInfo({
+            social: [
+              { id: 'fb', type: 'social', label: 'Facebook', value: 'https://facebook.com/ma.services.solution', platform: 'facebook', isActive: true, sortOrder: 1 },
+              { id: 'ln', type: 'social', label: 'LinkedIn', value: 'https://linkedin.com/company/ma-services-solution', platform: 'linkedin', isActive: true, sortOrder: 2 },
+              { id: 'tw', type: 'social', label: 'Twitter', value: 'https://twitter.com/ma_services', platform: 'twitter', isActive: true, sortOrder: 3 },
+              { id: 'ig', type: 'social', label: 'Instagram', value: 'https://instagram.com/ma_services_solution', platform: 'instagram', isActive: true, sortOrder: 4 }
+            ],
+            phones: [
+              { id: 'phone1', type: 'phone', label: 'Main Office', value: '+251 911 123 456', isActive: true, sortOrder: 1 },
+              { id: 'phone2', type: 'phone', label: 'Business Development', value: '+251 922 654 321', isActive: true, sortOrder: 2 }
+            ],
+            emails: [
+              { id: 'email1', type: 'email', label: 'General Inquiries', value: 'info@maservices.com', isActive: true, sortOrder: 1 },
+              { id: 'email2', type: 'email', label: 'Business Development', value: 'business@maservices.com', isActive: true, sortOrder: 2 }
+            ],
+            addresses: [
+              { id: 'addr1', type: 'address', label: 'Head Office', value: '123 Business District\nAddis Ababa, Ethiopia\nP.O. Box 12345', isActive: true, sortOrder: 1 }
+            ],
+            websites: [
+              { id: 'web1', type: 'website', label: 'Company Website', value: 'https://maservices.com', isActive: true, sortOrder: 1 }
+            ]
+          })
         }
       } catch (error) {
         console.error('Failed to fetch contact info:', error)
-        // Fallback to default values if API fails
+        // Use fallback data if API fails
+        setContactInfo({
+          social: [
+            { id: '1', type: 'social', label: 'LinkedIn', value: 'https://linkedin.com/company/ma-services-solution', platform: 'linkedin', isActive: true, sortOrder: 1 },
+            { id: '2', type: 'social', label: 'Twitter', value: 'https://twitter.com/ma_services', platform: 'twitter', isActive: true, sortOrder: 2 },
+            { id: '3', type: 'social', label: 'Facebook', value: 'https://facebook.com/ma.services.solution', platform: 'facebook', isActive: true, sortOrder: 3 },
+            { id: '4', type: 'social', label: 'Instagram', value: 'https://instagram.com/ma_services_solution', platform: 'instagram', isActive: true, sortOrder: 4 }
+          ],
+          phones: [
+            { id: '5', type: 'phone', label: 'Main Office', value: '+251 911 123 456', isActive: true, sortOrder: 1 },
+            { id: '6', type: 'phone', label: 'Business Line', value: '+251 922 654 321', isActive: true, sortOrder: 2 }
+          ],
+          emails: [
+            { id: '7', type: 'email', label: 'General Inquiries', value: 'info@maservices.com', isActive: true, sortOrder: 1 },
+            { id: '8', type: 'email', label: 'Business Development', value: 'business@maservices.com', isActive: true, sortOrder: 2 }
+          ],
+          addresses: [
+            { id: '9', type: 'address', label: 'Head Office', value: '123 Business District\nAddis Ababa, Ethiopia\nP.O. Box 12345', isActive: true, sortOrder: 1 }
+          ],
+          websites: [
+            { id: '10', type: 'website', label: 'Company Website', value: 'https://maservices.com', isActive: true, sortOrder: 1 }
+          ]
+        })
       }
     }
 
     fetchContactInfo()
   }, [])
+
   return (
-    <footer className="bg-black/90 backdrop-blur-md text-white py-8 border-t-4 border-orange-500 relative z-10">
-      <div className="w-full px-6">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-10 gap-8 mb-8">
+    <>
+      <footer className="bg-black/90 backdrop-blur-md text-white py-8 border-t-4 border-orange-500 relative z-10">
+        <div className="w-full px-6">
+          {/* Main Footer Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-10 gap-8 mb-8">
           {/* Company Branding & Description */}
           <div className="lg:col-span-4">
             <div className="flex items-center space-x-4 mb-6">
@@ -189,37 +240,37 @@ const Footer = () => {
             <h4 className="text-xl font-bold mb-6 text-white">Our Services</h4>
             <ul className="space-y-4">
               <li>
-                <a href="/services" className="group flex items-center text-white transition-all duration-300">
+                <a href={location.pathname === '/services' ? '#investment-consulting' : '/services#investment-consulting'} className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-blue-500 rounded-full mr-3 group-hover:bg-blue-400 transition-colors"></span>
                   <span className="text-lg">Investment Consulting</span>
                 </a>
               </li>
               <li>
-                <a href="/services" className="group flex items-center text-white transition-all duration-300">
+                <a href={location.pathname === '/services' ? '#business-development' : '/services#business-development'} className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-green-500 rounded-full mr-3 group-hover:bg-green-400 transition-colors"></span>
                   <span className="text-lg">Business Development</span>
                 </a>
               </li>
               <li>
-                <a href="/services" className="group flex items-center text-white transition-all duration-300">
+                <a href={location.pathname === '/services' ? '#marketing-strategies' : '/services#marketing-strategies'} className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 group-hover:bg-purple-400 transition-colors"></span>
                   <span className="text-lg">Marketing Strategies</span>
                 </a>
               </li>
               <li>
-                <a href="/services" className="group flex items-center text-white transition-all duration-300">
+                <a href={location.pathname === '/services' ? '#tax-customs' : '/services#tax-customs'} className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-orange-500 rounded-full mr-3 group-hover:bg-orange-400 transition-colors"></span>
                   <span className="text-lg">Tax & Customs</span>
                 </a>
               </li>
               <li>
-                <a href="/services" className="group flex items-center text-white transition-all duration-300">
+                <a href={location.pathname === '/services' ? '#development-works' : '/services#development-works'} className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-teal-500 rounded-full mr-3 group-hover:bg-teal-400 transition-colors"></span>
                   <span className="text-lg">Development Works</span>
                 </a>
               </li>
               <li>
-                <a href="/services" className="group flex items-center text-white transition-all duration-300">
+                <a href={location.pathname === '/services' ? '#dedicated-support' : '/services#dedicated-support'} className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-pink-500 rounded-full mr-3 group-hover:bg-pink-400 transition-colors"></span>
                   <span className="text-lg">Dedicated Support</span>
                 </a>
@@ -247,6 +298,12 @@ const Footer = () => {
                 <a href="/team" className="group flex items-center text-white transition-all duration-300">
                   <span className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mr-3"></span>
                   <span className="text-lg">Our Team</span>
+                </a>
+              </li>
+              <li>
+                <a href="/testimonials" className="group flex items-center text-white transition-all duration-300">
+                  <span className="w-2 h-2 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mr-3"></span>
+                  <span className="text-lg">Testimonials</span>
                 </a>
               </li>
               <li>
@@ -309,28 +366,6 @@ const Footer = () => {
                 </div>
               )}
 
-              {/* Website */}
-              {contactInfo.websites.length > 0 && (
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
-                    <span className="text-white text-xl">🌐</span>
-                  </div>
-                  <div>
-                    <h5 className="text-lg font-semibold text-white mb-1">Website</h5>
-                    {contactInfo.websites.map((website) => (
-                      <a
-                        key={website.id}
-                        href={website.value}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-200 hover:text-white transition-colors"
-                      >
-                        {website.value.replace('https://', '').replace('http://', '')}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              )}
 
               {/* Office Addresses */}
               {contactInfo.addresses.length > 0 && (
@@ -351,31 +386,33 @@ const Footer = () => {
               )}
             </div>
           </div>
-
-        </div>
-
+</div>
 
 
-        {/* Bottom Footer */}
+
+{/* Bottom Footer */}
         <div className="border-t border-gray-700/50 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm">
               &copy; 2024 Ma Services Solution PLC. All rights reserved.
             </p>
+            <p className="text-gray-400 text-sm text-center">
+              Developed by Yonas Bogale
+            </p>
             <div className="flex flex-wrap gap-6">
               <a href="/admin" className="text-gray-200 transition-colors duration-300 text-sm hover:underline">
                 Admin Panel
               </a>
-              <a href="#" className="text-gray-200 transition-colors duration-300 text-sm hover:underline">
+              <a href="/privacy-policy" className="text-gray-200 transition-colors duration-300 text-sm hover:underline">
                 Privacy Policy
               </a>
-              <a href="#" className="text-gray-200 transition-colors duration-300 text-sm hover:underline">
+              <a href="/terms-of-service" className="text-gray-200 transition-colors duration-300 text-sm hover:underline">
                 Terms of Service
               </a>
-              <a href="#" className="text-gray-200 transition-colors duration-300 text-sm hover:underline">
+              <a href="/cookie-policy" className="text-gray-200 transition-colors duration-300 text-sm hover:underline">
                 Cookie Policy
               </a>
-              <a href="#" className="text-gray-200 transition-colors duration-300 text-sm hover:underline">
+              <a href="/accessibility" className="text-gray-200 transition-colors duration-300 text-sm hover:underline">
                 Accessibility
               </a>
             </div>
@@ -383,6 +420,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+  </>
   )
 }
 

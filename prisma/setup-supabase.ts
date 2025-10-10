@@ -91,6 +91,20 @@ CREATE TABLE IF NOT EXISTS "Lead" (
     "createdAt" TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- Contact Info table
+CREATE TABLE IF NOT EXISTS "ContactInfo" (
+    id TEXT PRIMARY KEY DEFAULT gen_random_uuid()::text,
+    type TEXT NOT NULL,
+    label TEXT NOT NULL,
+    value TEXT NOT NULL,
+    platform TEXT,
+    icon TEXT,
+    "isActive" BOOLEAN DEFAULT true,
+    "sortOrder" INTEGER DEFAULT 0,
+    "createdAt" TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    "updatedAt" TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 -- Enable Row Level Security
 ALTER TABLE "User" ENABLE ROW LEVEL SECURITY;
 ALTER TABLE "Service" ENABLE ROW LEVEL SECURITY;
@@ -115,6 +129,8 @@ DROP POLICY IF EXISTS "Allow all operations on Application" ON "Application";
 CREATE POLICY "Allow all operations on Application" ON "Application" FOR ALL USING (true);
 DROP POLICY IF EXISTS "Allow all operations on Lead" ON "Lead";
 CREATE POLICY "Allow all operations on Lead" ON "Lead" FOR ALL USING (true);
+DROP POLICY IF EXISTS "Allow all operations on ContactInfo" ON "ContactInfo";
+CREATE POLICY "Allow all operations on ContactInfo" ON "ContactInfo" FOR ALL USING (true);
   `)
   console.log('')
   console.log('After running the SQL above, run this command to seed data:')
@@ -327,6 +343,111 @@ async function seedData() {
       ])
 
     if (blogError) console.error('Blog seed error:', blogError)
+
+    // Seed contact info
+    const { error: contactError } = await supabase
+      .from('ContactInfo')
+      .upsert([
+        // Social Media
+        {
+          id: 'contact-1',
+          type: 'social',
+          label: 'LinkedIn',
+          value: 'https://linkedin.com/company/ma-services-solution',
+          platform: 'linkedin',
+          isActive: true,
+          sortOrder: 1
+        },
+        {
+          id: 'contact-2',
+          type: 'social',
+          label: 'Twitter',
+          value: 'https://twitter.com/ma_services',
+          platform: 'twitter',
+          isActive: true,
+          sortOrder: 2
+        },
+        {
+          id: 'contact-3',
+          type: 'social',
+          label: 'Facebook',
+          value: 'https://facebook.com/ma.services.solution',
+          platform: 'facebook',
+          isActive: true,
+          sortOrder: 3
+        },
+        {
+          id: 'contact-4',
+          type: 'social',
+          label: 'Instagram',
+          value: 'https://instagram.com/ma_services_solution',
+          platform: 'instagram',
+          isActive: true,
+          sortOrder: 4
+        },
+        // Phone Numbers
+        {
+          id: 'contact-5',
+          type: 'phone',
+          label: 'Main Office',
+          value: '+251 911 123 456',
+          isActive: true,
+          sortOrder: 1
+        },
+        {
+          id: 'contact-6',
+          type: 'phone',
+          label: 'Business Development',
+          value: '+251 922 654 321',
+          isActive: true,
+          sortOrder: 2
+        },
+        // Emails
+        {
+          id: 'contact-7',
+          type: 'email',
+          label: 'General Inquiries',
+          value: 'info@maservices.com',
+          isActive: true,
+          sortOrder: 1
+        },
+        {
+          id: 'contact-8',
+          type: 'email',
+          label: 'Business Development',
+          value: 'business@maservices.com',
+          isActive: true,
+          sortOrder: 2
+        },
+        // Website
+        {
+          id: 'contact-9',
+          type: 'website',
+          label: 'Company Website',
+          value: 'https://maservices.com',
+          isActive: true,
+          sortOrder: 1
+        },
+        // Addresses
+        {
+          id: 'contact-10',
+          type: 'address',
+          label: 'Head Office',
+          value: '123 Business District\nAddis Ababa, Ethiopia\nP.O. Box 12345',
+          isActive: true,
+          sortOrder: 1
+        },
+        {
+          id: 'contact-11',
+          type: 'address',
+          label: 'Branch Office',
+          value: '456 Commercial Street\nDire Dawa, Ethiopia\nP.O. Box 67890',
+          isActive: true,
+          sortOrder: 2
+        }
+      ])
+
+    if (contactError) console.error('Contact info seed error:', contactError)
 
     console.log('Database seeded successfully!')
 

@@ -591,13 +591,22 @@ export function Home({ initialSection }: { initialSection?: string }) {
                   </ul>
                 </div>
 
-                <div className="flex justify-center space-x-4">
-                  <div className="w-10 h-10 bg-amber-600/30 rounded-full flex items-center justify-center hover:bg-amber-500/40 transition-colors cursor-pointer">
-                    <span className="text-amber-200 text-sm">in</span>
-                  </div>
-                  <div className="w-10 h-10 bg-amber-600/30 rounded-full flex items-center justify-center hover:bg-amber-500/40 transition-colors cursor-pointer">
-                    <span className="text-amber-200 text-sm">🐦</span>
-                  </div>
+                <div className="flex justify-center space-x-3">
+                  <a href="https://linkedin.com/in/alebachew-sitotaw" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-blue-600/80 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+                    <span className="text-white text-sm font-bold">in</span>
+                  </a>
+                  <a href="https://facebook.com/alebachew.sitotaw" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-blue-700/80 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                    <span className="text-white text-sm">f</span>
+                  </a>
+                  <a href="https://instagram.com/alebachew_sitotaw" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-pink-600/80 rounded-full flex items-center justify-center hover:bg-pink-600 transition-colors">
+                    <span className="text-white text-sm">📷</span>
+                  </a>
+                  <a href="https://twitter.com/alebachew_sitotaw" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-blue-400/80 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors">
+                    <span className="text-white text-sm">🐦</span>
+                  </a>
+                  <a href="mailto:alebachew@maservices.com" className="w-10 h-10 bg-gray-600/80 rounded-full flex items-center justify-center hover:bg-gray-600 transition-colors">
+                    <span className="text-white text-sm">✉️</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -628,13 +637,22 @@ export function Home({ initialSection }: { initialSection?: string }) {
                   </ul>
                 </div>
 
-                <div className="flex justify-center space-x-4">
-                  <div className="w-10 h-10 bg-orange-600/30 rounded-full flex items-center justify-center hover:bg-orange-500/40 transition-colors cursor-pointer">
-                    <span className="text-orange-200 text-sm">in</span>
-                  </div>
-                  <div className="w-10 h-10 bg-orange-600/30 rounded-full flex items-center justify-center hover:bg-orange-500/40 transition-colors cursor-pointer">
-                    <span className="text-orange-200 text-sm">📧</span>
-                  </div>
+                <div className="flex justify-center space-x-3">
+                  <a href="https://linkedin.com/in/melsew-hailemariam" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-blue-600/80 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+                    <span className="text-white text-sm font-bold">in</span>
+                  </a>
+                  <a href="https://facebook.com/melsew.hailemariam" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-blue-700/80 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                    <span className="text-white text-sm">f</span>
+                  </a>
+                  <a href="https://instagram.com/melsew_hailemariam" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-pink-600/80 rounded-full flex items-center justify-center hover:bg-pink-600 transition-colors">
+                    <span className="text-white text-sm">📷</span>
+                  </a>
+                  <a href="https://twitter.com/melsew_hailemariam" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-blue-400/80 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors">
+                    <span className="text-white text-sm">🐦</span>
+                  </a>
+                  <a href="mailto:melsew@maservices.com" className="w-10 h-10 bg-gray-600/80 rounded-full flex items-center justify-center hover:bg-gray-600 transition-colors">
+                    <span className="text-white text-sm">✉️</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -665,13 +683,22 @@ export function Home({ initialSection }: { initialSection?: string }) {
                   </ul>
                 </div>
 
-                <div className="flex justify-center space-x-4">
-                  <div className="w-10 h-10 bg-red-600/30 rounded-full flex items-center justify-center hover:bg-red-500/40 transition-colors cursor-pointer">
-                    <span className="text-red-200 text-sm">in</span>
-                  </div>
-                  <div className="w-10 h-10 bg-red-600/30 rounded-full flex items-center justify-center hover:bg-red-500/40 transition-colors cursor-pointer">
-                    <span className="text-red-200 text-sm">💼</span>
-                  </div>
+                <div className="flex justify-center space-x-3">
+                  <a href="https://linkedin.com/in/tiruwork-tizazu" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-blue-600/80 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+                    <span className="text-white text-sm font-bold">in</span>
+                  </a>
+                  <a href="https://facebook.com/tiruwork.tizazu" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-blue-700/80 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                    <span className="text-white text-sm">f</span>
+                  </a>
+                  <a href="https://instagram.com/tiruwork_tizazu" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-pink-600/80 rounded-full flex items-center justify-center hover:bg-pink-600 transition-colors">
+                    <span className="text-white text-sm">📷</span>
+                  </a>
+                  <a href="https://twitter.com/tiruwork_tizazu" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-blue-400/80 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors">
+                    <span className="text-white text-sm">🐦</span>
+                  </a>
+                  <a href="mailto:tiruwork@maservices.com" className="w-10 h-10 bg-gray-600/80 rounded-full flex items-center justify-center hover:bg-gray-600 transition-colors">
+                    <span className="text-white text-sm">✉️</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -727,7 +754,16 @@ export function Home({ initialSection }: { initialSection?: string }) {
                 Meet Our Full Team
               </button>
               <button
-                onClick={() => navigate('/careers')}
+                onClick={() => {
+                  navigate('/careers')
+                  // Wait for page to load and scroll to apply section
+                  setTimeout(() => {
+                    const applySection = document.getElementById('apply')
+                    if (applySection) {
+                      applySection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    }
+                  }, 500)
+                }}
                 className="border-2 border-white/50 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white transition-all duration-300 backdrop-blur-sm"
               >
                 Join Our Team

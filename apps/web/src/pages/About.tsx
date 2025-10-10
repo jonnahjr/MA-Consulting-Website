@@ -1,9 +1,30 @@
+import { Link, useNavigate } from 'react-router-dom'
 import Meta from '../components/Meta'
 import aleImage from '../assets/images/team/Ale-360x280-modified.png'
 import melsewImage from '../assets/images/team/Mele1-360x280-photoaidcom-cropped.jpg'
 import tiruImage from '../assets/images/team/Tiru-360x280-photoaidcom-cropped.jpg'
 
 export function About() {
+  const navigate = useNavigate()
+
+  const handleTeamNavigation = (memberId?: string) => {
+    navigate('/team')
+    setTimeout(() => {
+      if (memberId) {
+        const element = document.getElementById(memberId)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      } else {
+        window.scrollTo(0, 0)
+      }
+    }, 100)
+  }
+
+  const handleAlebachewNavigation = () => handleTeamNavigation('alebachew')
+  const handleMelsewNavigation = () => handleTeamNavigation('melsew')
+  const handleTiruworkNavigation = () => handleTeamNavigation('tiruwork')
+
   return (
     <>
       <Meta title="About Ma Services Solution - Ethiopia's Premier Business Consulting Firm" description="Learn about Ma Services Solution's 13+ years of excellence in investment consulting, business development, tax services, and strategic transformation. Meet our expert team and discover our mission." />
@@ -53,10 +74,15 @@ export function About() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <button className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 transform hover:scale-105 animate-pulse-glow">
-                Our Services
-              </button>
-              <button className="border-2 border-white/30 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm">
+              <Link to="/services">
+                <button className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 transform hover:scale-105 animate-pulse-glow">
+                  Our Services
+                </button>
+              </Link>
+              <button
+                onClick={() => handleTeamNavigation()}
+                className="border-2 border-white/30 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm"
+              >
                 Meet Our Team
               </button>
             </div>
@@ -407,7 +433,10 @@ export function About() {
                 Visionary leader with 15+ years of consulting excellence, driving innovation and client success across diverse industries.
               </p>
               <div className="flex justify-center">
-                <button className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300">
+                <button
+                  onClick={handleAlebachewNavigation}
+                  className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300"
+                >
                   Learn More
                 </button>
               </div>
@@ -430,7 +459,10 @@ export function About() {
                 Strategic operations expert ensuring seamless client experiences and organizational excellence in consulting delivery.
               </p>
               <div className="flex justify-center">
-                <button className="bg-gradient-to-r from-orange-500 to-red-600 text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300">
+                <button
+                  onClick={handleMelsewNavigation}
+                  className="bg-gradient-to-r from-orange-500 to-red-600 text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300"
+                >
                   Learn More
                 </button>
               </div>
@@ -453,7 +485,10 @@ export function About() {
                 Driving strategic partnerships and fostering long-term client relationships through innovative business development solutions.
               </p>
               <div className="flex justify-center">
-                <button className="bg-gradient-to-r from-red-500 to-pink-600 text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300">
+                <button
+                  onClick={handleTiruworkNavigation}
+                  className="bg-gradient-to-r from-red-500 to-pink-600 text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300"
+                >
                   Learn More
                 </button>
               </div>
@@ -461,7 +496,10 @@ export function About() {
           </div>
 
           <div className="text-center">
-            <button className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 transform hover:scale-105 animate-pulse-glow">
+            <button
+              onClick={() => handleTeamNavigation()}
+              className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 transform hover:scale-105 animate-pulse-glow"
+            >
               View Full Team
             </button>
           </div>
@@ -477,12 +515,16 @@ export function About() {
             sustainable growth with Ma Services Solution's expert guidance.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button className="bg-white text-gray-900 px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-              Start Your Transformation
-            </button>
-            <button className="border-2 border-white/50 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white transition-all duration-300">
-              Explore Our Services
-            </button>
+            <Link to="/contact">
+              <button className="bg-white text-gray-900 px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                Start Your Transformation
+              </button>
+            </Link>
+            <Link to="/services">
+              <button className="border-2 border-white/50 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white transition-all duration-300">
+                Explore Our Services
+              </button>
+            </Link>
           </div>
         </div>
       </section>

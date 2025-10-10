@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Meta from '../components/Meta'
+import NewsletterSignup from '../components/NewsletterSignup'
+import { LikeButton } from '../components/LikeButton'
 
 interface BlogPost {
   id: string
@@ -94,10 +97,16 @@ export function Blog() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <button className="bg-gradient-to-r from-purple-500 to-blue-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-105 animate-pulse-glow">
+              <button
+                onClick={() => document.getElementById('blog-content')?.scrollIntoView({ behavior: 'smooth' })}
+                className="bg-gradient-to-r from-purple-500 to-blue-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-105 animate-pulse-glow"
+              >
                 Explore Latest Articles
               </button>
-              <button className="border-2 border-white/30 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm">
+              <button
+                onClick={() => document.getElementById('newsletter-signup')?.scrollIntoView({ behavior: 'smooth' })}
+                className="border-2 border-white/30 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm"
+              >
                 Subscribe to Newsletter
               </button>
             </div>
@@ -113,7 +122,7 @@ export function Blog() {
       </section>
 
       {/* BLOG CONTENT SECTION */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+      <section id="blog-content" className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="container mx-auto px-4">
           {/* Category Filter */}
           <div className="flex flex-wrap justify-center gap-4 mb-16">
@@ -156,9 +165,11 @@ export function Blog() {
                         </span>
                       ))}
                     </div>
-                    <button className="bg-white text-purple-600 px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-                      Read Full Article
-                    </button>
+                    <Link to={`/blog/${filteredPosts[0].slug}`}>
+                      <button className="bg-white text-purple-600 px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                        Read Full Article
+                      </button>
+                    </Link>
                   </div>
                   <div className="text-center">
                     <div className="w-64 h-64 bg-gradient-to-br from-white/20 to-white/10 rounded-3xl flex items-center justify-center mx-auto shadow-2xl">
@@ -239,21 +250,36 @@ export function Blog() {
 
                     {/* Read More */}
                     <div className="flex items-center justify-between">
-                      <button className="text-purple-600 hover:text-purple-800 font-bold text-lg flex items-center group/btn transition-colors">
-                        Read Full Article
-                        <svg className="w-5 h-5 ml-2 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </button>
+                      <Link to={`/blog/${post.slug}`}>
+                        <button className="text-purple-600 hover:text-purple-800 font-bold text-lg flex items-center group/btn transition-colors">
+                          Read Full Article
+                          <svg className="w-5 h-5 ml-2 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      </Link>
 
                       {/* Social Share */}
                       <div className="flex space-x-3">
-                        <button className="w-10 h-10 bg-gray-100 hover:bg-purple-100 rounded-full flex items-center justify-center transition-colors group">
-                          <svg className="w-5 h-5 text-gray-600 group-hover:text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                          </svg>
-                        </button>
-                        <button className="w-10 h-10 bg-gray-100 hover:bg-blue-100 rounded-full flex items-center justify-center transition-colors group">
+                        <LikeButton postId={post.id} />
+                        <button
+                          onClick={() => {
+                            const url = `${window.location.origin}/blog/${post.slug}`
+                            const title = post.title
+                            if (navigator.share) {
+                              navigator.share({
+                                title,
+                                text: `Check out this article: ${title}`,
+                                url
+                              })
+                            } else {
+                              navigator.clipboard.writeText(url).then(() => {
+                                alert('Link copied to clipboard!')
+                              })
+                            }
+                          }}
+                          className="w-10 h-10 bg-gray-100 hover:bg-blue-100 rounded-full flex items-center justify-center transition-colors group"
+                        >
                           <svg className="w-5 h-5 text-gray-600 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
                           </svg>
@@ -267,23 +293,8 @@ export function Blog() {
           )}
 
           {/* Newsletter Signup */}
-          <div className="mt-20 bg-gradient-to-r from-purple-600 to-blue-600 p-12 rounded-3xl text-white text-center">
-            <h3 className="text-4xl font-bold mb-6">Stay Updated with Industry Insights</h3>
-            <p className="text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
-              Subscribe to our newsletter and get the latest business consulting insights,
-              market trends, and expert analysis delivered directly to your inbox.
-            </p>
-            <div className="max-w-md mx-auto flex gap-4">
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                className="flex-1 px-6 py-4 rounded-2xl text-gray-900 font-semibold focus:outline-none focus:ring-2 focus:ring-white/50"
-              />
-              <button className="bg-white text-purple-600 px-8 py-4 rounded-2xl font-bold hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-                Subscribe
-              </button>
-            </div>
-            <p className="text-sm text-purple-200 mt-4">No spam, unsubscribe at any time.</p>
+          <div id="newsletter-signup" className="mt-20">
+            <NewsletterSignup />
           </div>
         </div>
       </section>
@@ -345,10 +356,15 @@ export function Blog() {
             consulting services that drive measurable business results.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button className="bg-white text-gray-900 px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-              Schedule Free Consultation
-            </button>
-            <button className="border-2 border-white/50 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white transition-all duration-300">
+            <Link to="/contact">
+              <button className="bg-white text-gray-900 px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                Schedule Free Consultation
+              </button>
+            </Link>
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="border-2 border-white/50 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white transition-all duration-300"
+            >
               Browse All Articles
             </button>
           </div>

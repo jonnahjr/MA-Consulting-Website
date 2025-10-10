@@ -147,6 +147,42 @@ async function main() {
             clientName: 'Michael Brown',
             feedback: 'Professional, reliable, and results-driven. Ma Services Solution is our go-to partner for all business development needs.',
             videoUrl: null
+          },
+          {
+            id: 'testimonial-4',
+            clientName: 'Ethio Manufacturing PLC',
+            feedback: 'As a leading manufacturing company in Ethiopia, we partnered with Ma Services Solution for our business expansion. Their strategic consulting helped us optimize our operations and increase production efficiency by 35%. Their deep understanding of the Ethiopian market was invaluable.',
+            videoUrl: null
+          },
+          {
+            id: 'testimonial-5',
+            clientName: 'Addis Ababa Bank',
+            feedback: 'Ma Services Solution provided exceptional investment consulting services that helped us diversify our portfolio and achieve sustainable growth. Their expertise in financial markets and risk management is unmatched.',
+            videoUrl: null
+          },
+          {
+            id: 'testimonial-6',
+            clientName: 'Green Valley Agriculture',
+            feedback: 'The tax and customs consultancy from Ma Services Solution saved us significant costs and ensured full compliance with Ethiopian regulations. Their team is professional, knowledgeable, and always available when needed.',
+            videoUrl: null
+          },
+          {
+            id: 'testimonial-7',
+            clientName: 'TechHub Ethiopia',
+            feedback: 'Working with Ma Services Solution on our business development strategy was transformative. They helped us secure partnerships and expand our market reach. Their marketing consultancy drove our brand awareness significantly.',
+            videoUrl: null
+          },
+          {
+            id: 'testimonial-8',
+            clientName: 'Ethio Construction Group',
+            feedback: 'Ma Services Solution\'s development works consultancy helped us streamline our project management processes. Their expertise in operational efficiency led to a 25% reduction in project timelines and improved profitability.',
+            videoUrl: null
+          },
+          {
+            id: 'testimonial-9',
+            clientName: 'Lion Insurance Company',
+            feedback: 'The dedicated support and ongoing consultancy from Ma Services Solution has been crucial for our continued success. Their team provides reliable guidance and helps us navigate complex business challenges.',
+            videoUrl: null
           }
         ]
       })

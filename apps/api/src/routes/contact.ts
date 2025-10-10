@@ -1,14 +1,17 @@
 import express from 'express'
-import prisma from '../lib/prisma'
+import supabase from '../lib/supabase'
 
 const router = express.Router()
 
 // GET all leads
 router.get('/leads', async (req, res) => {
   try {
-    const leads = await prisma.lead.findMany({
-      orderBy: { createdAt: 'desc' }
-    })
+    const { data: leads, error } = await supabase
+      .from('Lead')
+      .select('*')
+      .order('createdAt', { ascending: false })
+
+    if (error) throw error
     res.json(leads)
   } catch (error) {
     console.error('Leads fetch error:', error)
@@ -26,9 +29,13 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ error: 'All fields are required' })
     }
 
-    const lead = await prisma.lead.create({
-      data: { name, email, subject, message }
-    })
+    const { data: lead, error } = await supabase
+      .from('Lead')
+      .insert({ name, email, subject, message })
+      .select()
+      .single()
+
+    if (error) throw error
 
     // TODO: Send email notification
     res.json({ success: true, id: lead.id })

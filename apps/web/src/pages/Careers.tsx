@@ -1,10 +1,89 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import Meta from '../components/Meta'
 import JobApplicationForm from '../components/JobApplicationForm'
 
+interface Job {
+  id: string
+  title: string
+  department: string
+  location: string
+  type: 'full-time' | 'part-time' | 'contract' | 'internship'
+  description: string
+  requirements: string
+  responsibilities: string
+  salary?: string
+  benefits?: string
+  applicationDeadline?: string
+  isActive: boolean
+  createdAt: string
+  updatedAt: string
+  views?: number
+  applications?: number
+  category?: string
+}
+
 export function Careers() {
+  const location = useLocation()
   const [showApplicationForm, setShowApplicationForm] = useState(false)
   const [selectedJob, setSelectedJob] = useState<{title: string, department: string} | null>(null)
+  const [jobs, setJobs] = useState<Job[]>([])
+  const [filteredJobs, setFilteredJobs] = useState<Job[]>([])
+  const [loading, setLoading] = useState(true)
+  const [expandedJob, setExpandedJob] = useState<string | null>(null)
+
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+
+  useEffect(() => {
+    loadJobs()
+    // Auto-refresh jobs every 10 seconds to update view/application counts
+    const interval = setInterval(() => {
+      loadJobs()
+    }, 10000) // 10 seconds
+
+    return () => clearInterval(interval)
+  }, [])
+
+  useEffect(() => {
+    filterAndSortJobs()
+  }, [jobs])
+
+  // Handle hash navigation for direct links to job positions
+  useEffect(() => {
+    if (location.hash === '#jobs') {
+      setTimeout(() => {
+        const jobsSection = document.getElementById('jobs')
+        if (jobsSection) jobsSection.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
+    }
+  }, [location])
+
+  const loadJobs = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/api/jobs/active`)
+      if (response.ok) {
+        const data = await response.json()
+        // Add category for styling purposes
+        const enhancedData = data.map((job: Job) => ({
+          ...job,
+          views: job.views || 0,
+          applications: job.applications || 0,
+          category: job.department.toLowerCase().includes('business') ? 'business' :
+                    job.department.toLowerCase().includes('tech') ? 'technology' :
+                    job.department.toLowerCase().includes('finance') ? 'finance' : 'consulting'
+        }))
+        setJobs(enhancedData)
+      }
+    } catch (error) {
+      console.error('Failed to load jobs:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const filterAndSortJobs = () => {
+    setFilteredJobs([...jobs])
+  }
 
   const handleApplyClick = (jobTitle: string, department: string) => {
     setSelectedJob({ title: jobTitle, department })
@@ -15,6 +94,50 @@ export function Careers() {
     setShowApplicationForm(false)
     setSelectedJob(null)
   }
+
+  const toggleJobExpansion = async (jobId: string) => {
+    const isExpanding = expandedJob !== jobId
+
+    // If expanding (not collapsing), increment view count
+    if (isExpanding) {
+      try {
+        const response = await fetch(`${apiUrl}/api/jobs/${jobId}/view`, {
+          method: 'POST'
+        })
+        if (response.ok) {
+          // Update local state to reflect new view count
+          setJobs(prevJobs =>
+            prevJobs.map(job =>
+              job.id === jobId
+                ? { ...job, views: (job.views || 0) + 1 }
+                : job
+            )
+          )
+        }
+      } catch (error) {
+        console.error('Failed to track job view:', error)
+      }
+    }
+
+    setExpandedJob(expandedJob === jobId ? null : jobId)
+  }
+
+  const shareJob = (job: Job) => {
+    const url = window.location.href
+    const text = `Check out this ${job.title} position at Ma Services Solution: ${url}`
+
+    if (navigator.share) {
+      navigator.share({
+        title: job.title,
+        text: text,
+        url: url
+      })
+    } else {
+      navigator.clipboard.writeText(`${text}\n\n${job.description.substring(0, 200)}...`)
+      alert('Job link copied to clipboard!')
+    }
+  }
+
   return (
     <>
       <Meta title="Careers at Ma Services Solution - Join Our Professional Team" description="Discover exciting career opportunities at Ma Services Solution. Join Ethiopia's premier consulting firm and work on transformative projects with industry experts." />
@@ -208,207 +331,224 @@ export function Careers() {
         </div>
       </section>
 
-      {/* CURRENT OPENINGS */}
-      <section className="py-24 bg-gradient-to-br from-white to-gray-50">
+      {/* PROFESSIONAL JOB BOARD */}
+      <section id="jobs" className="py-24 bg-gradient-to-br from-slate-50 via-white to-amber-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">Current Opportunities</h2>
-            <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Join our growing team. We're looking for talented professionals ready to make an impact
-              in the consulting industry and contribute to our clients' success.
-            </p>
-          </div>
-
-          {/* Job Openings */}
-          <div className="space-y-8 mb-16">
-            {/* Senior Investment Consultant */}
-            <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500">
-              <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-6">
-                <div>
-                  <h3 className="text-3xl font-bold mb-2 text-gray-900">Senior Investment Consultant</h3>
-                  <p className="text-lg text-amber-600 font-semibold mb-2">Investment Consulting Department</p>
-                  <div className="flex flex-wrap gap-4 text-sm text-gray-600">
-                    <span className="flex items-center">
-                      <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                      Addis Ababa, Ethiopia
-                    </span>
-                    <span className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                      Full-time
-                    </span>
-                    <span className="flex items-center">
-                      <span className="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
-                      Competitive Salary
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-4 lg:mt-0">
-                  <span className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
-                    Urgent Hiring
-                  </span>
-                </div>
-              </div>
-
-              <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                Lead investment consulting projects for high-profile clients. Provide strategic investment advice,
-                portfolio management, and risk assessment services. Work directly with C-level executives to
-                develop comprehensive investment strategies.
+          <div className="text-center mb-16">
+            <div>
+              <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-amber-800 to-gray-900 bg-clip-text text-transparent">
+                Current Opportunities
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Join our growing team. We're looking for talented professionals ready to make an impact
+                in the consulting industry and contribute to our clients' success.
               </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <h4 className="text-xl font-bold mb-3 text-gray-900">Requirements</h4>
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• MBA or equivalent advanced degree</li>
-                    <li>• 5+ years investment consulting experience</li>
-                    <li>• CFA certification preferred</li>
-                    <li>• Strong analytical and communication skills</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold mb-3 text-gray-900">What We Offer</h4>
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• Competitive salary + performance bonuses</li>
-                    <li>• Professional development opportunities</li>
-                    <li>• Health insurance and retirement plan</li>
-                    <li>• Flexible work arrangements</li>
-                  </ul>
-                </div>
-              </div>
-
-              <button
-                onClick={() => handleApplyClick('Senior Investment Consultant', 'Investment Consulting Department')}
-                className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-              >
-                Apply for This Position
-              </button>
-            </div>
-
-            {/* Business Development Manager */}
-            <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500">
-              <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-6">
-                <div>
-                  <h3 className="text-3xl font-bold mb-2 text-gray-900">Business Development Manager</h3>
-                  <p className="text-lg text-green-600 font-semibold mb-2">Business Development Department</p>
-                  <div className="flex flex-wrap gap-4 text-sm text-gray-600">
-                    <span className="flex items-center">
-                      <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                      Addis Ababa, Ethiopia
-                    </span>
-                    <span className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                      Full-time
-                    </span>
-                    <span className="flex items-center">
-                      <span className="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
-                      Competitive Salary + Commission
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-4 lg:mt-0">
-                  <span className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
-                    New Position
-                  </span>
-                </div>
-              </div>
-
-              <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                Drive business growth initiatives and develop strategic partnerships. Identify new market opportunities,
-                build client relationships, and lead business development projects that expand Ma Services Solution's market presence.
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <h4 className="text-xl font-bold mb-3 text-gray-900">Requirements</h4>
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• Bachelor's degree in Business or related field</li>
-                    <li>• 3+ years business development experience</li>
-                    <li>• Proven track record of generating revenue</li>
-                    <li>• Excellent networking and presentation skills</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold mb-3 text-gray-900">What We Offer</h4>
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• Base salary + uncapped commission</li>
-                    <li>• Lead generation support</li>
-                    <li>• Marketing and business development budget</li>
-                    <li>• Career growth opportunities</li>
-                  </ul>
-                </div>
-              </div>
-
-              <button
-                onClick={() => handleApplyClick('Business Development Manager', 'Business Development Department')}
-                className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-              >
-                Apply for This Position
-              </button>
-            </div>
-
-            {/* Tax Consultant */}
-            <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500">
-              <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-6">
-                <div>
-                  <h3 className="text-3xl font-bold mb-2 text-gray-900">Tax Consultant</h3>
-                  <p className="text-lg text-orange-600 font-semibold mb-2">Tax & Customs Department</p>
-                  <div className="flex flex-wrap gap-4 text-sm text-gray-600">
-                    <span className="flex items-center">
-                      <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                      Addis Ababa, Ethiopia
-                    </span>
-                    <span className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                      Full-time
-                    </span>
-                    <span className="flex items-center">
-                      <span className="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
-                      Competitive Salary
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-4 lg:mt-0">
-                  <span className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
-                    Immediate Start
-                  </span>
-                </div>
-              </div>
-
-              <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                Provide expert tax consulting services to clients. Conduct tax planning, ensure compliance
-                with Ethiopian tax regulations, and optimize clients' tax positions through strategic advice
-                and implementation support.
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <h4 className="text-xl font-bold mb-3 text-gray-900">Requirements</h4>
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• Accounting or Finance degree</li>
-                    <li>• Tax certification (ACCA, CPA preferred)</li>
-                    <li>• 2+ years tax consulting experience</li>
-                    <li>• Knowledge of Ethiopian tax laws</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold mb-3 text-gray-900">What We Offer</h4>
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• Competitive salary package</li>
-                    <li>• Professional tax certifications support</li>
-                    <li>• Continuous learning opportunities</li>
-                    <li>• Work-life balance initiatives</li>
-                  </ul>
-                </div>
-              </div>
-
-              <button
-                onClick={() => handleApplyClick('Tax Consultant', 'Tax & Customs Department')}
-                className="bg-gradient-to-r from-orange-500 to-red-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-              >
-                Apply for This Position
-              </button>
             </div>
           </div>
+
+          {/* Job Display */}
+
+          {/* Job Cards */}
+          <div className="space-y-6">
+            {loading ? (
+              <div className="flex justify-center items-center py-20">
+                <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-amber-500"></div>
+              </div>
+            ) : filteredJobs.length === 0 ? (
+              <div className="text-center py-20">
+                <div className="w-24 h-24 bg-gradient-to-br from-amber-100 to-orange-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
+                  <span className="text-4xl">🔍</span>
+                </div>
+                <h3 className="text-3xl font-bold text-gray-900 mb-4">No Matching Positions</h3>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                  We couldn't find any positions matching your criteria. Try adjusting your filters or check back later for new opportunities.
+                </p>
+                <div className="text-center py-8">
+                  <p className="text-gray-600">No job opportunities available at the moment.</p>
+                  <p className="text-sm text-gray-500 mt-2">Please check back later for new openings.</p>
+                </div>
+              </div>
+            ) : (
+              filteredJobs.map((job, index) => (
+                <div
+                  key={job.id}
+                  className="group relative"
+                >
+                    <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/30 overflow-hidden">
+                      {/* Job Header */}
+                      <div className="p-8 border-b border-gray-100">
+                        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                          <div className="flex-1">
+                            <div className="flex items-start gap-4 mb-3">
+                              <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg">
+                                <span className="text-2xl text-white">💼</span>
+                              </div>
+                              <div>
+                                <h3 className="text-3xl font-bold text-gray-900 mb-2 group-hover:text-amber-700 transition-colors duration-300">
+                                  {job.title}
+                                </h3>
+                                <p className="text-amber-600 font-semibold text-xl">{job.department}</p>
+                              </div>
+                            </div>
+
+                            {/* Job Meta Info */}
+                            <div className="flex flex-wrap items-center gap-6 text-sm text-gray-600">
+                              <div className="flex items-center gap-2">
+                                <span className="text-amber-500">📍</span>
+                                <span>{job.location}</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <span className="text-blue-500">💼</span>
+                                <span>{job.type ? job.type.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'Not specified'}</span>
+                              </div>
+                              {job.salary && (
+                                <div className="flex items-center gap-2">
+                                  <span className="text-green-500">💰</span>
+                                  <span>{job.salary}</span>
+                                </div>
+                              )}
+                              <div className="flex items-center gap-2">
+                                <span className="text-purple-500">👁️</span>
+                                <span>{job.views} views</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <span className="text-indigo-500">📋</span>
+                                <span>{job.applications} applications</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Action Buttons */}
+                          <div className="flex flex-col sm:flex-row gap-3">
+                            <button
+                              onClick={() => toggleJobExpansion(job.id)}
+                              className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2"
+                            >
+                              <span>{expandedJob === job.id ? '🔽' : '🔼'}</span>
+                              {expandedJob === job.id ? 'Less Details' : 'More Details'}
+                            </button>
+
+                            <button
+                              onClick={() => shareJob(job)}
+                              className="px-6 py-3 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2"
+                            >
+                              <span>📤</span>
+                              Share
+                            </button>
+
+                            <button
+                              onClick={() => handleApplyClick(job.title, job.department)}
+                              className="px-8 py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+                            >
+                              <span>🚀</span>
+                              Apply Now
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Status Tags */}
+                        <div className="flex flex-wrap gap-2 mt-4">
+                          <span className="px-3 py-1 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 rounded-full text-sm font-medium border border-green-200">
+                            🆕 New Position
+                          </span>
+                          {job.category && (
+                            <span className="px-3 py-1 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 rounded-full text-sm font-medium border border-blue-200">
+                              {job.category.charAt(0).toUpperCase() + job.category.slice(1)}
+                            </span>
+                          )}
+                          {job.applicationDeadline && (
+                            <span className="px-3 py-1 bg-gradient-to-r from-red-100 to-pink-100 text-red-800 rounded-full text-sm font-medium border border-red-200">
+                              ⏰ Deadline: {new Date(job.applicationDeadline).toLocaleDateString()}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Expandable Content */}
+                      {expandedJob === job.id && (
+                        <div className="overflow-hidden">
+                          <div className="p-8 bg-gradient-to-br from-gray-50 to-amber-50">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                              {/* Job Description */}
+                              <div className="space-y-6">
+                                <div>
+                                  <h4 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                                    <span className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center text-white">💡</span>
+                                    About This Role
+                                  </h4>
+                                  <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-white/30 shadow-sm">
+                                    <p className="text-gray-700 leading-relaxed whitespace-pre-line">{job.description}</p>
+                                  </div>
+                                </div>
+
+                                {/* Requirements */}
+                                <div>
+                                  <h4 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                                    <span className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center text-white">🎯</span>
+                                    Requirements
+                                  </h4>
+                                  <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-white/30 shadow-sm">
+                                    <div className="text-gray-700 leading-relaxed whitespace-pre-line">{job.requirements}</div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Responsibilities & Benefits */}
+                              <div className="space-y-6">
+                                {/* Responsibilities */}
+                                <div>
+                                  <h4 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                                    <span className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center text-white">⚡</span>
+                                    Responsibilities
+                                  </h4>
+                                  <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-white/30 shadow-sm">
+                                    <div className="text-gray-700 leading-relaxed whitespace-pre-line">{job.responsibilities}</div>
+                                  </div>
+                                </div>
+
+                                {/* Benefits */}
+                                {job.benefits && (
+                                  <div>
+                                    <h4 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                                      <span className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center text-white">🎁</span>
+                                      What We Offer
+                                    </h4>
+                                    <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-white/30 shadow-sm">
+                                      <div className="text-gray-700 leading-relaxed whitespace-pre-line">{job.benefits}</div>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+
+                            {/* Apply CTA */}
+                            <div className="mt-8 text-center">
+                              <button
+                                onClick={() => handleApplyClick(job.title, job.department)}
+                                className="px-12 py-4 bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 hover:from-amber-600 hover:via-orange-600 hover:to-red-600 text-white font-bold text-xl rounded-2xl transition-all duration-300 shadow-2xl hover:shadow-3xl"
+                              >
+                                🚀 Apply for This Position
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                </div>
+              ))
+            )}
+          </div>
+
+          {/* Pagination (if needed) */}
+          {filteredJobs.length > 10 && (
+            <div className="mt-12 text-center">
+              <div className="flex justify-center items-center gap-2">
+                <button className="px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">Previous</button>
+                <span className="px-4 py-2 bg-amber-100 text-amber-800 rounded-lg font-semibold">1</span>
+                <button className="px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">Next</button>
+              </div>
+            </div>
+          )}
 
           {/* Application Process */}
           <div className="bg-gradient-to-r from-slate-100 to-gray-200 p-12 rounded-3xl">
@@ -623,7 +763,7 @@ export function Careers() {
       </section>
 
       {/* CALL TO ACTION */}
-      <section className="py-24 bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 text-white">
+      <section id="apply" className="py-24 bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-5xl md:text-6xl font-bold mb-6">Ready to Join Our Team?</h2>
           <p className="text-2xl mb-12 max-w-3xl mx-auto leading-relaxed">
@@ -632,10 +772,19 @@ export function Careers() {
             Ethiopia's leading consulting firm.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button className="bg-white text-gray-900 px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+            <button
+              onClick={() => {
+                const jobsSection = document.getElementById('jobs')
+                if (jobsSection) jobsSection.scrollIntoView({ behavior: 'smooth' })
+              }}
+              className="bg-white text-gray-900 px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+            >
               Apply for Open Positions
             </button>
-            <button className="border-2 border-white/50 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white transition-all duration-300">
+            <button
+              onClick={() => handleApplyClick('General Application', 'General')}
+              className="border-2 border-white/50 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white transition-all duration-300"
+            >
               Send Us Your Resume
             </button>
           </div>
@@ -656,6 +805,7 @@ export function Careers() {
           jobTitle={selectedJob.title}
           jobDepartment={selectedJob.department}
           onClose={handleCloseForm}
+          onSuccess={() => loadJobs()} // Refresh job list immediately after application
         />
       )}
     </>

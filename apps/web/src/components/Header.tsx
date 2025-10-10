@@ -12,6 +12,7 @@ const Header = () => {
     { path: '/about', label: 'About', description: 'Our Story & Mission' },
     { path: '/services', label: 'Services', description: 'Expert Consulting' },
     { path: '/team', label: 'Team', description: 'Leadership & Experts' },
+    { path: '/testimonials', label: 'Testimonials', description: 'Client Success Stories' },
     { path: '/blog', label: 'Blog', description: 'Insights & News' },
     { path: '/careers', label: 'Careers', description: 'Join Our Team' },
     { path: '/contact', label: 'Contact', description: 'Get In Touch' },
@@ -39,6 +40,13 @@ const Header = () => {
       <Link
         to="/"
         className="flex items-center space-x-3 hover:scale-105 transition-transform duration-300"
+        onClick={(e) => {
+          if (location.pathname === '/') {
+            e.preventDefault()
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }
+        }}
+        onDoubleClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       >
         {/* Use image instead of gradient box */}
         <img
@@ -69,6 +77,13 @@ const Header = () => {
                     ? 'text-blue-600'
                     : 'text-gray-700'
                 }`}
+                onClick={(e) => {
+                  if (location.pathname === item.path) {
+                    e.preventDefault()
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }
+                }}
+                onDoubleClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
                 {item.label}
               </Link>
@@ -78,6 +93,7 @@ const Header = () => {
           {/* CTA Button */}
           <button
             onClick={handleGetConsultation}
+            onDoubleClick={(e) => e.preventDefault()}
             className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105"
           >
             Get Consultation
@@ -88,6 +104,7 @@ const Header = () => {
             className="md:hidden w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center"
             aria-label="Toggle menu"
             onClick={() => setOpen(v => !v)}
+            onDoubleClick={(e) => e.preventDefault()}
           >
             <span className="text-lg font-semibold text-gray-700">{open ? '✕' : '☰'}</span>
           </button>
@@ -103,7 +120,14 @@ const Header = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => {
+                    if (location.pathname === item.path) {
+                      e.preventDefault()
+                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                    }
+                    setOpen(false)
+                  }}
+                  onDoubleClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   className={`block py-3 px-4 rounded-lg transition-colors duration-300 ${
                     location.pathname === item.path
                       ? 'bg-blue-50 text-blue-600 font-semibold'
@@ -116,6 +140,7 @@ const Header = () => {
               <div className="pt-4 border-t border-gray-200">
                 <button
                   onClick={handleGetConsultation}
+                  onDoubleClick={(e) => e.preventDefault()}
                   className="block w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 px-4 rounded-lg font-semibold text-center hover:shadow-lg transition-all duration-300"
                 >
                   Get Consultation

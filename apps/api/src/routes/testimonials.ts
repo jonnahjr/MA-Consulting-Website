@@ -1,14 +1,17 @@
 import express from 'express'
-import prisma from '../lib/prisma'
+import supabase from '../lib/supabase'
 
 const router = express.Router()
 
 // GET all testimonials
 router.get('/', async (req, res) => {
   try {
-    const testimonials = await prisma.testimonial.findMany({
-      orderBy: { createdAt: 'desc' }
-    })
+    const { data: testimonials, error } = await supabase
+      .from('Testimonial')
+      .select('*')
+      .order('createdAt', { ascending: false })
+
+    if (error) throw error
     res.json(testimonials)
   } catch (error) {
     console.error('Testimonials fetch error:', error)
@@ -21,14 +24,17 @@ router.post('/', async (req, res) => {
   try {
     const { clientName, feedback, videoUrl } = req.body
 
-    const testimonial = await prisma.testimonial.create({
-      data: {
+    const { data: testimonial, error } = await supabase
+      .from('Testimonial')
+      .insert({
         clientName,
         feedback,
         videoUrl
-      }
-    })
+      })
+      .select()
+      .single()
 
+    if (error) throw error
     res.json(testimonial)
   } catch (error) {
     console.error('Testimonial creation error:', error)
@@ -42,15 +48,18 @@ router.put('/:id', async (req, res) => {
     const { id } = req.params
     const { clientName, feedback, videoUrl } = req.body
 
-    const testimonial = await prisma.testimonial.update({
-      where: { id },
-      data: {
+    const { data: testimonial, error } = await supabase
+      .from('Testimonial')
+      .update({
         clientName,
         feedback,
         videoUrl
-      }
-    })
+      })
+      .eq('id', id)
+      .select()
+      .single()
 
+    if (error) throw error
     res.json(testimonial)
   } catch (error) {
     console.error('Testimonial update error:', error)
@@ -63,10 +72,12 @@ router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params
 
-    await prisma.testimonial.delete({
-      where: { id }
-    })
+    const { error } = await supabase
+      .from('Testimonial')
+      .delete()
+      .eq('id', id)
 
+    if (error) throw error
     res.json({ message: 'Testimonial deleted successfully' })
   } catch (error) {
     console.error('Testimonial deletion error:', error)

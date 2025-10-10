@@ -1,9 +1,21 @@
 import Meta from '../components/Meta'
 import ContactForm from '../components/ContactForm'
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 export function Contact() {
+  const location = useLocation()
   const contactFormRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Handle hash navigation after component mounts
+    if (location.hash === '#contact-form') {
+      // Small delay to ensure content is rendered
+      setTimeout(() => {
+        contactFormRef.current?.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
+    }
+  }, [location])
 
   const scrollToContactForm = () => {
     contactFormRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -232,7 +244,7 @@ export function Contact() {
           </div>
 
           {/* CONTACT FORM SECTION */}
-          <div ref={contactFormRef} className="max-w-4xl mx-auto">
+          <div id="contact-form" ref={contactFormRef} className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h3 className="text-4xl font-bold mb-6 text-gray-900">Send Us a Message</h3>
               <p className="text-xl text-gray-600 leading-relaxed">

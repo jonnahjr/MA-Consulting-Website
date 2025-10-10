@@ -5,9 +5,10 @@ interface JobApplicationFormProps {
   jobTitle?: string
   jobDepartment?: string
   onClose?: () => void
+  onSuccess?: () => void
 }
 
-const JobApplicationForm = ({ jobTitle, jobDepartment, onClose }: JobApplicationFormProps) => {
+const JobApplicationForm = ({ jobTitle, jobDepartment, onClose, onSuccess }: JobApplicationFormProps) => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -74,6 +75,10 @@ const JobApplicationForm = ({ jobTitle, jobDepartment, onClose }: JobApplication
 
       if (response.ok) {
         setSubmitMessage('Application submitted successfully! We will contact you soon.')
+        // Call onSuccess callback to refresh job list
+        if (onSuccess) {
+          onSuccess()
+        }
         setTimeout(() => {
           if (onClose) {
             onClose()

@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 // `framer-motion` types can be strict with JSX typings in some TS/React setups.
 // Create a lightweight alias typed as `any` so we can use normal HTML props like `className` without type errors.
 const m: any = motion
 
 const Hero = () => {
+  const navigate = useNavigate()
+
   return (
     <section className="h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800 flex items-center justify-center text-white relative overflow-hidden animate-gradient">
       {/* Animated background particles */}
@@ -48,6 +51,7 @@ const Hero = () => {
           transition={{ delay: 0.8, duration: 0.5 }}
         >
           <m.button
+            onClick={() => navigate('/contact#contact-form')}
             className="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg btn-3d hover:shadow-2xl transition-all duration-300"
             whileHover={{
               scale: 1.05,
@@ -58,6 +62,7 @@ const Hero = () => {
             Get Started Today
           </m.button>
           <m.button
+            onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
             className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 btn-3d"
             whileHover={{
               scale: 1.05,

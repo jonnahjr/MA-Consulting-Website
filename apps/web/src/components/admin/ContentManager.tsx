@@ -18,7 +18,7 @@ interface ContentManagerProps {
   displayFields: string[]
 }
 
-const ContentManager = ({ title, endpoint, fields, displayFields }: ContentManagerProps) => {
+const ContentManager = ({ title, endpoint, fields, displayFields, onDataChange }: ContentManagerProps & { onDataChange?: () => void }) => {
   const [items, setItems] = useState<ContentItem[]>([])
   const [filteredItems, setFilteredItems] = useState<ContentItem[]>([])
   const [loading, setLoading] = useState(true)
@@ -151,6 +151,8 @@ const ContentManager = ({ title, endpoint, fields, displayFields }: ContentManag
         setShowForm(false)
         setEditingItem(null)
         setFormData({})
+        // Notify parent component of data change
+        if (onDataChange) onDataChange()
       } else {
         alert('Failed to save item')
       }
@@ -176,6 +178,8 @@ const ContentManager = ({ title, endpoint, fields, displayFields }: ContentManag
 
       if (response.ok) {
         await loadItems()
+        // Notify parent component of data change
+        if (onDataChange) onDataChange()
       } else {
         alert('Failed to delete item')
       }

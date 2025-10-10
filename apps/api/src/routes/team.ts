@@ -1,14 +1,17 @@
 import express from 'express'
-import prisma from '../lib/prisma'
+import supabase from '../lib/supabase'
 
 const router = express.Router()
 
 // GET all team members
 router.get('/', async (req, res) => {
   try {
-    const team = await prisma.teamMember.findMany({
-      orderBy: { createdAt: 'desc' }
-    })
+    const { data: team, error } = await supabase
+      .from('TeamMember')
+      .select('*')
+      .order('createdAt', { ascending: false })
+
+    if (error) throw error
     res.json(team)
   } catch (error) {
     console.error('Team fetch error:', error)
@@ -21,16 +24,19 @@ router.post('/', async (req, res) => {
   try {
     const { name, role, bio, image, socials } = req.body
 
-    const member = await prisma.teamMember.create({
-      data: {
+    const { data: member, error } = await supabase
+      .from('TeamMember')
+      .insert({
         name,
         role,
         bio,
         image,
         socials
-      }
-    })
+      })
+      .select()
+      .single()
 
+    if (error) throw error
     res.json(member)
   } catch (error) {
     console.error('Team member creation error:', error)
@@ -44,17 +50,20 @@ router.put('/:id', async (req, res) => {
     const { id } = req.params
     const { name, role, bio, image, socials } = req.body
 
-    const member = await prisma.teamMember.update({
-      where: { id },
-      data: {
+    const { data: member, error } = await supabase
+      .from('TeamMember')
+      .update({
         name,
         role,
         bio,
         image,
         socials
-      }
-    })
+      })
+      .eq('id', id)
+      .select()
+      .single()
 
+    if (error) throw error
     res.json(member)
   } catch (error) {
     console.error('Team member update error:', error)
@@ -67,10 +76,12 @@ router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params
 
-    await prisma.teamMember.delete({
-      where: { id }
-    })
+    const { error } = await supabase
+      .from('TeamMember')
+      .delete()
+      .eq('id', id)
 
+    if (error) throw error
     res.json({ message: 'Team member deleted successfully' })
   } catch (error) {
     console.error('Team member deletion error:', error)

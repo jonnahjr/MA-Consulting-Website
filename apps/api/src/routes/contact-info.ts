@@ -1,18 +1,19 @@
 import express from 'express'
-import prisma from '../lib/prisma'
+import supabase from '../lib/supabase'
 
 const router = express.Router()
 
 // GET all contact info
 router.get('/', async (req, res) => {
   try {
-    const contacts = await prisma.contactInfo.findMany({
-      where: { isActive: true },
-      orderBy: [
-        { type: 'asc' },
-        { sortOrder: 'asc' }
-      ]
-    })
+    const { data: contacts, error } = await supabase
+      .from('ContactInfo')
+      .select('*')
+      .eq('isActive', true)
+      .order('type', { ascending: true })
+      .order('sortOrder', { ascending: true })
+
+    if (error) throw error
     res.json(contacts)
   } catch (error) {
     console.error('Contact info fetch error:', error)
@@ -24,13 +25,14 @@ router.get('/', async (req, res) => {
 router.get('/:type', async (req, res) => {
   try {
     const { type } = req.params
-    const contacts = await prisma.contactInfo.findMany({
-      where: {
-        type,
-        isActive: true
-      },
-      orderBy: { sortOrder: 'asc' }
-    })
+    const { data: contacts, error } = await supabase
+      .from('ContactInfo')
+      .select('*')
+      .eq('type', type)
+      .eq('isActive', true)
+      .order('sortOrder', { ascending: true })
+
+    if (error) throw error
     res.json(contacts)
   } catch (error) {
     console.error('Contact info fetch error:', error)
@@ -43,8 +45,9 @@ router.post('/', async (req, res) => {
   try {
     const { type, label, value, platform, icon, isActive, sortOrder } = req.body
 
-    const contact = await prisma.contactInfo.create({
-      data: {
+    const { data: contact, error } = await supabase
+      .from('ContactInfo')
+      .insert({
         type,
         label,
         value,
@@ -52,9 +55,11 @@ router.post('/', async (req, res) => {
         icon,
         isActive: isActive !== undefined ? isActive : true,
         sortOrder: sortOrder || 0
-      }
-    })
+      })
+      .select()
+      .single()
 
+    if (error) throw error
     res.json(contact)
   } catch (error) {
     console.error('Contact info creation error:', error)
@@ -68,9 +73,9 @@ router.put('/:id', async (req, res) => {
     const { id } = req.params
     const { type, label, value, platform, icon, isActive, sortOrder } = req.body
 
-    const contact = await prisma.contactInfo.update({
-      where: { id },
-      data: {
+    const { data: contact, error } = await supabase
+      .from('ContactInfo')
+      .update({
         type,
         label,
         value,
@@ -78,9 +83,12 @@ router.put('/:id', async (req, res) => {
         icon,
         isActive,
         sortOrder
-      }
-    })
+      })
+      .eq('id', id)
+      .select()
+      .single()
 
+    if (error) throw error
     res.json(contact)
   } catch (error) {
     console.error('Contact info update error:', error)
@@ -93,10 +101,12 @@ router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params
 
-    await prisma.contactInfo.delete({
-      where: { id }
-    })
+    const { error } = await supabase
+      .from('ContactInfo')
+      .delete()
+      .eq('id', id)
 
+    if (error) throw error
     res.json({ message: 'Contact information deleted successfully' })
   } catch (error) {
     console.error('Contact info deletion error:', error)
@@ -110,13 +120,16 @@ router.put('/bulk/sort', async (req, res) => {
     const { updates } = req.body // Array of { id, sortOrder }
 
     const updatePromises = updates.map((update: { id: string; sortOrder: number }) =>
-      prisma.contactInfo.update({
-        where: { id: update.id },
-        data: { sortOrder: update.sortOrder }
-      })
+      supabase
+        .from('ContactInfo')
+        .update({ sortOrder: update.sortOrder })
+        .eq('id', update.id)
     )
 
-    await Promise.all(updatePromises)
+    const results = await Promise.all(updatePromises)
+    const errors = results.filter(result => result.error)
+    if (errors.length > 0) throw errors[0].error
+
     res.json({ message: 'Sort order updated successfully' })
   } catch (error) {
     console.error('Bulk sort update error:', error)

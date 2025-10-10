@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Meta from '../components/Meta'
 import aleImage from '../assets/images/team/Ale-360x280-modified.png'
 import melsewImage from '../assets/images/team/Mele1-360x280-photoaidcom-cropped.jpg'
@@ -53,12 +54,16 @@ export function Team() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <button className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 transform hover:scale-105 animate-pulse-glow">
-                Connect With Us
-              </button>
-              <button className="border-2 border-white/30 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm">
-                Our Expertise
-              </button>
+              <Link to="/contact">
+                <button className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 transform hover:scale-105 animate-pulse-glow">
+                  Connect With Us
+                </button>
+              </Link>
+              <Link to="/services">
+                <button className="border-2 border-white/30 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm">
+                  Our Expertise
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -82,7 +87,7 @@ export function Team() {
           </div>
 
           {/* CEO & Founder */}
-          <div className="mb-24">
+          <div id="alebachew" className="mb-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div>
                 <div className="w-32 h-32 rounded-full overflow-hidden mb-8 shadow-2xl bg-gradient-to-br from-amber-400 to-orange-500 p-1">
@@ -164,7 +169,7 @@ export function Team() {
           </div>
 
           {/* Deputy CEO & Founder */}
-          <div className="mb-24">
+          <div id="melsew" className="mb-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div className="order-2 lg:order-1">
                 <div className="w-32 h-32 rounded-full overflow-hidden mb-8 shadow-2xl bg-gradient-to-br from-orange-400 to-red-500 p-1">
@@ -245,7 +250,7 @@ export function Team() {
           </div>
 
           {/* Head of Business Development */}
-          <div className="mb-24">
+          <div id="tiruwork" className="mb-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div>
                 <div className="w-32 h-32 rounded-full overflow-hidden mb-8 shadow-2xl bg-gradient-to-br from-red-400 to-pink-500 p-1">
@@ -372,12 +377,16 @@ export function Team() {
             Let's discuss how we can collaborate on your next project.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button className="bg-white text-gray-900 px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-              Start a Conversation
-            </button>
-            <button className="border-2 border-white/50 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white transition-all duration-300">
-              View Our Services
-            </button>
+            <Link to="/contact">
+              <button className="bg-white text-gray-900 px-10 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                Start a Conversation
+              </button>
+            </Link>
+            <Link to="/services">
+              <button className="border-2 border-white/50 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 hover:border-white transition-all duration-300">
+                View Our Services
+              </button>
+            </Link>
           </div>
         </div>
       </section>

@@ -10,6 +10,8 @@ import { teamRouter } from './routes/team.js'
 import { testimonialsRouter } from './routes/testimonials.js'
 import { blogRouter } from './routes/blog.js'
 import { contactInfoRouter } from './routes/contact-info.js'
+import { jobsRouter } from './routes/jobs.js'
+import { newsletterRouter } from './routes/newsletter.js'
 
 // Load .env from project root
 dotenv.config({ path: path.resolve(process.cwd(), '../../.env') })
@@ -31,6 +33,8 @@ app.use('/api/team', teamRouter)
 app.use('/api/testimonials', testimonialsRouter)
 app.use('/api/blog', blogRouter)
 app.use('/api/contact-info', contactInfoRouter)
+app.use('/api/jobs', jobsRouter)
+app.use('/api/newsletter', newsletterRouter)
 
 // Serve uploaded files
 app.use('/uploads', express.static(path.resolve(process.cwd(), 'uploads')))
